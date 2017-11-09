@@ -1,2 +1,31 @@
+
 <%= render "nav" %>
 <h1>会員一覧ページ</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+        <th>お名前</th>
+        <!-- <th>カナ</th> -->
+        <th>住所１</th>
+        <!-- <th>住所2</th> -->
+        <th>電話番号</th>
+        <th>宗派</th>
+        <th>会種</th>
+    </tr>
+  </thead>
+  <tbody>
+<% @members.each do |m| %>
+  <tr>
+    <td><%= link_to m.name, edit_member_path(m) %></td>
+    <!-- <td><%#= m.namek %></td> -->
+    <td><%= m.address1 %></td>
+    <!-- <td><%#= m.address2 %></td> -->
+    <td><%= m.tel %></td>
+    <td><%= m.sect %></td>
+    <td><%= m.kind %></td>
+    <td><%= m.text %></td>
+  </tr>
+<% end %>
+  </tbody>
+</table>
