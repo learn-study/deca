@@ -5,7 +5,6 @@ class Member < ApplicationRecord
       self.postal.tr!('－', '-')
       self.postal.delete!("-")
   }
-  validates :postal, numericality: true
   validates :lastname, presence: true, length: { in: 2..50 }
   validates :firstname, presence: true, length: { in: 2..50 }
   enum gender: {男性:1, 女性:2}
