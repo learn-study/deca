@@ -26,7 +26,7 @@ class MembersController < ApplicationController
   def update
     @member = Member.find(params[:id])
     if @member.update(member_params)
-      redirect_to members_url
+      redirect_to edit_member_url(@member)
     else
       render "edit"
     end
@@ -34,7 +34,7 @@ class MembersController < ApplicationController
   private
 
   def member_params
-    params.require(:member).permit(:name, :namek,
-    :address1, :address2, :tel, :sect, :kind, :text)
+    params.require(:member).permit(:lastname, :firstname, :namekana, :gender,
+    :birthday, :postal, :city, :streetaddress, :tel, :mobile, :sect, :kind, :locale, :reserve, :dm, :tag)
   end
 end

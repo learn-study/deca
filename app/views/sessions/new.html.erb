@@ -2,64 +2,61 @@
   <p>ログイン完了ユーザ: <%= current_user.loginid %></p>
   <div class="row">
     <div class="col-xs-6">
-      <div><%= link_to "会員ページ", members_path, class: "btn btn-success",style: "width:100%;" %></div>
+      <div><%= link_to "会員ページ", members_path, class: "btn btn-success large",style: "width:100%;" %></div>
     </div>
     <div class="col-xs-6">
-      <div><%= link_to "各種登録管理", "#", class: "btn btn-success",style: "width:100%;" %></div>
+      <div><%= link_to "仏壇売上", "#", class: "btn btn-success large",style: "width:100%;" %></div>
     </div>
   </div>
 
   <div class="row">
     <div class="col-xs-6 spacer">
-      <div><%= link_to "施工葬儀入力", "#", class: "btn btn-success",style: "width:100%;" %></div>
+      <div><%= link_to "施行済み葬儀", "#", class: "btn btn-success large",style: "width:100%;" %></div>
     </div>
     <div class="col-xs-6 spacer">
-      <div><%= link_to "仏壇売上入力（原価あり）", "#", class: "btn btn-success",style: "width:100%;" %></div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-xs-6 spacer">
-      <div><%= link_to "葬儀売り上げ原価入力", "#", class: "btn btn-success",style: "width:100%;" %></div>
-    </div>
-    <div class="col-xs-6 spacer">
-      <div><%= link_to "法事売上入力（原価あり）", "#", class: "btn btn-success",style: "width:100%;" %></div>
+      <div><%= link_to "法事売上", "#", class: "btn btn-success large",style: "width:100%;" %></div>
     </div>
   </div>
 
   <div class="row">
     <div class="col-xs-6 spacer">
-      <div><%= link_to "受発注報告入力(原価あり)", "#", class: "btn btn-success",style: "width:100%;" %></div>
+      <div><%= link_to "葬儀売上原価", "#", class: "btn btn-success large",style: "width:100%;" %></div>
     </div>
     <div class="col-xs-6 spacer">
-      <div><%= link_to "葬儀予約入力", "#", class: "btn btn-success",style: "width:100%;" %></div>
-    </div>  
-  </div>
-
-  <div class="row">
-    <div class="col-xs-6 spacer">
-      <div><%= link_to "仕入れ先別原価表", "#", class: "btn btn-success",style: "width:100%;" %></div>
-    </div>
-    <div class="col-xs-6 spacer">
-      <div><%= link_to "葬儀予約一覧", "#", class: "btn btn-success",style: "width:100%;" %></div>
+      <div><%= link_to "葬儀予約", "#", class: "btn btn-success large",style: "width:100%;" %></div>
     </div>
   </div>
 
   <div class="row">
     <div class="col-xs-6 spacer">
-      <div><%= link_to "売り上げ粗利表", "#", class: "btn btn-success",style: "width:100%;" %></div>
-    </div>
-    <div class="col-xs-6 spacer">
-      <div><%= link_to "葬儀予約一括削除", "#", class: "btn btn-success",style: "width:100%;" %></div>
+      <div><%= link_to "受発注報告", "#", class: "btn btn-success large",style: "width:100%;" %></div>
     </div>
   </div>
 
   <div class="row">
     <div class="col-xs-6 spacer">
-      <div><%= link_to "ログインユーザー追加", new_user_path, class: "btn btn-primary",style: "width:100%;" %></div>
+      <div><%= link_to "仕入れ先別原価表", "#", class: "btn btn-success large",style: "width:100%;" %></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-6 spacer">
+      <div><%= link_to "売り上げ粗利表", "#", class: "btn btn-success large",style: "width:100%;" %></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-6 spacer">
+      <div><%= link_to "各種登録管理", "#", class: "btn btn-success large",style: "width:100%;" %></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-6 spacer">
+      <div><%= link_to "ログインユーザー追加", new_user_path, class: "btn btn-primary large",style: "width:100%;" %></div>
     </div>
     <div class="col-xs-6 spacer">
-      <div><%= link_to "ログアウト", logout_path, method: :delete, class: "btn btn-primary",style: "width:100%;" %></div>
+      <div><%= link_to "ログアウト", logout_path, method: :delete, class: "btn btn-primary large",style: "width:100%;" %></div>
     </div>
   </div>
 <% else %>

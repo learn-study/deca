@@ -1,0 +1,77 @@
+<%= form_for(member) do |f| %>
+  <%= render 'layouts/error_messages', model: f.object %>
+  <div class="form-group">
+    <div class="row">
+      <div class="col-xs-6">
+        <label>氏名</label>
+        <%= f.text_field :name, class: "form-control input-sm" %>
+      </div>
+      <div class="col-xs-6">
+        <label>カナ</label>
+        <%= f.text_field :namek, class: "form-control input-sm" %>
+      </div>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <div class="row">
+      <div class="col-xs-12">
+        <label>市区町村</label>
+        <%= f.text_field :address1, class: "form-control input-sm" %>
+      </div>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <div class="row">
+      <div class="col-xs-12">
+        <label>番地、ビル・マンション名</label>
+        <%= f.text_field :address2, class: "form-control input-sm" %>
+      </div>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <div class="row">
+      <div class="col-xs-6">
+        <label>TEL</label>
+        <%= f.text_field :tel, class: "form-control input-sm" %>
+      </div>
+    </div>
+  </div>  
+
+  <div class="form-group">
+    <div class="row">
+      <div class="col-xs-6">
+        <label>宗派</label>
+        <select class="form-control input-sm">
+        </select>
+      </div>
+      <div class="col-xs-6">
+        <label>会種</label>
+        <select class="form-control input-sm">
+        </select>
+      </div>
+    </div>
+  </div>  
+
+  <div class="form-group">
+    <div class="row">
+      <div class="col-xs-12">
+        <label>備考</label>
+        <%= f.text_area :text, class: "form-control input-sm" %>
+      </div>
+    </div>
+  </div>  
+  <% if current_page?(:controller => 'members', :action => 'index') %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">検索</button>
+          </div>
+  <% else %>
+    <div class="form-group">
+      <%= f.submit "会員登録", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+<% end %>

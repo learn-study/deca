@@ -17,14 +17,13 @@
   <tbody>
 <% @members.each do |m| %>
   <tr>
-    <td><%= link_to m.name, edit_member_path(m) %></td>
+    <td><%= link_to m.firstname+m.lastname, edit_member_path(m) %></td>
     <!-- <td><%#= m.namek %></td> -->
-    <td><%= m.address1 %></td>
+    <td><%= m.city %></td>
     <!-- <td><%#= m.address2 %></td> -->
     <td><%= m.tel %></td>
     <td><%= m.sect %></td>
     <td><%= m.kind %></td>
-    <td><%= m.text %></td>
   </tr>
 <% end %>
   </tbody>

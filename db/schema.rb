@@ -13,14 +13,22 @@
 ActiveRecord::Schema.define(version: 20171109074550) do
 
   create_table "members", force: :cascade do |t|
-    t.string "name"
-    t.string "namek"
-    t.string "address1"
-    t.string "address2"
+    t.string "lastname"
+    t.string "firstname"
+    t.string "namekana"
+    t.integer "gender"
+    t.date "birthday"
+    t.string "postal"
+    t.string "city"
+    t.string "streetaddress"
     t.string "tel"
+    t.string "mobile"
     t.string "sect"
     t.string "kind"
-    t.string "text"
+    t.boolean "local", default: false, null: false
+    t.boolean "reserve", default: false, null: false
+    t.boolean "dm", default: false, null: false
+    t.text "tag"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
