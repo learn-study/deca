@@ -6,6 +6,12 @@
   <div class="form-group">
     <label>会員番号</label>
     <%= member.id %>
+    
+    <label>DM</label>
+    <%= f.check_box :dm %> 
+
+    <label>付箋</label>
+    <%= f.text_field :tag %>
   </div>
   
   <div class="form-group">
@@ -35,16 +41,12 @@
     </div>
   </div>
   
-
-  
   <div class="form-group">
     <div class="col-sm-4">
       <label>郵便番号</label>
       <%= f.text_field :postal, maxlength: "8",onKeyUp: "AjaxZip3.zip2addr(this,'','pref','member[city]');", style: "width: 75px;" %>
     </div>
   </div>
-
-
 
   <div class="form-group">
     <div class="col-sm-8">
@@ -80,40 +82,24 @@
     </select>
   </div>
 
-<!--
-  <div class="row">
-    <div class="col-sm-3">
-      <h2>家族情報</h2>
-    </div>
-    <div class="col-sm-9">
-      <span class="btn btn-danger">追加</span>
-    </div>   
-  </div>
+  <div class="form-group">
+    <label>地方</label>
+    <%= f.check_box :local %>
+ 
+    <label>予備</label>
+    <%= f.check_box :reserve %>
 
-  <div class="row">
-    <div class="col-sm-3">
-      <h2>関係者情報</h2>
-    </div>
-    <div class="col-sm-9">
-      <span class="btn btn-danger">追加</span>
-    </div>    
   </div>
-
-  <div class="row">
-    <div class="col-sm-3">
-      <h2>備考</h2>
-    </div>
-    <div class="col-sm-9">
-      <span class="btn btn-danger">追加</span>
-    </div>   
-  </div>
--->
 
   <% if current_page?(:controller => 'members', :action => 'index') %>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       <button type="button" class="btn btn-primary">検索</button>
+    </div>
+  <% elsif (controller_name.eql? "members") && (action_name.eql? "edit") %>
+    <div class="form-group">
+      <%= f.submit "変更", class: "btn btn-primary col-sm-8" %>
     </div>
   <% else %>
     <p>登録すると家族情報や関係者情報が登録できます。</p>

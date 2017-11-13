@@ -21,6 +21,8 @@ class MembersController < ApplicationController
   
   def edit
     @member = Member.find(params[:id])
+    @family = @member.families.build
+    @families = @member.families.rank(:row_order)
   end
   
   def update
@@ -35,6 +37,6 @@ class MembersController < ApplicationController
 
   def member_params
     params.require(:member).permit(:lastname, :firstname, :namekana, :gender,
-    :birthday, :postal, :city, :streetaddress, :tel, :mobile, :sect, :kind, :locale, :reserve, :dm, :tag)
+    :birthday, :postal, :city, :streetaddress, :tel, :mobile, :sect, :kind, :local, :reserve, :dm, :tag)
   end
 end

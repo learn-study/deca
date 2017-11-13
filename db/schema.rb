@@ -10,7 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171109074550) do
+ActiveRecord::Schema.define(version: 20171112123059) do
+
+  create_table "families", force: :cascade do |t|
+    t.integer "member_id"
+    t.integer "separately"
+    t.string "relationship"
+    t.string "lastname"
+    t.string "firstname"
+    t.string "namekana"
+    t.date "birthday"
+    t.string "postal"
+    t.string "city"
+    t.string "streetaddress"
+    t.text "note"
+    t.boolean "dm", default: false, null: false
+    t.integer "row_order"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_families_on_member_id"
+  end
 
   create_table "members", force: :cascade do |t|
     t.string "lastname"
