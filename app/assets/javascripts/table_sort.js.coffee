@@ -1,4 +1,5 @@
 $ ->
+  ready = ->
   $('.table-sortable').sortable
     axis: 'y'
     items: '.item'
