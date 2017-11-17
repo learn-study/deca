@@ -11,5 +11,7 @@ class Member < ApplicationRecord
   enum gender: {男性:1, 女性:2}
   
   has_many :families
+  has_many :relations, class_name: "Relationship",foreign_key: "user_id"
+  has_many :member_relashionships, through: :relations,source: :member 
 
 end

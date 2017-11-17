@@ -1,5 +1,8 @@
 class SessionsController < ApplicationController
   def new
+    if logged_in?
+      @hoge = current_user.build_hoge
+    end
   end
 
   def create

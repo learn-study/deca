@@ -1,15 +1,7 @@
 <h2>会員編集</h2>
 <%= render "shared/memberform", member: @member %>
 <%= render "addfamily",family: @family, families: @families %>
-
-<div class="row">
-  <div class="col-sm-3">
-    <h2>関係者情報</h2>
-  </div>
-  <div class="col-sm-9">
-    <span class="btn btn-danger">追加</span>
-  </div>    
-</div>
+<%= render "relation" %>
 
 <div class="row">
   <div class="col-sm-3">

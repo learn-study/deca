@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  member: one
+  text: MyString
+  row_order: 1
+
+two:
+  user: two
+  member: two
+  text: MyString
+  row_order: 1

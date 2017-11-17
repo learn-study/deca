@@ -9,6 +9,7 @@
         <thead>
           <tr>
             <th>住居</th>
+            <th>続柄</th>
             <th>氏名</th>
             <th>カナ</th>
             <th>生年月日</th>
@@ -23,6 +24,7 @@
         <% families.each do |f| %>
           <tr class="item" data-model-name="family" data-update-url="<%= sort_family_path(f.id) %>">
             <td><%= f.separately %></td>
+            <td><%= f.relationship %></td>
             <td><%= f.lastname + " " + f.firstname %></td>
             <td><%= f.namekana %></td>
             <td><%= f.birthday %></td>
@@ -30,7 +32,7 @@
             <td><%= f.city %></td>
             <td><%= f.streetaddress %></td>
             <td><%= f.note %></td>
-            <td><%= f.dm %></td>
+            <td><%= boolean(f.dm) %></td>
           </tr>
         <% end %>
         </tbody>

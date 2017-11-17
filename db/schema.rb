@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171112123059) do
+ActiveRecord::Schema.define(version: 20171115092546) do
 
   create_table "families", force: :cascade do |t|
     t.integer "member_id"
@@ -29,6 +29,12 @@ ActiveRecord::Schema.define(version: 20171112123059) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["member_id"], name: "index_families_on_member_id"
+  end
+
+  create_table "hoges", force: :cascade do |t|
+    t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "members", force: :cascade do |t|
@@ -50,6 +56,17 @@ ActiveRecord::Schema.define(version: 20171112123059) do
     t.text "tag"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "member_id"
+    t.string "text"
+    t.integer "row_order"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_relationships_on_member_id"
+    t.index ["user_id"], name: "index_relationships_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
