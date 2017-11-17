@@ -18,8 +18,8 @@ class FamiliesController < ApplicationController
   def sort
     family = Family.find(params[:id])
     family.update!(family_params)
-    render nothing: true
   end
+  
   private
   
   def family_params
