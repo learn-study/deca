@@ -1,5 +1,32 @@
-<%= render "nav" %>
-<h1>会員一覧ページ</h1>
+<div class="row">
+  <h2 class="col-xs-3" style="padding:0;margin:0;">会員</h2>
+  <div><%= link_to "新規登録", new_member_path, class: "col-xs-3 col-xs-offset-1 btn btn-danger" %></div>
+  <div class="col-xs-3 col-xs-offset-1 btn btn-danger">印刷</div>
+</div>
+
+<div class="row spacer">
+  <a class="col-xs-3" data-toggle="modal" data-target="#serchModal">
+  オプション検索
+  </a>
+</div>
+
+<div class="modal fade" id="serchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">会員検索</h4>
+        </div>
+        <div class="modal-body">
+          検索ﾌｫｰﾑ
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">検索</button>
+        </div>
+    </div>
+  </div>
+</div>
 
 <table class="table">
   <thead>
@@ -16,7 +43,7 @@
   <tbody>
 <% @members.each do |m| %>
   <tr>
-    <td><%= link_to m.firstname+m.lastname, edit_member_path(m) %></td>
+    <td><%= link_to m.lastname + " " + m.firstname, edit_member_path(m) %></td>
     <!-- <td><%#= m.namek %></td> -->
     <td><%= m.city %></td>
     <!-- <td><%#= m.address2 %></td> -->
@@ -27,3 +54,4 @@
 <% end %>
   </tbody>
 </table>
+<%= paginate @members %>

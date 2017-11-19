@@ -1,6 +1,6 @@
 $ ->
   ready = ->
-  $('.table-sortable').sortable
+  $('.table-sortable2').sortable
     axis: 'y'
     items: '.item'
 

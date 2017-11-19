@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 20171115092546) do
     t.boolean "reserve", default: false, null: false
     t.boolean "dm", default: false, null: false
     t.text "tag"
+    t.integer "row_order"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -62,10 +63,10 @@ ActiveRecord::Schema.define(version: 20171115092546) do
     t.integer "user_id"
     t.integer "member_id"
     t.string "text"
-    t.integer "row_order"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["member_id"], name: "index_relationships_on_member_id"
+    t.index ["user_id", "member_id"], name: "index_relationships_on_user_id_and_member_id", unique: true
     t.index ["user_id"], name: "index_relationships_on_user_id"
   end
 

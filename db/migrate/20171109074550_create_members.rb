@@ -17,6 +17,7 @@ class CreateMembers < ActiveRecord::Migration[5.1]
       t.boolean :reserve, default: false, null: false
       t.boolean :dm, default: false, null: false
       t.text :tag
+      t.integer :row_order
 
       t.timestamps
     end

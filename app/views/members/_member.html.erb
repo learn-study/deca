@@ -1,0 +1,9 @@
+<tr class="member">
+  <%#= form_for(Relationship.new) do |f| %>
+    <td><%= member.lastname + " " + member.firstname %></td>
+    <%#= hidden_field_tag :member_id, m.id %>
+    <%#= hidden_field_tag :r_id, member.id %>
+    <td>備考<%#= f.text_field :text %></td>
+    <td><%#= f.submit "追加",class: "btn btn-sm btn-primary" %></td>
+  <%# end %>
+</tr>

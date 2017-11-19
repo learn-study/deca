@@ -1,13 +1,15 @@
-<h2>会員編集</h2>
-<%= render "shared/memberform", member: @member %>
-<%= render "addfamily",family: @family, families: @families %>
-<%= render "relation" %>
+<table id="infinity">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
 
-<div class="row">
-  <div class="col-sm-3">
-    <h2>備考</h2>
-  </div>
-  <div class="col-sm-9">
-    <span class="btn btn-danger">追加</span>
-  </div>   
-</div>
+  <tbody class="page">
+    <%= render @members %>
+  </tbody>
+</table>
+
+<%= paginate @members, remote: true, param_name: :hoge_page %> 
+

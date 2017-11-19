@@ -2,7 +2,7 @@ class MembersController < ApplicationController
   before_action :require_user_logged_in
   def index
     @member = Member.new
-    @members = Member.all
+    @members = Member.all.page(params[:page])
   end
   
   def new
@@ -23,6 +23,8 @@ class MembersController < ApplicationController
     @member = Member.find(params[:id])
     @family = @member.families.build
     @families = @member.families.rank(:row_order)
+    @members = Member.all.where.not(:id => @member.id).page(params[:page])
+    @relationships = @member.member_relashionships.rank(:row_order)
   end
   
   def update
@@ -33,10 +35,16 @@ class MembersController < ApplicationController
       render "edit"
     end
   end
+  
+  def sort
+    member = Member.find(params[:id])
+    member.update!(member_params)
+  end
+  
   private
 
   def member_params
     params.require(:member).permit(:lastname, :firstname, :namekana, :gender,
-    :birthday, :postal, :city, :streetaddress, :tel, :mobile, :sect, :kind, :local, :reserve, :dm, :tag)
+    :birthday, :postal, :city, :streetaddress, :tel, :mobile, :sect, :kind, :local, :reserve, :dm, :tag, :row_order_position)
   end
 end
