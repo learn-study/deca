@@ -12,7 +12,7 @@ class Member < ApplicationRecord
   enum gender: {男性:1, 女性:2}
   paginates_per 50  
   has_many :families
-  has_many :relations, class_name: "Relationship",foreign_key: "user_id"
-  has_many :member_relashionships, through: :relations,source: :member
+  has_many :relationships
+  has_many :member_relashionships, through: :relationships,source: :member2
 
 end

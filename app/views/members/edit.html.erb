@@ -1,15 +1,22 @@
-<table id="infinity">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-    </tr>
-  </thead>
+<h2>会員編集</h2>
+<%= render "shared/memberform", member: @member %>
+<%= render "addfamily",family: @family, families: @families %>
+<%= render "relation", members: @members, user: @member %>
 
-  <tbody class="page">
-    <%= render @members %>
-  </tbody>
-</table>
+<div class="row">
+  <div class="col-sm-3">
+    <h2>備考</h2>
+  </div>
+  <div class="col-sm-9">
+    <span class="btn btn-danger">追加</span>
+  </div>   
+</div>
 
-<%= paginate @members, remote: true, param_name: :hoge_page %> 
-
+<script>
+var params = location.search
+if ( params.match(/page/)) {
+  $(window).on('load',function(){
+      $('#relationForm').modal('show');
+  });
+}
+</script>

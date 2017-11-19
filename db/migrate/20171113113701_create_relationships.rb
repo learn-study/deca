@@ -1,12 +1,12 @@
 class CreateRelationships < ActiveRecord::Migration[5.1]
   def change
     create_table :relationships do |t|
-      t.references :user, class_name: "Member", foreign_key: true
       t.references :member, foreign_key: true
+      t.references :member2, class_name: "Member"
       t.string :text
 
       t.timestamps
-      t.index [:user_id, :member_id], unique: true
+      t.index [:member_id, :member2_id], unique: true
     end
   end
 end

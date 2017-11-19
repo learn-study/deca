@@ -12,8 +12,9 @@
 //
 //= require jquery
 //= require jquery.turbolinks
-//= require rails-ujs
+//= require jquery_ujs
 //= require jquery.infinitescroll
 //= require jquery-ui/widgets/sortable
-//= require turbolinks
+// require turbolinks
+//= require bootstrap-sprockets
 //= require_tree .

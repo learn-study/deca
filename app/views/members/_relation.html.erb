@@ -16,15 +16,21 @@
       <% @relationships.each do |r| %>
         <tr class="item" data-model-name="member" data-update-url="<%= sort_member_path(r.id) %>">
           <td><%= link_to r.lastname + " " + r.firstname, edit_member_path(r) %></td>
-          <td><%= user.relations.find_by(member_id: r.id).text %></td>
+          <td><%= user.relationships.find_by(member2_id: r.id).text %></td>
           <!--<td><%#= r.row_order %></td>-->
         </tr>
       <% end %>
     <%end %>
         </tbody>
       </table>
-      
-<div id="hoge_container">
+
+    <div class="modal fade" id="relationForm" tabindex="-1">
+    	<div class="modal-dialog">
+    		<div class="modal-content">
+    			<div class="modal-header">
+    				<button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+    				<h4 class="modal-title">関係者情報追加</h4>
+
   <table id="members">
     <thead>
       <tr>
@@ -38,18 +44,7 @@
     </tbody>
   </table>
   
-    <%= paginate members, remote: true %> 
-</div>
-      
-      
-    <div class="modal fade" id="relationForm" tabindex="-1">
-    	<div class="modal-dialog">
-    		<div class="modal-content">
-    			<div class="modal-header">
-    				<button type="button" class="close" data-dismiss="modal"><span>×</span></button>
-    				<h4 class="modal-title">関係者情報追加</h4>
-
-
+  <%= paginate members %> 
 
     			</div>
     		</div>

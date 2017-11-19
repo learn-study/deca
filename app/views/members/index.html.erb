@@ -5,9 +5,13 @@
 </div>
 
 <div class="row spacer">
-  <a class="col-xs-3" data-toggle="modal" data-target="#serchModal">
-  オプション検索
-  </a>
+  <div class="col-xs-12">
+  <%= form_tag(members_path, method: :get, class: 'form-inline') do %>
+    <%= text_field_tag :keyword, @keyword, class: 'form-control input-sm', placeholder: "キーワードを入力", size: 40 %>
+    <%= submit_tag '検索', class: 'btn btn-success btn-sm' %>
+  <% end %>
+  <a class="col-xs-3 btn btn-defalut" data-toggle="modal" data-target="#serchModal">オプション検索</a>
+  </div>
 </div>
 
 <div class="modal fade" id="serchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -28,6 +32,7 @@
   </div>
 </div>
 
+<% if @members.present? %>
 <table class="table">
   <thead>
     <tr>
@@ -41,17 +46,23 @@
     </tr>
   </thead>
   <tbody>
-<% @members.each do |m| %>
-  <tr>
-    <td><%= link_to m.lastname + " " + m.firstname, edit_member_path(m) %></td>
-    <!-- <td><%#= m.namek %></td> -->
-    <td><%= m.city %></td>
-    <!-- <td><%#= m.address2 %></td> -->
-    <td><%= m.tel %></td>
-    <td><%= m.sect %></td>
-    <td><%= m.kind %></td>
-  </tr>
-<% end %>
+  <% @members.each do |m| %>
+    <tr>
+      <td><%= link_to m.lastname + " " + m.firstname, edit_member_path(m) %></td>
+      <!-- <td><%#= m.namek %></td> -->
+      <td><%= m.city %></td>
+      <!-- <td><%#= m.address2 %></td> -->
+      <td><%= m.tel %></td>
+      <td><%= m.sect %></td>
+      <td><%= m.kind %></td>
+    </tr>
+  <% end %>
   </tbody>
 </table>
 <%= paginate @members %>
+<% else %>
+
+<div class="alert alert-danger spacer">
+  ご入力のワードでは検索できませんでした。
+</div>
+<% end %>

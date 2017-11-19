@@ -1,0 +1,27 @@
+<h1>Listing shops</h1>
+
+<!-- 修正箇所 開始 -->
+<table id="shops">
+<!-- 修正箇所 終了 -->
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Zipcode</th>
+      <th>Address</th>
+      <th>Tel</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <!-- 修正箇所 開始 -->
+  <tbody class="page">
+    <%= render @shops %>
+  </tbody>
+  <!-- 修正箇所 終了 -->
+</table>
+
+<br>
+
+<%= link_to 'New Shop',"#" %>
+<!-- 一番下に追加 -->
+<%= paginate @shops %>

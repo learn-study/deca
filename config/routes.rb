@@ -10,6 +10,9 @@ Rails.application.routes.draw do
     member do
       put 'sort'
     end
+    collection do
+      get "hoge"
+    end
   end
   resources :families do
     member do

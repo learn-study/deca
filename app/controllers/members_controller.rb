@@ -1,8 +1,20 @@
 class MembersController < ApplicationController
   before_action :require_user_logged_in
   def index
-    @member = Member.new
-    @members = Member.all.page(params[:page])
+    @keyword = params[:keyword]
+    p @keyword
+    if @keyword.present?
+      @member = Member.new
+      @members = Member.where("lastname like '%"+@keyword+"%'")
+                .or(Member.where("firstname like '%"+@keyword+"%'"))
+                .or(Member.where("city like '%"+@keyword+"%'"))
+                .or(Member.where("streetaddress like '%"+@keyword+"%'"))
+                .or(Member.where("tag like '%"+@keyword+"%'"))
+                .page(params[:page])
+    else
+      @member = Member.new
+      @members = Member.page(params[:page])
+    end
   end
   
   def new
@@ -23,7 +35,7 @@ class MembersController < ApplicationController
     @member = Member.find(params[:id])
     @family = @member.families.build
     @families = @member.families.rank(:row_order)
-    @members = Member.all.where.not(:id => @member.id).page(params[:page])
+    @members = Member.where.not(:id => @member.id).page(params[:page])
     @relationships = @member.member_relashionships.rank(:row_order)
   end
   
