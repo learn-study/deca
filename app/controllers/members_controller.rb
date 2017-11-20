@@ -4,6 +4,7 @@ class MembersController < ApplicationController
     @keyword = params[:keyword]
     p @keyword
     if @keyword.present?
+      @keyword.gsub!(/(\s|　)+/, '')
       @member = Member.new
       @members = Member.where("lastname like '%"+@keyword+"%'")
                 .or(Member.where("firstname like '%"+@keyword+"%'"))
@@ -24,6 +25,7 @@ class MembersController < ApplicationController
   
   def create
     @member = Member.new(member_params)
+    @member.name = @member.lastname.gsub(/(\s|　)+/, '')+@member.firstname.gsub(/(\s|　)+/, '')
     if @member.save
       redirect_to members_url
       #redirect_back(fallback_location: root_path)

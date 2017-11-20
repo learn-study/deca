@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20171113113701) do
   create_table "members", force: :cascade do |t|
     t.string "lastname"
     t.string "firstname"
+    t.string "name"
     t.string "namekana"
     t.integer "gender"
     t.date "birthday"

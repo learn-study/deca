@@ -3,6 +3,7 @@ class CreateMembers < ActiveRecord::Migration[5.1]
     create_table :members do |t|
       t.string :lastname
       t.string :firstname
+      t.string :name
       t.string :namekana
       t.integer :gender
       t.date :birthday

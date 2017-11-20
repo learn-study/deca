@@ -8,10 +8,14 @@
 
 User.create(loginid:"admin", password:"pass")
 Faker::Config.locale = 'ja'
-2100.times do
+100.times do
+    f = Faker::Name.first_name
+    l = Faker::Name.last_name
+    n = l+f
      m=Member.new(
-        firstname: Faker::Name.first_name,
-        lastname: Faker::Name.last_name,
+        firstname: f,
+        lastname: l,
+        name: n,
         city: Faker::Address.street_name,
         tel: Faker::PhoneNumber.cell_phone,
         streetaddress: Faker::Address.street_address,
