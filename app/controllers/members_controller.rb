@@ -8,6 +8,7 @@ class MembersController < ApplicationController
       @member = Member.new
       @members = Member.where("lastname like '%"+@keyword+"%'")
                 .or(Member.where("firstname like '%"+@keyword+"%'"))
+                .or(Member.where("name like '%"+@keyword+"%'"))
                 .or(Member.where("namekana like '%"+@keyword+"%'"))
                 .or(Member.where("city like '%"+@keyword+"%'"))
                 .or(Member.where("streetaddress like '%"+@keyword+"%'"))
