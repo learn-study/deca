@@ -17,6 +17,9 @@ class MembersController < ApplicationController
                 .page(params[:page])
     elsif @tel.present?
       @tel.gsub!(/(\s|　)+/, '')
+      @tel.delete!("-")
+      @tel.delete!("－")
+      @tel.delete!("ー")
       @member = Member.new
       @members = Member.where("tel like '%"+@tel+"%'")
                 .or(Member.where("mobile like '%"+@tel+"%'"))
