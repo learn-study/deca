@@ -5,13 +5,24 @@
 </div>
 
 <div class="row spacer">
-  <div class="col-xs-12">
+  <div class="col-xs-3">
   <%= form_tag(members_path, method: :get, class: 'form-inline') do %>
-    <%= text_field_tag :keyword, @keyword, class: 'form-control input-sm', placeholder: "キーワードを入力", size: 40 %>
+    <%= text_field_tag :keyword, @keyword, class: 'form-control input-sm', placeholder: "キーワードを入力" %>
     <%= submit_tag '検索', class: 'btn btn-success btn-sm' %>
   <% end %>
+  </div>
+  
+  <div class="col-xs-3">
+  <%= form_tag(members_path, method: :get, class: 'form-inline') do %>
+    <%= text_field_tag :tel, @tel, class: 'form-control input-sm', placeholder: "電話番号を入力"  %>
+    <%= submit_tag '検索', class: 'btn btn-success btn-sm' %>
+  <% end %>
+  </div>
+  
+  <div class="col-xs-3">
   <a class="col-xs-3 btn btn-defalut" data-toggle="modal" data-target="#serchModal">オプション検索</a>
   </div>
+
 </div>
 
 <div class="modal fade" id="serchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

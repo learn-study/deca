@@ -2,6 +2,7 @@ class MembersController < ApplicationController
   before_action :require_user_logged_in
   def index
     @keyword = params[:keyword]
+    @tel = params[:tel].to_s
     p @keyword
     if @keyword.present?
       @keyword.gsub!(/(\s|　)+/, '')
@@ -13,6 +14,12 @@ class MembersController < ApplicationController
                 .or(Member.where("city like '%"+@keyword+"%'"))
                 .or(Member.where("streetaddress like '%"+@keyword+"%'"))
                 .or(Member.where("tag like '%"+@keyword+"%'"))
+                .page(params[:page])
+    elsif @tel.present?
+      @tel.gsub!(/(\s|　)+/, '')
+      @member = Member.new
+      @members = Member.where("tel like '%"+@tel+"%'")
+                .or(Member.where("mobile like '%"+@tel+"%'"))
                 .page(params[:page])
     else
       @member = Member.new
