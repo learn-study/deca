@@ -108,22 +108,29 @@
 <% end %>
 
 <script>
-  function calcAge(birthdate) {
+  function getAge(){
+    var year = $("#member_birthday_1i").children(':selected').val();
+    var month = $("#member_birthday_2i").children(':selected').val() -1 ;
+    var day = $("#member_birthday_3i").children(':selected').val();
+    var birthdate= new Date(year, month, day)
     var today= new Date()
     var age = today.getFullYear() - birthdate.getFullYear();
-
 	  var birthday = new Date(today.getFullYear(), birthdate.getMonth(), birthdate.getDate());
+
   	if (today.getTime() < birthday.getTime()) {
   		age--;
   	}
-  	return age;
+ 
+  document.getElementById("age").innerHTML= "("+age+"歳"+")" ;
   }
 
-  var year = $("#member_birthday_1i").children(':selected').val();
-  var month = $("#member_birthday_2i").children(':selected').val() -1 ;
-  var day = $("#member_birthday_3i").children(':selected').val();
-  var birthdate= new Date(year, month, day)
-  age = calcAge(birthdate)
-  console.log(age)
-  document.getElementById("age").innerHTML= "("+age+"歳"+")" ;
+  $("#member_birthday_1i").click( function(){
+    getAge();
+  });$("#member_birthday_2i").click( function(){
+    getAge();
+  });$("#member_birthday_3i").click( function(){
+    getAge();
+  });
+
+  getAge();
 </script> 
