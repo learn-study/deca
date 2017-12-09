@@ -2,17 +2,24 @@ class FamiliesController < ApplicationController
   def create
     @member = Member.find(params[:member_id])
     @family = @member.families.build(family_params)
+    @members = Member.where.not(:id => @member.id).page(params[:page])
     if @family.save
       redirect_to edit_member_url(@member)
     else
-      render "member/edit"
+      redirect_to edit_member_url(@member)
+      flash[:danger] = "家族追加に失敗しました。"
     end
+  end
+
+  def edit
+    @family=Family.find(params[:id])
   end
   
   def update
     @family = Family.find(params[:id])
     @family.update(family_params)
-    redirect_back(fallback_location: root_path)
+    redirect_to edit_member_url(@family.member)
+    #redirect_back(fallback_location: root_path)
   end
   
   def sort
@@ -24,6 +31,6 @@ class FamiliesController < ApplicationController
   
   def family_params
     params.require(:family).permit(:separately, :relationship, :lastname, :firstname, :namekana, :gender,
-    :birthday, :postal, :city, :streetaddress, :dm, :row_order_position)
+    :birthday, :postal, :city, :streetaddress, :dm, :note, :row_order_position)
   end
 end

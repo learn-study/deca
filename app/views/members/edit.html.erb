@@ -1,15 +1,53 @@
-<h2>会員編集</h2>
-<%= render "shared/memberform", member: @member %>
-<%= render "addfamily",family: @family, families: @families %>
-<%= render "relation", members: @members, user: @member %>
-
 <div class="row">
-  <div class="col-sm-3">
-    <h2>備考</h2>
+  <a href="/members" class="col-xs-3 btn btn-danger">戻る</a>
+  <div class="col-xs-3 col-xs-offset-6 btn btn-danger">印刷</div>
+</div>
+<div class="row">
+  <div class="col-xs-4 col-xs-offset-4 text-center"><h2>会員・情報編集</h2></div>
+</div>
+
+
+<%= render "shared/memberform", member: @member,family: @family, families: @families %>
+
+
+<!-- モーダル・ダイアログ -->
+<div class="modal fade" id="familyForm" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+				<h4 class="modal-title">家族情報追加</h4>
+			</div>
+      <%= render "shared/familyform", family: @family %>
+		</div>
+	</div>
+</div>
+
+<!-- モーダル・ダイアログ -->
+<div class="modal fade" id="relationForm" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+				<h4 class="modal-title">関係者情報追加</h4>
+        <table id="members">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+      
+          <tbody class="page">
+            <%= render @members, m: @member %>
+          </tbody>
+        </table>
+
+        <%= paginate @members %> 
+
+			</div>
+		</div>
   </div>
-  <div class="col-sm-9">
-    <span class="btn btn-danger">追加</span>
-  </div>   
 </div>
 
 <script>

@@ -1,95 +1,116 @@
+<style>
+  .left_column{
+    width:85px;
+  }
+  ._small{
+    font-size:12px;
+  }
+</style>
+
 <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
 
 <%= form_for(member, html: {class: 'form-horizontal',name: 'member'}) do |f| %>
   <%= render 'layouts/error_messages', model: f.object %>
 
   <div class="form-group">
-    <label>会員番号</label>
-    <%= member.id %>
-    
-    <label>DM</label>
-    <%= f.check_box :dm %> 
-
-    <label>付箋</label>
-    <%= f.text_field :tag %>
+    <label class="left_column">コード</label>
+    <input type="text" value="<%= member.id %>" style="text-align: right;width:80px;">
   </div>
   
+
+  
   <div class="form-group">
-    <div class="col-sm-4">
-      <label>姓</label>
+      <label class="left_column">氏名</label>
       <%= f.text_field :lastname, style: "width: 90px;" %>
-      
-      <label>名</label>
       <%= f.text_field :firstname, style: "width: 90px;" %>
-    </div>
-
-    <div class="col-sm-4">
-      <label>カナ</label>
-      <%= f.text_field :namekana, style: "width: 250px;" %>
-    </div>
+      <label style="margin-left:30px;">カナ</label>
+      <%= f.text_field :namekana, style: "width: 200px;" %>
   </div>
 
   <div class="form-group">
-    <div class="col-sm-4">
-      <label>性別</label>
-      <%= f.radio_button :gender, :男性 %>男性
-      <%= f.radio_button :gender, :女性 %>女性
-    </div>
-    <div class="col-sm-4">
-      <label>誕生日</label>
-      <%= f.date_select(:birthday, :use_month_numbers => true, start_year:1890, end_year:Time.now.year, default: Date.new(Time.now.year-40, 6, 15)) %><span id="age"></span>
-    </div>
+    <label class="left_column">性別</label>
+    <%= f.radio_button :gender, :男性 %>男性
+    <%= f.radio_button :gender, :女性 %>女性
+  </div>
+
+  <div class="form-group">
+    <label class="left_column">生年月日</label>
+    <%= f.date_select(:birthday, :use_month_numbers => true, start_year:1890, end_year:Time.now.year, default: Date.new(Time.now.year-40, 6, 15)) %><span id="age"></span>
   </div>
   
   <div class="form-group">
-    <div class="col-sm-4">
-      <label>郵便番号</label>
-      <%= f.text_field :postal, maxlength: "8",onKeyUp: "AjaxZip3.zip2addr(this,'','pref','member[city]');", style: "width: 75px;" %>
-    </div>
+    <label class="left_column">郵便番号</label>
+    <%= f.text_field :postal, maxlength: "8",onKeyUp: "AjaxZip3.zip2addr(this,'','pref','member[city]');", style: "width: 75px;" %>
   </div>
 
   <div class="form-group">
-    <div class="col-sm-8">
-      <input type="hidden" name="pref">
-      <label>市区町村 </label>
-      <%= f.text_field :city, id: "address_city", placeholder: "市区町村", style: "width: 80%" %>
-    </div>
+    <input type="hidden" name="pref">
+    <label class="left_column">市区町村 </label>
+    <%= f.text_field :city, id: "address_city", style: "width: 80%" %>
   </div>
     
   <div class="form-group">
-    <div class="col-sm-8">
-      <label>番地 建物</label>
-      <%= f.text_field :streetaddress, id: "address_street", placeholder: "番地、ビル・マンション名", style: "width: 80%" %>
-    </div>
+    <label class="left_column _small">番地・ﾏﾝｼｮﾝ名</label>
+    <%= f.text_field :streetaddress, id: "address_street", style: "width: 80%" %>
   </div>
     
   <div class="form-group">
-    <label>固定電話</label>
+    <label class="left_column">固定電話</label>
     <%= f.text_field :tel %>
   </div>
     
   <div class="form-group">
-    <label>携帯電話</label>
+    <label class="left_column">携帯電話</label>
     <%= f.text_field :mobile %>
   </div>
 
   <div class="form-group">
-    <label>宗派</label>
-    <select>
-    </select>
-    <label>会種</label>
-    <select>
+    <label class="left_column">宗派</label>
+    <%= f.collection_select :sect, Sect.all, :id, :sect,  {:include_blank => true}, {style: "width:190px;"} %>
+
+    <label style="margin-left:30px;">会種</label>
+    <select style="width:190px;">
     </select>
   </div>
 
   <div class="form-group">
-    <label>地方</label>
-    <%= f.check_box :local %>
- 
-    <label>予備</label>
-    <%= f.check_box :reserve %>
-
+    <label class="left_column">DM送付</label>
+    <%= f.check_box :dm %> 
   </div>
+
+  <div class="form-group">
+    <label class="left_column">予備</label>
+    <%= f.check_box :reserve %>
+  </div>
+ 
+  <div class="form-group">
+    <label class="left_column">地方</label>
+    <%= f.check_box :local %>
+  </div>
+
+  <% if (controller_name.eql? "members") && (action_name.eql? "edit") %>
+    <%= render "members/addfamily",family: family, families: families %>
+    <%= render "members/relation", user: member %>
+    <div class="row">
+      <div class="col-sm-3">
+        <h2>備考</h2>
+      </div>
+      <div class="col-sm-9">
+        <span class="btn btn-danger">追加</span>
+      </div>   
+    </div>
+  <% end %>
+
+
+
+  <div class="form-group">
+    <label class="left_column">付箋</label>
+    <%= f.text_field :tag, style: "width: 80%" %>
+  </div>
+  
+ 
+  
+
 
   <% if current_page?(:controller => 'members', :action => 'index') %>
     </div>
@@ -106,6 +127,21 @@
     <%= f.submit "登録", class: "btn btn-primary" %>
   <% end %>
 <% end %>
+
+
+<div style="padding: 20px 0">
+<%= form_for(Sect.new) do |f| %>
+  <%= f.text_field :sect %>
+  <%= f.submit "宗派追加" %>
+<% end %>
+</div>
+
+<%= form_for(Kind.new) do |f| %>
+  <%= f.text_field :text %>
+  <%= f.submit "会種追加" %>
+<% end %>
+
+
 
 <script>
   function getAge(){

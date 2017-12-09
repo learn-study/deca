@@ -6,4 +6,7 @@ class Family < ApplicationRecord
   include RankedModel
   ranks :row_order
   enum separately: {同居:1, 別居:0}
+  validates :lastname, presence: true, length: { in: 2..50 }
+  validates :firstname, presence: true, length: { in: 2..50 }
+  belongs_to :member
 end

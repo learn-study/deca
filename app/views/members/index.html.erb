@@ -7,6 +7,7 @@
 <div class="row" style="margin:30px 0;">
   <div><%= link_to "会員新規登録", new_member_path, class: "col-xs-4 col-xs-offset-4 btn btn-primary" %></div>
 </div>
+<%= @text %>
 
 <div class="row spacer">
   <div class="col-xs-4">
@@ -37,11 +38,92 @@
         <h4 class="modal-title" id="myModalLabel">会員検索</h4>
         </div>
         <div class="modal-body">
-          検索ﾌｫｰﾑ
+
+          <%= form_for(@member, :url => {:controller => :members, :action => :index}, html: {method: 'GET'}) do |f| %>
+            <%= hidden_field_tag :form, "true" %>
+            <div class="form-group">
+              <%= f.label :id, "会員番号" %>
+              <%= f.number_field :id %>
+            </div>
+
+            <div class="form-group">
+              <label>姓</label>
+              <%= f.text_field :lastname %>
+              <label>名</label>
+              <%= f.text_field :firstname %><br>
+              <label>カナ</label>
+              <%= f.text_field :namekana %>
+            </div>
+            
+            <div class="form-group">
+              <label>性別</label>
+              <%= f.radio_button :gender, :男性 %>男性
+              <%= f.radio_button :gender, :女性 %>女性
+            </div>
+            
+            <div class="form-group">
+              <label>住所1</label>
+              <%= f.text_field :city %>
+            </div>            
+            
+            <div class="form-group">
+              <label>住所2</label>
+              <%= f.text_field :streetaddress %>
+            </div>              
+            
+            <div class="form-group">
+              <label>電話番号</label>
+              <%= f.text_field :tel %>
+            </div>             
+            
+            <div class="form-group">
+              <label>宗派</label>
+                <%= f.collection_select :sect, Sect.all, :id, :sect,  :include_blank => true %>
+              <label>会種</label>
+            </div>             
+            
+            <div class="form-group">
+              <label>登録日</label>
+            </div> 
+
+            <div class="form-group">
+              <label>変更日</label>
+            </div> 
+
+            <div class="form-group">
+              <label>備考</label>
+              <label>付箋</label>
+            </div> 
+            
+            <div class="form-group">
+              <label>DM送付</label>
+              <%= f.check_box :dm %> 
+              <label>予備</label>
+              <%= f.check_box :reserve %>
+            </div> 
+            
+            <div class="form-group">
+              <label>家族[姓]</label>
+              <%= text_field_tag :flastname %>
+              <label>家族[名]</label>
+              <%= text_field_tag :ffirstname %>
+              <label>家族カナ</label>
+              <%= text_field_tag :fkana %>
+            </div>             
+
+            <div class="form-group">
+              <label>並び順</label>
+            </div> 
+
+            <div class="form-group">
+              <label>条件</label>
+            </div> 
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">検索</button>
+            <%= f.submit "検索" ,class: "btn btn-primary" %>
+          <% end %>
         </div>
     </div>
   </div>
@@ -75,7 +157,7 @@
       <td><%= m.city %></td>
       <td><%= m.tel %></td>
       <td><%= m.mobile %></td>
-      <td><%= m.sect %></td>
+      <td><%= Sect.find(m.sect).sect if m.sect.present? %></td>
       <td><%= m.kind %></td>
       <td><%= m.created_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %></td>
       <td><%= m.updated_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %></td>

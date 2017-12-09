@@ -1,0 +1,58 @@
+<%= form_for(@family) do |f| %>
+  <div class="form-group">
+		<label>住居</label>
+		<%= f.select :separately, Family.separatelies.keys, {prompt: '選択してください'} %>
+	</div>
+		
+  <div class="form-group">
+		<label>続柄</label>
+		<%= f.text_field :relationship %>
+	</div>
+
+  <div class="form-group">
+    <label>氏名</label>
+    <%= f.text_field :lastname %>
+    <%= f.text_field :firstname %>
+  </div>
+  
+  <div class="form-group">
+    <label>カナ</label>
+    <%= f.text_field :namekana %>
+  </div>
+  
+  <div class="form-group">
+    <label>誕生日</label>
+    <%= f.date_select(:birthday, :use_month_numbers => true, start_year:1890, end_year:Time.now.year, default: Date.new(Time.now.year-40, 6, 15)) %><span id="age"></span>
+  </div>        
+
+  <div class="form-group">
+    <label>郵便番号</label>
+    <%= f.text_field :postal, maxlength: "8",onKeyUp: "AjaxZip3.zip2addr(this,'','pref2','family[city]');", style: "width: 75px;" %>
+  </div>  
+
+  <div class="form-group">
+    <input type="hidden" name="pref2">
+    <label>市区町村 </label>
+    <%= f.text_field :city, id: "address_city", placeholder: "市区町村", style: "width: 80%" %>
+  </div>
+    
+  <div class="form-group">
+    <label>番地 建物</label>
+    <%= f.text_field :streetaddress, id: "address_street", placeholder: "番地、ビル・マンション名", style: "width: 80%" %>
+  </div>  
+
+  <div class="form-group">
+  <label>備考</label>
+  <%= f.text_field :note %> 
+  </div>
+  
+  
+  <div class="form-group">
+  <label>DM</label>
+  <%= f.check_box :dm %> 
+  </div>
+  
+	<div>
+		<%= f.submit "編集する", class: "btn btn-primary" %>
+	</div>
+<% end %>

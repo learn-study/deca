@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  class: MyString
+  kind: MyString
+  responsible: MyString
+  deceased: MyString
+  coffin: MyString
+
+two:
+  class: MyString
+  kind: MyString
+  responsible: MyString
+  deceased: MyString
+  coffin: MyString

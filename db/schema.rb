@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171113113701) do
+ActiveRecord::Schema.define(version: 20171209135452) do
 
   create_table "families", force: :cascade do |t|
     t.integer "member_id"
@@ -29,6 +29,24 @@ ActiveRecord::Schema.define(version: 20171113113701) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["member_id"], name: "index_families_on_member_id"
+  end
+
+  create_table "kinds", force: :cascade do |t|
+    t.string "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ledgers", force: :cascade do |t|
+    t.string "class"
+    t.string "kind"
+    t.string "responsible"
+    t.string "deceased"
+    t.string "coffin"
+    t.text "other"
+    t.integer "member_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "members", force: :cascade do |t|
@@ -63,6 +81,12 @@ ActiveRecord::Schema.define(version: 20171113113701) do
     t.index ["member2_id"], name: "index_relationships_on_member2_id"
     t.index ["member_id", "member2_id"], name: "index_relationships_on_member_id_and_member2_id", unique: true
     t.index ["member_id"], name: "index_relationships_on_member_id"
+  end
+
+  create_table "sects", force: :cascade do |t|
+    t.string "sect"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

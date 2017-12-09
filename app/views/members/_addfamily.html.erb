@@ -1,120 +1,44 @@
-<div class="row">
-  <div class="col-sm-3">
-    <h2>家族情報</h2>
-  </div>
-  <div class="col-sm-9">
-    <span class="btn btn-danger" data-toggle="modal" data-target="#familyForm">追加</span>
-      <% if families.present? %>
-      <table class="table table-bordered table-sortable ui-sortable">
-        <thead>
-          <tr>
-            <th>住居</th>
-            <th>続柄</th>
-            <th>氏名</th>
-            <th>カナ</th>
-            <th>生年月日</th>
-            <th>年齢</th>
-            <th>住所1</th>
-            <th>住所2</th>
-            <th>備考</th>
-            <th>DM</th>
-          </tr>
-        </thead>
-        <tbody>
-        <% families.each do |f| %>
-          <tr class="item" data-model-name="family" data-update-url="<%= sort_family_path(f.id) %>">
-            <td><%= f.separately %></td>
-            <td><%= f.relationship %></td>
-            <td><%= f.lastname + " " + f.firstname %></td>
-            <td><%= f.namekana %></td>
-            <td><%= f.birthday %></td>
-            <td><%= age(f.birthday) %></td>
-            <td><%= f.city %></td>
-            <td><%= f.streetaddress %></td>
-            <td><%= f.note %></td>
-            <td><%= boolean(f.dm) %></td>
-          </tr>
-        <% end %>
-        </tbody>
-      </table>
-      <% end %>
-  </div>   
+<div class="row underspacer">
+  <label class="left_column">家族情報</label>
+  <span class="btn btn-danger" data-toggle="modal" data-target="#familyForm">追加</span>
 </div>
 
-<!-- モーダル・ダイアログ -->
-<div class="modal fade" id="familyForm" tabindex="-1">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"><span>×</span></button>
-				<h4 class="modal-title">家族情報追加</h4>
-			</div>
-			<%= form_for(family) do |f| %>
-  			<div class="modal-body">
-  			  <div class="form-group">
-    				<label>住居</label>
-    				<%= f.select :separately, Family.separatelies.keys, {prompt: '選択してください'} %>
-    				
-    				<label>続柄</label>
-    				<%= f.text_field :relationship %>
-  				</div>
-  			</div>
-
-        <div class="form-group">
-          <label>姓</label>
-          <%= f.text_field :lastname %>
-          
-          <label>名</label>
-          <%= f.text_field :firstname %>
-
-          <label>カナ</label>
-          <%= f.text_field :namekana %>
-        </div>
-        
-        <div class="form-group">
-          <div class="col-sm-5">
-            <label>誕生日</label>
-            <%= f.date_select(:birthday, :use_month_numbers => true, start_year:1890, end_year:Time.now.year, default: Date.new(Time.now.year-40, 6, 15)) %><span id="age"></span>
-          </div>
-        </div>        
-  
-        <div class="form-group">
-          <div class="col-sm-4">
-            <label>郵便番号</label>
-            <%= f.text_field :postal, maxlength: "8",onKeyUp: "AjaxZip3.zip2addr(this,'','pref2','family[city]');", style: "width: 75px;" %>
-          </div>
-        </div>  
-  
-        <div class="form-group">
-          <div class="col-sm-8">
-            <input type="hidden" name="pref2">
-            <label>市区町村 </label>
-            <%= f.text_field :city, id: "address_city", placeholder: "市区町村", style: "width: 80%" %>
-          </div>
-        </div>
-          
-        <div class="form-group">
-          <div class="col-sm-8">
-            <label>番地 建物</label>
-            <%= f.text_field :streetaddress, id: "address_street", placeholder: "番地、ビル・マンション名", style: "width: 80%" %>
-          </div>
-        </div>  
-
-        <label>備考</label>
-        <%= f.text_field :note %> 
-
-        <label>DM</label>
-        <%= f.check_box :dm %> 
-        
-        <%= hidden_field_tag :member_id, params[:id] %>
-
-  			<div class="modal-footer">
-  				<button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
-  				<%= f.submit "家族登録", class: "btn btn-primary" %>
-  			</div>
-			<% end %>
-		</div>
-	</div>
-</div>
-
+<% if families.present? %>
+<table class="table table-bordered table-sortable ui-sortable">
+  <thead>
+    <tr>
+      <th>住居</th>
+      <th>続柄</th>
+      <th>氏名</th>
+      <th>カナ</th>
+      <th>生年月日</th>
+      <th>年齢</th>
+      <th>郵便番号</th></th>
+      <th>住所1</th>
+      <th>住所2</th>
+      <th>備考</th>
+      <th>DM</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% families.each do |fa| %>
+    <tr class="item" data-model-name="family" data-update-url="<%= sort_family_path(fa.id) %>">
+      <td><%= fa.separately %></td>
+      <td><%= fa.relationship %></td>
+      <td><%= fa.lastname + " " + fa.firstname %></td>
+      <td><%= fa.namekana %></td>
+      <td><%= fa.birthday %></td>
+      <td><%= age(fa.birthday) %></td>
+      <td><%= fa.postal %></td>
+      <td><%= fa.city %></td>
+      <td><%= fa.streetaddress %></td>
+      <td><%= fa.note %></td>
+      <td><%= boolean(fa.dm) %></td>
+      <td class="no-wrap"><%= link_to "修正", edit_family_path(fa),class: "btn btn-primary btn-xs" %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>
+      
 

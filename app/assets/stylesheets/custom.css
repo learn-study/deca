@@ -1,9 +1,19 @@
 .spacer {
-  padding-top: 15px; }
+  padding-top: 15px;
+}
 
+.underspacer{
+  padding-bottom:15px;
+}
 .large {
   font-size: 20px; }
 
 .field_with_errors input{
   border: 1px solid #f00;
+}
+
+.table-bordered td.no-wrap{
+  border-bottom:hidden;
+  border-top:hidden;
+  border-right:hidden;
 }
