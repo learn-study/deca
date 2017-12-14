@@ -1,27 +1,27 @@
-<div class="row">
-  <div class="col-sm-3">
-    <h2>関係者情報</h2>
-  </div>
-  <div class="col-sm-9">
-    <span class="btn btn-danger" data-toggle="modal" data-target="#relationForm">追加</span>
-    <% if @relationships.present? %>
-      <table class="table table-bordered table-sortable2 ui-sortable">
-        <thead>
-          <tr>
-            <th>名前</th>
-            <th>備考</th>
-          </tr>
-        </thead>
-        <tbody>
-        <% @relationships.each do |r| %>
-          <tr class="item" data-model-name="member" data-update-url="<%= sort_member_path(r.id) %>">
-            <td><%= link_to r.lastname + " " + r.firstname, edit_member_path(r) %></td>
-            <td><%= user.relationships.find_by(member2_id: r.id).text %></td>
-            <!--<td><%#= r.row_order %></td>-->
-          </tr>
-        <% end %>
-    <%end %>
-        </tbody>
-      </table>
-  </div>
+<div class="row underspacer">
+  <label class="left_column">関係者情報</label>
+  <span class="btn btn-danger" data-toggle="modal" data-target="#relationForm">追加</span>
 </div>
+
+
+<% if @relationships.present? %>
+<table class="table table-bordered table-sortable2 ui-sortable">
+  <thead>
+    <tr>
+      <th>会員番号</th>
+      <th>氏名</th>
+      <th>備考</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @relationships.each do |r| %>
+    <tr class="item" data-model-name="member" data-update-url="<%= sort_member_path(r.id) %>">
+      <td class="col-xs-1"><%= r.id %></td>
+      <td style="width:120px;"><%= link_to r.lastname + " " + r.firstname, edit_member_path(r) %></td>
+      <td><%= user.relationships.find_by(member2_id: r.id).text %></td>
+      <td class="no-wrap"><%= link_to "削除",relationship_path(r,r: params[:id]),method: :delete,class: "btn btn-default btn-sm" %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<%end %>

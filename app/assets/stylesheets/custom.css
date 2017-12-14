@@ -17,3 +17,10 @@
   border-top:hidden;
   border-right:hidden;
 }
+
+  .left_column{
+    width:85px;
+  }
+  ._small{
+    font-size:12px;
+  }
