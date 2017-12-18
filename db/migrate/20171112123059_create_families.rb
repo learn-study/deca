@@ -6,6 +6,7 @@ class CreateFamilies < ActiveRecord::Migration[5.1]
       t.string :relationship
       t.string :lastname
       t.string :firstname
+      t.string :name
       t.string :namekana
       t.date :birthday
       t.string :postal

@@ -25,9 +25,19 @@
   </div>
   
   <div class="col-xs-4">
-  <a class="col-xs-3 btn btn-defalut" data-toggle="modal" data-target="#serchModal">オプション検索</a>
+  <%= form_tag(members_path, method: :get, class: 'form-inline') do %>
+    <%= text_field_tag :family, @family, class: 'form-control input-sm', placeholder: "家族検索"  %>
+    <%= submit_tag '検索', class: 'btn btn-success btn-sm' %>
+  <% end %>
   </div>
 
+</div>
+
+
+<div class="row spacer">
+  <div class="col-xs-4 col-xs-offset-4">
+  <a class="col-xs-3 btn btn-defalut" data-toggle="modal" data-target="#serchModal">オプション検索</a>
+  </div>
 </div>
 
 <div class="modal fade" id="serchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -103,15 +113,6 @@
             </div> 
             
             <div class="form-group">
-              <label>家族[姓]</label>
-              <%= text_field_tag :flastname %>
-              <label>家族[名]</label>
-              <%= text_field_tag :ffirstname %>
-              <label>家族カナ</label>
-              <%= text_field_tag :fkana %>
-            </div>             
-
-            <div class="form-group">
               <label>並び順</label>
             </div> 
 
@@ -129,9 +130,10 @@
   </div>
 </div>
 
-<%= paginate @members %>
 
 <% if @members.present? %>
+<%= paginate @members %>
+
 <table class="table">
   <thead>
     <tr>
@@ -166,6 +168,46 @@
   </tbody>
 </table>
 <%= paginate @members %>
+
+<% elsif @families.present? %>
+<%= paginate @families %>
+
+<table class="table">
+  <thead>
+    <tr>
+        <th>会員番号</th>
+        <th>氏名</th>
+        <th>カナ</th>
+        <th>住所１</th>
+        <!-- <th>住所2</th> -->
+        <th>固定電話</th>
+        <th>携帯電話</th>
+        <th>宗派</th>
+        <th>会種</th>
+        <th>登録日</th>
+        <th>修正日</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @families.each do |f| %>
+  <% m = f.member %>
+    <tr>
+      <td><%= m.id %></td>
+      <td><%= link_to m.lastname + " " + m.firstname, edit_member_path(m) %></td>
+      <td><%= m.namekana %></td>
+      <td><%= m.city %></td>
+      <td><%= m.tel %></td>
+      <td><%= m.mobile %></td>
+      <td><%= Sect.find(m.sect).sect if m.sect.present? %></td>
+      <td><%= m.kind %></td>
+      <td><%= m.created_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %></td>
+      <td><%= m.updated_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<%= paginate @families %>
+
 <% else %>
 
 <div class="alert alert-danger spacer">

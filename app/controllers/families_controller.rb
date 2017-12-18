@@ -2,6 +2,8 @@ class FamiliesController < ApplicationController
   def create
     @member = Member.find(params[:member_id])
     @family = @member.families.build(family_params)
+    @family.name = @family.lastname.gsub(/(\s|　)+/, '')+@family.firstname.gsub(/(\s|　)+/, '')
+    p @family.inspect
     @members = Member.where.not(:id => @member.id).page(params[:page])
     if @family.save
       redirect_to edit_member_url(@member)
@@ -17,6 +19,7 @@ class FamiliesController < ApplicationController
   
   def update
     @family = Family.find(params[:id])
+    @family.name = @family.lastname.gsub(/(\s|　)+/, '')+@family.firstname.gsub(/(\s|　)+/, '')
     @family.update(family_params)
     redirect_to edit_member_url(@family.member)
     #redirect_back(fallback_location: root_path)

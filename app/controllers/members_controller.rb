@@ -4,6 +4,7 @@ class MembersController < ApplicationController
     @member = Member.new #検索用
     @keyword = params[:keyword] #フリー検索
     @tel = params[:tel].to_s #電話番合検索
+    @family = params[:family].to_s #家族検索
     
     if @keyword.present?
       @keyword.gsub!(/(\s|　)+/, '')
@@ -25,6 +26,14 @@ class MembersController < ApplicationController
       @member = Member.new
       @members = Member.where("tel like '%"+@tel+"%'")
                 .or(Member.where("mobile like '%"+@tel+"%'"))
+                .page(params[:page])
+    elsif @family.present?
+      @family.gsub!(/(\s|　)+/, '')
+      @member = Member.new
+      @families = Family.where("lastname like '%"+@family+"%'")
+                .or(Family.where("firstname like '%"+@family+"%'"))
+                .or(Family.where("name like '%"+@family+"%'"))
+                .or(Family.where("namekana like '%"+@family+"%'"))
                 .page(params[:page])
     elsif params[:form]
       strongwords = "k83!あ1ksoこ"
@@ -74,7 +83,7 @@ class MembersController < ApplicationController
       #end
     else
       @member = Member.new
-      @members = Member.page(params[:page])
+      @members = Member.page(params[:page]).order(updated_at: :desc)
     end
   end
   

@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20171209135452) do
     t.string "relationship"
     t.string "lastname"
     t.string "firstname"
+    t.string "name"
     t.string "namekana"
     t.date "birthday"
     t.string "postal"

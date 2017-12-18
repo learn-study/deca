@@ -8,7 +8,7 @@
 
 User.create(loginid:"admin", password:"pass")
 Faker::Config.locale = 'ja'
-1000.times do
+10000.times do
     f = Faker::Name.first_name
     l = Faker::Name.last_name
     n = l+f
