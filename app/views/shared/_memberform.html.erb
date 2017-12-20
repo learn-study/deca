@@ -79,15 +79,9 @@
 
     <%= render "members/addfamily",family: family, families: families %>
     <%= render "members/relation", user: member %>
+    <%= render "members/remarks", remarks: remarks %>
 
-    <div class="row">
-      <div class="col-sm-3">
-        <h2>備考</h2>
-      </div>
-      <div class="col-sm-9">
-        <span class="btn btn-danger">追加</span>
-      </div>   
-    </div>
+
   <% end %>
 
   <div class="form-group">
@@ -125,7 +119,6 @@
   <%= f.text_field :text %>
   <%= f.submit "会種追加" %>
 <% end %>
-
 
 
 <script>

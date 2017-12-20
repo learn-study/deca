@@ -1,0 +1,23 @@
+<div class="row underspacer">
+  <label class="left_column">備考</label>
+  <span class="btn btn-danger btn-sm" data-toggle="modal" data-target="#remarks">追加</span>
+</div>
+
+<% if remarks.present? %>
+<table class="table table-bordered table-sortable2 ui-sortable">
+  <thead>
+    <tr>
+      <th>日時</th>
+      <th>備考</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% remarks.each do |r| %>
+    <tr>
+      <th><%= r.date %></th>
+      <th><%= r.content %></th>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<%end %>

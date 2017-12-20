@@ -105,7 +105,10 @@ class MembersController < ApplicationController
   def edit
     @member = Member.find(params[:id])
     @family = @member.families.build
+    @remark = Remark.new
     @families = @member.families.rank(:row_order)
+    @remarks = @member.remarks
+    p @member.remarks.inspect
     @members = Member.where.not(:id => @member.id).page(params[:page])
     @relationships = @member.member_relashionships.rank(:row_order)
   end

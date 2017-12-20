@@ -6,6 +6,9 @@ git_source(:github) do |repo_name|
 end
 
 gem 'bootstrap-sass'
+gem 'momentjs-rails'
+gem 'bootstrap3-datetimepicker-rails'
+
 gem 'jquery-rails'
 gem 'faker'
 gem "jquery-turbolinks"

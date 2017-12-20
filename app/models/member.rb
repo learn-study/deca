@@ -13,6 +13,7 @@ class Member < ApplicationRecord
   paginates_per 50  
   has_many :families
   has_many :relationships
+  has_many :remarks
   has_many :member_relashionships, through: :relationships,source: :member2
 
 end

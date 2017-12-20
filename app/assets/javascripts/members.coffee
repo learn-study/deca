@@ -7,3 +7,4 @@ $ ->
     path: "ul.pagination a[rel=next]"
     append: "tr.member"
     history: false
+

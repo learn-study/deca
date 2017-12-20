@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :relationships, only: [:create, :destroy]
   resources :sects
   resources :kinds
+  resources :remarks, only: [:create, :destroy]
   resources :ledgers
   resources :members do
     member do
