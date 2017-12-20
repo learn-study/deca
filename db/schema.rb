@@ -10,7 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171218100347) do
+ActiveRecord::Schema.define(version: 20171220142707) do
+
+  create_table "costs", force: :cascade do |t|
+    t.string "item"
+    t.integer "quantity"
+    t.integer "price"
+    t.integer "total"
+    t.string "supplier"
+    t.integer "ledger_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ledger_id"], name: "index_costs_on_ledger_id"
+  end
+
+  create_table "earnings", force: :cascade do |t|
+    t.string "item"
+    t.integer "quantity"
+    t.integer "price"
+    t.integer "total"
+    t.string "taxclass"
+    t.integer "ledger_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ledger_id"], name: "index_earnings_on_ledger_id"
+  end
 
   create_table "families", force: :cascade do |t|
     t.integer "member_id"
@@ -39,11 +63,12 @@ ActiveRecord::Schema.define(version: 20171218100347) do
   end
 
   create_table "ledgers", force: :cascade do |t|
-    t.string "class"
+    t.string "home"
+    t.string "classification"
     t.string "kind"
     t.string "responsible"
     t.string "deceased"
-    t.string "coffin"
+    t.date "coffin"
     t.text "other"
     t.integer "member_id"
     t.datetime "created_at", null: false

@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   resources :kinds
   resources :remarks, only: [:create, :destroy]
   resources :ledgers
+  resources :earnings, only: [:create, :destroy]
+  resources :costs, only: [:create, :destroy]
   resources :members do
     member do
       put 'sort'
