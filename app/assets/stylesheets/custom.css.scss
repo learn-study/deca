@@ -1,3 +1,6 @@
+@import 'bootstrap-sprockets';
+@import 'bootstrap';
+@import 'bootstrap-datetimepicker';
 .spacer {
   padding-top: 15px;
 }
@@ -24,3 +27,5 @@
   ._small{
     font-size:12px;
   }
+  
+  
