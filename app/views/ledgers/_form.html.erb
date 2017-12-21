@@ -1,0 +1,132 @@
+<%= form_for(ledger) do |f| %>
+
+  <div class="form-group">
+    <label class="left_column">家</label>
+    <%= f.text_field :home %>&nbsp;家
+  </div>
+  
+  <div class="form-group">
+    <label class="left_column">本会員</label>
+    <%= f.text_field :member_id,placeholder: "idを入力してください。" %>&nbsp;
+  </div>
+
+  <div class="form-group">
+    <label class="left_column">区分</label>
+    <%= f.radio_button :classification, :ホクシン %>ホクシン
+    <%= f.radio_button :classification, :共済会 %>共済会
+  </div>
+
+  <div class="form-group">
+    <label class="left_column">会種</label>
+    <%= f.text_field :kind %>
+  </div>
+
+  <div class="form-group">
+    <label class="left_column">担当</label>
+    <%= f.text_field :responsible %>
+  </div>
+
+  <div class="form-group">
+    <label class="left_column">故人名</label>
+    <%= f.text_field :deceased %>
+  </div>
+
+  <div class="form-group">
+    <label class="left_column">出棺日</label>
+    <%= f.date_select(:coffin, :use_month_numbers => true, start_year:1890, end_year:Time.now.year, default: Date.new(Time.now.year, 6, 15)) %><span id="age"></span>
+
+  </div>
+
+
+
+  <% if (controller_name.eql? "ledgers") && (action_name.eql? "edit") %>
+
+    <div class="row underspacer">
+      <label class="left_column">売上</label>
+      <span class="btn btn-danger btn-sm" data-toggle="modal" data-target="#earningForm">追加</span>
+    </div>
+
+<% if eanings.present? %>
+<table class="table table-bordered table-sortable ui-sortable">
+  <thead>
+    <tr>
+      <th>課税方法</th>
+      <th>商品</th>
+      <th>数量</th>
+      <th>単価</th>
+      <th>金額</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% sum = 0 %>
+  <% eanings.each do |e| %>
+    <tr class="item" data-model-name="eaninngs" data-update-url="<%=  %>">
+      <td><%= e.taxclass %></td>
+      <td><%= e.item %></td>
+      <td><%= e.quantity %></td>
+      <td><%= e.price %></td>
+      <td><%= fa = e.quantity.to_i * e.price.to_i %></td>
+      <% sum += fa %>
+    </tr>
+    <% end %>
+    <tr>
+      <td></td><td></td><td></td><td>合計金額</td>
+      <td><%= sum  %></td>
+    </tr> 
+  </tbody>
+</table>
+<% end %>
+      
+
+
+
+
+
+
+
+    <div class="row underspacer">
+      <label class="left_column">原価</label>
+      <span class="btn btn-danger btn-sm" data-toggle="modal" data-target="#costForm">追加</span>
+    </div>
+
+<% if costs.present? %>
+<table class="table table-bordered table-sortable ui-sortable">
+  <thead>
+    <tr>
+      <th>仕入れ先</th>
+      <th>商品</th>
+      <th>数量</th>
+      <th>単価</th>
+      <th>金額</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% costSum = 0 %>
+  <% costs.each do |c| %>
+    <tr class="item" data-model-name="costs" data-update-url="<%=  %>">
+      <td><%= c.quantity %></td>
+      <td><%= c.item %></td>
+      <td><%= c.quantity %></td>
+      <td><%= c.price %></td>
+      <td><%= s = c.quantity.to_i * c.price.to_i %></td>
+      <% costSum += s %>
+    </tr>
+    <% end %>
+    <tr>
+      <td></td><td></td><td></td><td>合計金額</td>
+      <td><%= costSum  %></td>
+    </tr> 
+  </tbody>
+</table>
+<% end %>
+
+    
+  <% end %>
+
+  <div class="form-group">
+    <label class="left_column">備考</label>
+    <%= f.text_field :other, style: "width:80%" %>
+  </div>
+
+  <%= f.submit %>
+<% end %>
