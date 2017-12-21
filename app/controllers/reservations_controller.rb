@@ -1,7 +1,7 @@
 class ReservationsController < ApplicationController
   #葬儀予約
   def index
-    @reservations = Reservation.all
+    @reservations = Reservation.page(params[:page])
   end
   
   def new
@@ -11,6 +11,7 @@ class ReservationsController < ApplicationController
   
   def create
     @reserve = Reservation.new(reserve_params)
+    @reserve.name =  @reserve.lastname + @reserve.firstname
     @reserve.save
     redirect_to edit_reservation_url(@reserve)
   end
@@ -21,6 +22,7 @@ class ReservationsController < ApplicationController
 
   def update
     @reserve = Reservation.find(params[:id])
+    @reserve.name = params[:reservation][:lastname] + params[:reservation][:firstname]
     @reserve.update(reserve_params)
     redirect_to edit_reservation_url(@reserve)
   end

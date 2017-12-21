@@ -10,3 +10,34 @@
   <div class="col-sm-2 col-sm-offset-3 btn btn-default">検索</div>
   <%= link_to "新規登録", new_reservation_path,class: "col-sm-2 col-sm-offset-2 btn btn-default"%>
 </div>
+
+<%= paginate @reservations %>
+
+<table class="table">
+  <thead>
+    <tr>
+        <th>予約日</th>
+        <th>対象者</th>
+        <th>市区町村</th>
+        <th>入院先</th>
+        <th>希望プラン</th>
+        <th>登録日</th>
+        <th>修正日</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @reservations.each do |r| %>
+    <tr>
+      <td><%= link_to r.date, edit_reservation_path(r) %></td>
+      <td><%= r.name %></td>
+      <td><%= r.city %></td>
+      <td><%= r.hospital %></td>
+      <td><%= r.plan %></td>
+      <td><%= r.created_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %></td>
+      <td><%= r.updated_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @reservations %>
