@@ -4,17 +4,19 @@
     <div class="col-xs-6">
       <div><%= link_to "会員ページ", members_path, class: "btn btn-success large",style: "width:100%;" %></div>
     </div>
+
     <div class="col-xs-6">
-      <div><%= link_to "仏壇売上", "#", class: "btn btn-success large",style: "width:100%;" %></div>
+      <div><%= link_to "葬儀予約", reservations_path , class: "btn btn-success large",style: "width:100%;" %></div>
     </div>
   </div>
 
   <div class="row">
     <div class="col-xs-6 spacer">
-      <div><%= link_to "施行済み葬儀", "#", class: "btn btn-success large",style: "width:100%;" %></div>
+      <div><%= link_to "施行済み葬儀", enforcements_path, class: "btn btn-success large",style: "width:100%;" %></div>
     </div>
+
     <div class="col-xs-6 spacer">
-      <div><%= link_to "法事売上", "#", class: "btn btn-success large",style: "width:100%;" %></div>
+      <div><%= link_to "仕入先別原価表", costlists_path, class: "btn btn-success large",style: "width:100%;" %></div>
     </div>
   </div>
 
@@ -22,26 +24,27 @@
     <div class="col-xs-6 spacer">
       <div><%= link_to "葬儀売上原価", ledgers_path, class: "btn btn-success large",style: "width:100%;" %></div>
     </div>
+
     <div class="col-xs-6 spacer">
-      <div><%= link_to "葬儀予約", "#", class: "btn btn-success large",style: "width:100%;" %></div>
+      <div><%= link_to "売上粗利表", profits_path, class: "btn btn-success large",style: "width:100%;" %></div>
     </div>
   </div>
 
   <div class="row">
     <div class="col-xs-6 spacer">
-      <div><%= link_to "受発注報告", "#", class: "btn btn-success large",style: "width:100%;" %></div>
+      <div><%= link_to "受発注報告", reports_path, class: "btn btn-success large",style: "width:100%;" %></div>
     </div>
   </div>
 
   <div class="row">
     <div class="col-xs-6 spacer">
-      <div><%= link_to "仕入れ先別原価表", "#", class: "btn btn-success large",style: "width:100%;" %></div>
+      <div><%= link_to "仏壇売上", altars_path, class: "btn btn-success large",style: "width:100%;" %></div>
     </div>
   </div>
 
   <div class="row">
     <div class="col-xs-6 spacer">
-      <div><%= link_to "売り上げ粗利表", "#", class: "btn btn-success large",style: "width:100%;" %></div>
+      <div><%= link_to "法事売上", judges_path, class: "btn btn-success large",style: "width:100%;" %></div>
     </div>
   </div>
 
@@ -87,3 +90,6 @@
 </div>
 
 <% end %>
+
+
+

@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  get 'profits/index'
+
+  get 'costlists/index'
+
+  get 'judges/index'
+
+  get 'altars/index'
+
+  get 'reports/index'
+
+  get 'enforcements/index'
+
   get 'updateinfo/index'
 
   root to: 'sessions#new'
@@ -8,8 +20,15 @@ Rails.application.routes.draw do
   resources :relationships, only: [:create, :destroy]
   resources :sects
   resources :kinds
+  resources :reports
+  resources :judges
+  resources :profits
+  resources :costlists
+  resources :altars
+  resources :enforcements
   resources :remarks, only: [:create, :destroy]
   resources :ledgers
+  resources :reservations
   resources :earnings, only: [:create, :destroy]
   resources :costs, only: [:create, :destroy]
   resources :members do

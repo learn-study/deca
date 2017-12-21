@@ -1,0 +1,90 @@
+<div class="row">
+  <a href="/reservations" class="col-xs-3 btn btn-danger">戻る</a>
+</div>
+<div class="row">
+  <div class="col-xs-4 col-xs-offset-4 text-center"><h2>葬儀予約・新規登録</h2></div>
+</div>
+
+<%= form_for(@reserve) do |f| %>
+
+  <div class="form-group">
+    <label class="left_column">予約日</label>
+    <%= f.date_select(:date, :use_month_numbers => true, start_year:1890, end_year:Time.now.year, default: Date.new(Time.now.year, 6, 15)) %><span id="age"></span>
+  </div>
+  
+  <div class="form-group">
+    <label class="left_column">本会員</label>
+    <%= f.text_field :member_id,placeholder: "idを入力してください。" %>&nbsp;
+  </div>
+
+  <div class="form-group">
+    <label class="left_column">区分</label>
+    <%= f.radio_button :classification, :ホクシン %>ホクシン
+    <%= f.radio_button :classification, :共済会 %>共済会
+  </div>
+
+  <div class="form-group">
+    <label class="left_column">対象者</label>
+    <%= f.text_field :lastname %>
+    <%= f.text_field :firstname %>
+    <label>カナ</label>
+    <%= f.text_field :namekana %>
+  </div>
+
+  <div class="form-group">
+    <label class="left_column">氏名(会員)</label>
+    <label>カナ</label>
+  </div>
+
+  <div class="form-group">
+    <label class="left_column">市区町村</label>
+    <%= f.text_field :city %>
+  </div>
+
+  <div class="form-group">
+    <label class="left_column">番地・ﾏﾝｼｮﾝ名</label>
+    <%= f.text_field :streetadress %>
+  </div>
+
+  <div class="form-group">
+    <label class="left_column">対象者との関係</label>
+    <%= f.text_field :relation %>
+  </div>
+
+  <div class="form-group">
+    <label class="left_column">入院先</label>
+    <%= f.text_field :hospital %>
+  </div>
+  
+  <div class="form-group">
+    <label class="left_column">希望式場</label>
+    1&nbsp;<%= f.text_field :ceremonial1 %>
+  </div>
+
+  <div class="form-group">
+    <label class="left_column"></label>
+    2&nbsp;<%= f.text_field :ceremonial2 %>
+  </div>
+
+  <div class="form-group">
+    <label class="left_column"></label>
+    3&nbsp;<%= f.text_field :ceremonial3 %>
+  </div>
+
+  <div class="form-group">
+    <label class="left_column">希望プラン</label>
+    &nbsp;<%= f.text_field :plan %>
+  </div>
+
+  <div class="form-group">
+    <label class="left_column">直下げ希望</label>
+    &nbsp;<%= f.text_field :lower %>
+  </div>
+
+  <div class="form-group">
+    <label class="left_column">備考</label>
+    &nbsp;<%= f.text_area :other,rows:7,style: "width:80%" %>
+  </div>
+
+  <%= f.submit "葬儀予約新規登録", class: "btn btn-primary col-xs-12" %>
+<% end %>

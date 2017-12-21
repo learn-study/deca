@@ -1,0 +1,39 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2017-12-21
+  member_id: 1
+  classification: MyString
+  lastname: MyString
+  firstname: MyString
+  name: MyString
+  namekana: MyString
+  city: MyString
+  streetadress: MyString
+  relation: MyString
+  hospital: MyString
+  ceremonial1: MyString
+  ceremonial2: MyString
+  ceremonial3: MyString
+  plan: MyString
+  lower: MyString
+  other: MyString
+
+two:
+  date: 2017-12-21
+  member_id: 1
+  classification: MyString
+  lastname: MyString
+  firstname: MyString
+  name: MyString
+  namekana: MyString
+  city: MyString
+  streetadress: MyString
+  relation: MyString
+  hospital: MyString
+  ceremonial1: MyString
+  ceremonial2: MyString
+  ceremonial3: MyString
+  plan: MyString
+  lower: MyString
+  other: MyString
