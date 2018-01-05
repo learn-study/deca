@@ -1,0 +1,2 @@
+class Ceremonialplace < ApplicationRecord
+end

@@ -1,0 +1,44 @@
+<div class="row">
+  <a href="/settings" class="col-xs-3 btn btn-danger">各種登録管理へ戻る</a>
+  <div class="col-xs-3 col-xs-offset-6"></div>
+</div>
+<div class="row">
+  <div class="col-xs-4 col-xs-offset-4 text-center"><h2>仕入れ先管理</h2></div>
+</div>
+
+<table class="table table-boarderd">
+  <thead>
+    <th>id</th>
+    <th>仕入れ先名</th>
+    <th>課税区分</th>
+  </thead>
+  <tbody>
+<%= form_for(Supplier.new) do |f| %>
+  <td><%= f.text_field :id,size: 2 %></td>
+  <td><%= f.text_field :name,size: 20 %></td>
+  <td><%= f.select :tax, [["外税四捨五入", 1], ["外税切上げ", 2], ["外税切捨て", 3], ["内税四捨五入", 4], ["内税切上げ", 5], ["内税切捨て", 6], ["非課税", 7]] %></td>
+  <td><%= f.submit "登録" %></td>
+<% end %>
+  </tbody>
+</table>
+  
+
+<table class="table table-boarderd">
+  <thead>
+    <th>id</th>
+    <th>仕入れ先名</th>
+    <th>課税区分</th>
+  </thead>
+  <tbody>
+<% @suppliers.each do |s| %>
+  <%= form_for(Supplier.find(s.id)) do |f| %>
+  <tr>
+    <td><%= s.id %></td>
+    <td><%= f.text_field :name,value: s.name,size: 20 %></td>
+  <td><%= f.select :tax, [["外税四捨五入", 1], ["外税切上げ", 2], ["外税切捨て", 3], ["内税四捨五入", 4], ["内税切上げ", 5], ["内税切捨て", 6], ["非課税", 7]], :selected => s.tax %></td>
+    <td><%= f.submit "編集" %></td>
+  </tr>
+  <% end %>
+<% end %>
+  </tbody>
+</table>

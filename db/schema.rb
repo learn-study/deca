@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171221045039) do
+ActiveRecord::Schema.define(version: 20180105045254) do
+
+  create_table "ceremonialplaces", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.string "tel"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "costs", force: :cascade do |t|
     t.string "item"
@@ -34,6 +42,62 @@ ActiveRecord::Schema.define(version: 20171221045039) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["ledger_id"], name: "index_earnings_on_ledger_id"
+  end
+
+  create_table "employees", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "enforcements", force: :cascade do |t|
+    t.string "family_name"
+    t.integer "member_id"
+    t.integer "classification"
+    t.integer "kind_id"
+    t.integer "employee_id"
+    t.string "deceased"
+    t.datetime "birthday"
+    t.datetime "ddate"
+    t.string "cliefmaster"
+    t.string "relationship"
+    t.string "constructor"
+    t.string "city"
+    t.string "streetaddress"
+    t.string "tel"
+    t.string "mobile"
+    t.integer "plan"
+    t.integer "total"
+    t.datetime "wake"
+    t.datetime "funeral"
+    t.datetime "coffin"
+    t.string "ceremonial_id"
+    t.integer "royarity"
+    t.integer "burdon"
+    t.string "ucosts"
+    t.integer "temple_id"
+    t.integer "number_of_pepole"
+    t.integer "letter_price"
+    t.integer "letter_quantity"
+    t.integer "letter_supplier_id"
+    t.integer "refreshment_price"
+    t.integer "refreshment_quantity"
+    t.integer "refreshment_supplier_id"
+    t.integer "refreshment_product_id"
+    t.integer "gift_price"
+    t.integer "gift_quantity"
+    t.integer "gift_supplier_id"
+    t.integer "gift_product_id"
+    t.integer "nightwear_price"
+    t.integer "nightwear_quantity"
+    t.integer "nightwear_supplier_id"
+    t.integer "bus_price"
+    t.integer "bus_quantity"
+    t.integer "bus_supplier_id"
+    t.string "r_bus"
+    t.text "other"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "families", force: :cascade do |t|
@@ -63,10 +127,9 @@ ActiveRecord::Schema.define(version: 20171221045039) do
   end
 
   create_table "ledgers", force: :cascade do |t|
-    t.string "home"
     t.string "classification"
-    t.string "kind"
-    t.string "responsible"
+    t.integer "kind_id"
+    t.string "employee_id"
     t.string "deceased"
     t.date "coffin"
     t.text "other"
@@ -142,6 +205,21 @@ ActiveRecord::Schema.define(version: 20171221045039) do
 
   create_table "sects", force: :cascade do |t|
     t.string "sect"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "suppliers", force: :cascade do |t|
+    t.string "name"
+    t.integer "tax"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "temples", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.string "tel"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

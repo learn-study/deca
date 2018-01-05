@@ -1,0 +1,48 @@
+<div class="row">
+  <a href="/settings" class="col-xs-3 btn btn-danger">各種登録管理へ戻る</a>
+  <div class="col-xs-3 col-xs-offset-6"></div>
+</div>
+<div class="row">
+  <div class="col-xs-4 col-xs-offset-4 text-center"><h2>式場管理</h2></div>
+</div>
+
+<table class="table table-boarderd">
+  <thead>
+    <th>id</th>
+    <th>式場</th>
+    <th>住所</th>
+    <th>電話番号</th>
+  </thead>
+  <tbody>
+<%= form_for(Ceremonialplace.new) do |f| %>
+    <td><%= f.text_field :id,size: 2 %></td>
+    <td><%= f.text_field :name,size: 20 %></td>
+    <td><%= f.text_field :address,size: 45 %></td>
+    <td><%= f.text_field :tel,size: 12 %></td>
+  <td><%= f.submit "登録" %></td>
+<% end %>
+  </tbody>
+</table>
+  
+
+<table class="table table-boarderd">
+  <thead>
+    <th>id</th>
+    <th>式場</th>
+    <th>住所</th>
+    <th>電話番号</th>
+  </thead>
+  <tbody>
+<% @place.each do |p| %>
+  <%= form_for(Ceremonialplace.find(p.id)) do |f| %>
+  <tr>
+    <td><%= p.id %></td>
+    <td><%= f.text_field :name,value: p.name,size: 20 %></td>
+    <td><%= f.text_field :address,value: p.address,size: 45 %></td>
+    <td><%= f.text_field :tel,value: p.tel,size: 12 %></td>
+    <td><%= f.submit "編集" %></td>
+  </tr>
+  <% end %>
+<% end %>
+  </tbody>
+</table>

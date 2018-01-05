@@ -1,17 +1,7 @@
 Rails.application.routes.draw do
-  get 'profits/index'
+  get 'temples/index'
 
-  get 'costlists/index'
-
-  get 'judges/index'
-
-  get 'altars/index'
-
-  get 'reports/index'
-
-  get 'enforcements/index'
-
-  get 'updateinfo/index'
+  get "settings" , to: "settings#index"
 
   root to: 'sessions#new'
   post 'login', to: 'sessions#create'
@@ -24,9 +14,12 @@ Rails.application.routes.draw do
   resources :judges
   resources :profits
   resources :costlists
+  resources :suppliers
   resources :altars
   resources :enforcements
+  resources :ceremonialplaces
   resources :remarks, only: [:create, :destroy]
+  resources :employees
   resources :ledgers
   resources :reservations
   resources :earnings, only: [:create, :destroy]

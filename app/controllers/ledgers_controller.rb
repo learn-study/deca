@@ -31,7 +31,7 @@ class LedgersController < ApplicationController
   
   def ledger_params
     params.require(:ledger).permit(:home, :classification,
-                            :kind, :responsible, :member_id,
+                            :employee_id, :kind_id, :member_id,
                             :deceased, :coffin, :other)
   end
 end

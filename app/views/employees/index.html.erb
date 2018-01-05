@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="col-sm-4 col-sm-offset-4 text-center">
+    <h2>担当者一覧</h2>
+  </div>
+</div>
+
+<div class="row">
+  <%= form_for(Employee.new) do |f| %>
+    <%= f.text_field :name %>
+    <%= f.submit "担当者追加" %>
+  <% end %>
+</div>
+  
+<div class="row spacer">
+  <% @emps.each do |e| %>
+    <%= form_for(Employee.find(e.id)) do |f| %>
+      <%= f.text_field :name, value: e.name %>
+      <%= f.submit "編集" %>
+    <% end %>
+    <br>
+  <% end %>
+</div>

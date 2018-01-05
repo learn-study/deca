@@ -141,7 +141,6 @@
         <th>氏名</th>
         <th>カナ</th>
         <th>住所１</th>
-        <!-- <th>住所2</th> -->
         <th>固定電話</th>
         <th>携帯電話</th>
         <th>宗派</th>
@@ -160,7 +159,7 @@
       <td><%= m.tel %></td>
       <td><%= m.mobile %></td>
       <td><%= Sect.find(m.sect).sect if m.sect.present? %></td>
-      <td><%= m.kind %></td>
+      <td><%= Kind.find(m.kind).text if m.kind.present? %></td>
       <td><%= m.created_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %></td>
       <td><%= m.updated_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %></td>
     </tr>

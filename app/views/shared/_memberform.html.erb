@@ -56,7 +56,7 @@
     <%= f.collection_select :sect, Sect.all, :id, :sect,  {:include_blank => true}, {style: "width:190px;"} %>
 
     <label style="margin-left:30px;">会種</label>
-    <select style="width:190px;">
+    <%= f.collection_select :kind, Kind.all, :id, :text,  {:include_blank => true}, {style: "width:190px;"} %>
     </select>
   </div>
 
@@ -105,19 +105,6 @@
     <p>登録すると家族情報や関係者情報が登録できます。</p>
     <%= f.submit "登録", class: "btn btn-primary" %>
   <% end %>
-<% end %>
-
-
-<div style="padding: 20px 0">
-<%= form_for(Sect.new) do |f| %>
-  <%= f.text_field :sect %>
-  <%= f.submit "宗派追加" %>
-<% end %>
-</div>
-
-<%= form_for(Kind.new) do |f| %>
-  <%= f.text_field :text %>
-  <%= f.submit "会種追加" %>
 <% end %>
 
 

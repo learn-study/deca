@@ -17,7 +17,7 @@
   <thead>
     <tr>
         <th>コード</th>
-        <th>氏名</th>
+        <th>故人名</th>
         <th>担当者</th>
         <th>出棺日</th>
         <th>合計金額</th>
@@ -31,7 +31,7 @@
     <tr>
       <td><%= l.id %></td>
       <td><%= link_to l.deceased,edit_ledger_path(l) %></td>
-      <td><%= l.responsible %></td>
+      <td><%= Employee.find(l.employee_id).name if l.employee_id.present? %></td>
       <td><%= l.coffin%></td>
       <td></td>
       <td></td>
