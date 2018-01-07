@@ -6,6 +6,12 @@ class ReservationsController < ApplicationController
   
   def new
     @reserve = Reservation.new
+    if params[:member_id]
+      @member = Member.find(params[:member_id])
+      @reserve.city = @member.city
+      @reserve.member_id = @member.id
+      @reserve.streetadress = @member.streetaddress
+    end
   end
   
   
@@ -18,6 +24,9 @@ class ReservationsController < ApplicationController
   
   def edit 
     @reserve = Reservation.find(params[:id])
+    if @reserve.member_id.present?
+      @member = Member.find(@reserve.member_id)
+    end
   end
 
   def update
@@ -30,7 +39,7 @@ class ReservationsController < ApplicationController
   private
   
   def reserve_params
-    params.require(:reservation).permit(:date, :member_id, :classication,
+    params.require(:reservation).permit(:date, :member_id, :classification,
                             :lastname, :firstname, :namekana,
                             :city, :streetadress, :relation,
                             :hospital,:ceremonial1,:ceremonial2,:ceremonial3,

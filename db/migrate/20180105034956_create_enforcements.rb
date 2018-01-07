@@ -3,7 +3,7 @@ class CreateEnforcements < ActiveRecord::Migration[5.1]
     create_table :enforcements do |t|
       t.string :family_name
       t.integer :member_id
-      t.integer :classification
+      t.string :classification
       t.integer :kind_id
       t.integer :employee_id
       t.string :deceased

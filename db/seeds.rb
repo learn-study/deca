@@ -336,7 +336,11 @@ Temple.find_or_create_by(id:24,name: "地蔵寺", address: "札幌市中央区�
 Temple.find_or_create_by(id:25,name: "伊夜日子神社", address: "札幌市中央区南14条西4丁目",tel: "011-521-2565")
 
 
-
+Collection.find_or_create_by(id:1	,text: "納入時担当者")
+Collection.find_or_create_by(id:2	,text: "後日担当者")
+Collection.find_or_create_by(id:3	,text: "後日代行")
+Collection.find_or_create_by(id:4	,text: "振込")
+Collection.find_or_create_by(id:9	,text: "その他")
 
 
 

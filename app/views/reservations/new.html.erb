@@ -12,10 +12,23 @@
     <%= f.date_select(:date, :use_month_numbers => true, start_year:1890, end_year:Time.now.year, default: Date.new(Time.now.year, 6, 15)) %><span id="age"></span>
   </div>
   
+  <% if @member %>
   <div class="form-group">
-    <label class="left_column">本会員</label>
-    <%= f.text_field :member_id,placeholder: "idを入力してください。" %>&nbsp;
+    <label class="left_column">本会員ID</label>
+    <%= @member.id %>
+    <input type="hidden" value="<%= @member.id %>" name="reservation[member_id]" %>
   </div>
+  
+  <div class="form-group">
+    <label class="left_column">会員氏名</label>
+    <%= @member.name %>
+  </div>
+
+  <div class="form-group">
+    <label class="left_column">会員カナ</label>
+    <%= @member.namekana %>
+  </div>
+  <% end %>
 
   <div class="form-group">
     <label class="left_column">区分</label>
@@ -24,30 +37,41 @@
   </div>
 
   <div class="form-group">
-    <label class="left_column">対象者</label>
-    <%= f.text_field :lastname %>
-    <%= f.text_field :firstname %>
-    <label>カナ</label>
+    <label class="left_column">対象者氏名</label>
+    <%= f.text_field :lastname,size: 7 %>
+    <%= f.text_field :firstname,size: 7 %>
+  </div>
+  
+  <div class="form-group">
+    <label class="left_column">対象者カナ</label>
     <%= f.text_field :namekana %>
   </div>
 
-  <div class="form-group">
-    <label class="left_column">氏名(会員)</label>
-    <label>カナ</label>
-  </div>
+
+  <% if @member %>
+    <div class="form-group">
+      <label class="left_column">市区町村</label>
+      <%= @member.city %>
+    </div>
+  
+    <div class="form-group">
+      <label class="left_column _small">番地・ﾏﾝｼｮﾝ名</label>
+      <%= @member.streetaddress %>
+    </div>
+  <% else %>
+    <div class="form-group">
+      <label class="left_column">市区町村</label>
+      <%= f.text_field :city %>
+    </div>
+  
+    <div class="form-group">
+      <label class="left_column _small">番地・ﾏﾝｼｮﾝ名</label>
+      <%= f.text_field :streetadress %>
+    </div>
+  <% end %>
 
   <div class="form-group">
-    <label class="left_column">市区町村</label>
-    <%= f.text_field :city %>
-  </div>
-
-  <div class="form-group">
-    <label class="left_column">番地・ﾏﾝｼｮﾝ名</label>
-    <%= f.text_field :streetadress %>
-  </div>
-
-  <div class="form-group">
-    <label class="left_column">対象者との関係</label>
+    <label class="left_column _small">対象者との関係</label>
     <%= f.text_field :relation %>
   </div>
 

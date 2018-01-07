@@ -10,12 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180105045254) do
+ActiveRecord::Schema.define(version: 20180105093936) do
 
   create_table "ceremonialplaces", force: :cascade do |t|
     t.string "name"
     t.string "address"
     t.string "tel"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "collections", force: :cascade do |t|
+    t.string "text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -179,6 +185,28 @@ ActiveRecord::Schema.define(version: 20180105045254) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["member_id"], name: "index_remarks_on_member_id"
+  end
+
+  create_table "reports", force: :cascade do |t|
+    t.integer "member_id"
+    t.string "classification"
+    t.string "employee_id"
+    t.datetime "orderdate"
+    t.datetime "deliverydate"
+    t.datetime "payment"
+    t.string "name"
+    t.string "namekana"
+    t.string "firstname"
+    t.string "lastname"
+    t.string "deceased"
+    t.string "city"
+    t.string "streetaddress"
+    t.string "tel"
+    t.string "mobile"
+    t.integer "collection_id"
+    t.text "other"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "reservations", force: :cascade do |t|

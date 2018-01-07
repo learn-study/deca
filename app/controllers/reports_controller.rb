@@ -1,37 +1,38 @@
 class ReportsController < ApplicationController
   def index
-    @reports = Ledger.page(params[:page])
+    @reports = Report.page(params[:page])
   end
   
   def new
-    @ledger = Ledger.new
+    @report = Report.new
   end
   
   def create
-    @ledger = Ledger.new(ledger_params)
-    @ledger.save
-    redirect_to edit_ledger_url(@ledger)
+    @report = Report.new(report_params)
+    @report.name = @report.lastname.gsub(/(\s|　)+/, '')+@report.firstname.gsub(/(\s|　)+/, '')
+    @report.save
+    redirect_to edit_report_url(@report)
   end
   
   def edit 
-    @ledger = Ledger.find(params[:id])
-    @cost = Cost.new
-    @earning = Earning.new
-    @eanings= @ledger.earnings
-    @costs   = @ledger.costs
+    @report = Report.find(params[:id])
   end
 
   def update
-    @ledger = Ledger.find(params[:id])
-    @ledger.update(ledger_params)
-    redirect_to edit_ledger_url(@ledger)
+    @report = Report.find(params[:id])
+    @report.name = @report.lastname.gsub(/(\s|　)+/, '')+@report.firstname.gsub(/(\s|　)+/, '')
+    @report.update(report_params)
+    redirect_to edit_report_url(@report)
   end
 
   private
   
-  def ledger_params
-    params.require(:ledger).permit(:home, :classification,
-                            :kind, :responsible, :member_id,
-                            :deceased, :coffin, :other)
+  def report_params
+    params.require(:report).permit(:member_id, :classification, :employee_id,
+                            :orderdate, :deliverydate, :payment,
+                            :name, :namekana, :firstname, :lastname,
+                            :deceased, :city, :streetaddress,
+                            :tel, :mobile, :collection_id, :other
+                            )
   end
 end

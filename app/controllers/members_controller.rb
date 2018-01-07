@@ -16,7 +16,6 @@ class MembersController < ApplicationController
                 .or(Member.where("city like '%"+@keyword+"%'"))
                 .or(Member.where("streetaddress like '%"+@keyword+"%'"))
                 .or(Member.where("tag like '%"+@keyword+"%'"))
-                .or(Member.where("id like '%"+@keyword+"%'"))
                 .page(params[:page])
     elsif @tel.present?
       @tel.gsub!(/(\s|　)+/, '')
