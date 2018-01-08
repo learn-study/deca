@@ -18,7 +18,11 @@ class ReservationsController < ApplicationController
   def create
     @reserve = Reservation.new(reserve_params)
     @reserve.name =  @reserve.lastname + @reserve.firstname
+    if  params[:reservation][:applicantlastname] && params[:reservation][:applicantfirstname]
+      @reserve.applicantname = params[:reservation][:applicantlastname] + params[:reservation][:applicantfirstname]
+    end
     @reserve.save
+    flash[:success] = "葬儀予約を新規登録しました。"
     redirect_to edit_reservation_url(@reserve)
   end
   
@@ -32,8 +36,12 @@ class ReservationsController < ApplicationController
   def update
     @reserve = Reservation.find(params[:id])
     @reserve.name = params[:reservation][:lastname] + params[:reservation][:firstname]
+    if  params[:reservation][:applicantlastname] && params[:reservation][:applicantfirstname]
+      @reserve.applicantname = params[:reservation][:applicantlastname] + params[:reservation][:applicantfirstname]
+    end
     @reserve.update(reserve_params)
-    redirect_to edit_reservation_url(@reserve)
+     flash[:success] = "葬儀予約を編集しました。"
+   redirect_to edit_reservation_url(@reserve)
   end
 
   private
@@ -43,6 +51,6 @@ class ReservationsController < ApplicationController
                             :lastname, :firstname, :namekana,
                             :city, :streetadress, :relation,
                             :hospital,:ceremonial1,:ceremonial2,:ceremonial3,
-                            :plan, :lower, :other)
+                            :plan, :lower, :other, :applicantlastname,:applicantkana,:applicantfirstname)
   end
 end

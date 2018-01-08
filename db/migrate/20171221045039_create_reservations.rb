@@ -4,6 +4,10 @@ class CreateReservations < ActiveRecord::Migration[5.1]
       t.date :date
       t.integer :member_id
       t.string :classification
+      t.string :applicantlastname
+      t.string :applicantfirstname
+      t.string :applicantname
+      t.string :applicantkana
       t.string :lastname
       t.string :firstname
       t.string :name

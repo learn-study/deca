@@ -2,20 +2,38 @@
   <a href="/enforcements" class="col-xs-3 btn btn-danger">戻る</a>
 </div>
 <div class="row">
-  <div class="col-xs-4 col-xs-offset-4 text-center"><h2>施行済み葬儀・新規登録</h2></div>
+  <div class="col-xs-4 col-xs-offset-4 text-center"><h2>施行済葬儀・新規登録</h2></div>
 </div>
 
 <%= form_for(@enforce) do |f| %>
+  <%= f.hidden_field :member_id, value: @enforce.member_id %>
 
   <div class="form-group">
     <label class="left_column">家</label>
     <%= f.text_field :family_name %>
   </div>
+
+  <% if @member %>
+    <div class="form-group">
+      <label class="left_column">会員氏名</label>
+      <%= @member.name %>
+    </div>
   
-  <div class="form-group">
-    <label class="left_column">本会員</label>
-    <%= f.text_field :member_id %>
-  </div>
+    <div class="form-group">
+      <label class="left_column">会員カナ</label>
+      <%= @member.namekana %>
+    </div>
+  <% else %>
+    <div class="form-group">
+      <label class="left_column">氏名（一般）</label>
+      <%= f.text_field :applicantlastname,size: 7 %>
+      <%= f.text_field :applicantfirstname,size: 7 %>
+    </div>
+    <div class="form-group">
+      <label class="left_column">氏名カナ</label>
+      <%= f.text_field :applicantkana %>
+    </div>
+  <% end %>
   
   <div class="form-group">
     <label class="left_column">区分</label>
@@ -60,15 +78,27 @@
     <%= f.text_field :constructor %>
   </div>
   
-  <div class="form-group">
-    <label class="left_column">市区町村 </label>
-    <%= f.text_field :city, id: "address_city", style: "width: 80%" %>
-  </div>
-    
-  <div class="form-group">
-    <label class="left_column _small">番地・ﾏﾝｼｮﾝ名</label>
-    <%= f.text_field :streetaddress, id: "address_street", style: "width: 80%" %>
-  </div>
+  <% if @member %>
+    <div class="form-group">
+      <label class="left_column">市区町村</label>
+      <%= @member.city %>
+    </div>
+  
+    <div class="form-group">
+      <label class="left_column _small">番地・ﾏﾝｼｮﾝ名</label>
+      <%= @member.streetaddress %>
+    </div>
+  <% else %>
+    <div class="form-group">
+      <label class="left_column">市区町村</label>
+      <%= f.text_field :city %>
+    </div>
+  
+    <div class="form-group">
+      <label class="left_column _small">番地・ﾏﾝｼｮﾝ名</label>
+      <%= f.text_field :streetaddress %>
+    </div>
+  <% end %>
     
   <div class="form-group">
     <label class="left_column">固定電話</label>
@@ -164,6 +194,10 @@
       <label>仕入れ先</label>
       <%= f.collection_select :refreshment_supplier_id, Supplier.all, :id, :name,  {:include_blank => true}, {style: "width:190px;"} %>
     </div>
+    <div class="col-md-3">
+      <label>商品</label>
+      <%= f.collection_select :refreshment_product_id, Item.all, :id, :name,  {:include_blank => true}, {style: "width:190px;"} %>
+    </div>
   </div>
 
   <div class="row">
@@ -182,7 +216,7 @@
     </div>
     <div class="col-md-3">
       <label>商品</label>
-      <%= f.collection_select :gift_product_id, Supplier.all, :id, :name,  {:include_blank => true}, {style: "width:190px;"} %>
+      <%= f.collection_select :gift_product_id, Item.all, :id, :name,  {:include_blank => true}, {style: "width:190px;"} %>
     </div>
   </div>
 

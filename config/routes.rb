@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'items/index'
+
+  get 'collections/index'
+
   get 'temples/index'
 
   get "settings" , to: "settings#index"
@@ -14,6 +18,10 @@ Rails.application.routes.draw do
   resources :judges
   resources :profits
   resources :costlists
+  resources :taxations
+  resources :items
+  resources :temples
+  resources :collections
   resources :suppliers
   resources :altars
   resources :enforcements
@@ -29,7 +37,6 @@ Rails.application.routes.draw do
       put 'sort'
     end
     collection do
-      get "hoge"
     end
   end
   resources :families do

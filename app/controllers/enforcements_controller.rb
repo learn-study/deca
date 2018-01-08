@@ -5,6 +5,12 @@ class EnforcementsController < ApplicationController
   
   def new
     @enforce= Enforcement.new
+    if params[:member_id]
+      @member = Member.find(params[:member_id])
+      @enforce.city = @member.city
+      @enforce.member_id = @member.id
+      @enforce.streetaddress = @member.streetaddress
+    end
   end
 
   def create
@@ -12,9 +18,12 @@ class EnforcementsController < ApplicationController
     @enforce.save
     redirect_to edit_enforcement_url(@enforce)
   end
-  
+
   def edit
     @enforce = Enforcement.find(params[:id])
+    if @enforce.member_id.present?
+      @member = Member.find(@enforce.member_id)
+    end
   end
   
   def update
@@ -26,7 +35,7 @@ class EnforcementsController < ApplicationController
   private
   def en_parms
     params.require(:enforcement).permit(:family_name, :member_id,
-                                       :calssification, :kind_id, :employee_id,
+                                       :classification, :kind_id, :employee_id,
                                        :deceased, :birthday, :ddate,
                                        :cliefmaster, :relationship, :constructor,
                                        :city, :streetaddress, :tel, :mobile,

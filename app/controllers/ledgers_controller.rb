@@ -5,6 +5,12 @@ class LedgersController < ApplicationController
   
   def new
     @ledger = Ledger.new
+    if params[:member_id]
+      @member = Member.find(params[:member_id])
+      @ledger.city = @member.city
+      @ledger.member_id = @member.id
+      @ledger.streetadress = @member.streetaddress
+    end
   end
   
   def create

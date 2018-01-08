@@ -107,8 +107,18 @@ class MembersController < ApplicationController
     @remark = Remark.new
     @families = @member.families.rank(:row_order)
     @remarks = @member.remarks
-    p @member.remarks.inspect
-    @members = Member.where.not(:id => @member.id).page(params[:page])
+
+    if params[:q]
+      word = params[:q].gsub("　", "")
+      @q = word.gsub(" ", "")
+      @members = Member.where("lastname like '%"+ @q +"%'")
+                 .or(Member.where("firstname like '%"+@q+"%'"))
+                 .or(Member.where("namekana like '%"+@q+"%'"))
+                 .or(Member.where("name like '%"+@q+"%'")) 
+                 .page(params[:page])
+    else
+      @members = Member.where.not(:id => @member.id).page(params[:page])
+    end
     @relationships = @member.member_relashionships.rank(:row_order)
   end
   
@@ -119,6 +129,16 @@ class MembersController < ApplicationController
     else
       render "edit"
     end
+  end
+  
+  def search
+    @member = Member.find(params[:id])
+    word = params[:q].gsub("　", "")
+    w = word.gsub(" ", "")
+    @members = Member.where("lastname like '%"+ w +"%'")
+               .or(Member.where("firstname like '%"+w+"%'"))
+               .or(Member.where("namekana like '%"+w+"%'"))
+               .or(Member.where("name like '%"+w+"%'"))
   end
   
   def sort

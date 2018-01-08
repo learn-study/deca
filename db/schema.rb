@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180105093936) do
+ActiveRecord::Schema.define(version: 20180108144130) do
 
   create_table "ceremonialplaces", force: :cascade do |t|
     t.string "name"
@@ -59,7 +59,11 @@ ActiveRecord::Schema.define(version: 20180105093936) do
   create_table "enforcements", force: :cascade do |t|
     t.string "family_name"
     t.integer "member_id"
-    t.integer "classification"
+    t.string "classification"
+    t.string "applicantlastname"
+    t.string "applicantfirstname"
+    t.string "applicantname"
+    t.string "applicantkana"
     t.integer "kind_id"
     t.integer "employee_id"
     t.string "deceased"
@@ -126,6 +130,14 @@ ActiveRecord::Schema.define(version: 20180105093936) do
     t.index ["member_id"], name: "index_families_on_member_id"
   end
 
+  create_table "items", force: :cascade do |t|
+    t.string "name"
+    t.float "sell"
+    t.float "cost"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "kinds", force: :cascade do |t|
     t.string "text"
     t.datetime "created_at", null: false
@@ -163,6 +175,13 @@ ActiveRecord::Schema.define(version: 20180105093936) do
     t.boolean "dm", default: false, null: false
     t.text "tag"
     t.integer "row_order"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "names", force: :cascade do |t|
+    t.float "sell"
+    t.float "cost"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -213,6 +232,10 @@ ActiveRecord::Schema.define(version: 20180105093936) do
     t.date "date"
     t.integer "member_id"
     t.string "classification"
+    t.string "applicantlastname"
+    t.string "applicantfirstname"
+    t.string "applicantname"
+    t.string "applicantkana"
     t.string "lastname"
     t.string "firstname"
     t.string "name"
@@ -240,6 +263,12 @@ ActiveRecord::Schema.define(version: 20180105093936) do
   create_table "suppliers", force: :cascade do |t|
     t.string "name"
     t.integer "tax"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "taxations", force: :cascade do |t|
+    t.string "text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

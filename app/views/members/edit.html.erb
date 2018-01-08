@@ -3,11 +3,30 @@
   <div class="col-xs-3 col-xs-offset-6 btn btn-danger">印刷</div>
 </div>
 <div class="row">
-  <div class="col-xs-4 col-xs-offset-4 text-center"><h2>会員・情報編集</h2></div>
+  <div class="col-xs-4 col-xs-offset-4"><h2>会員・情報編集</h2></div>
+	<div class="col-xs-4"></div>
 </div>
 
-<%= link_to "葬儀予約登録",new_reservation_path(member_id: @member.id), class: "btn btn-success" %>
-
+<div class ="row text-center">
+	<div class="col-md-2">
+		<%= link_to "施行済葬儀",new_enforcement_path(member_id: @member.id), class: "btn btn-primary" %>
+	</div>
+	<div class="col-md-2">
+		<%= link_to "葬儀売上原価",new_ledger_path(member_id: @member.id), class: "btn btn-primary" %>
+	</div>
+	<div class="col-md-2">
+		<%= link_to "受発注報告",new_report_path(member_id: @member.id), class: "btn btn-primary" %>
+	</div>
+	<div class="col-md-2">
+		<%= link_to "仏壇売上",new_altar_path(member_id: @member.id), class: "btn btn-primary" %>
+	</div>　
+	<div class="col-md-2">
+		<%= link_to "法事売上",new_judge_path(member_id: @member.id), class: "btn btn-primary" %>
+	</div>
+	<div class="col-md-1">
+		<%= link_to "葬儀予約",new_reservation_path(member_id: @member.id), class: "btn btn-primary" %>
+	</div>
+</div>
 
 <%= render "shared/memberform", member: @member,family: @family, families: @families,remarks: @remarks %>
 
@@ -31,15 +50,23 @@
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"><span>×</span></button>
 				<h4 class="modal-title">関係者情報追加</h4>
+				
+				<%= form_tag(edit_member_path(@member) , method: "get") do %>
+				  <div style="padding:10px 0;">
+				  <%= text_field_tag(:q,@q) %>
+				  <%= submit_tag("会員検索") %>
+				  </div>
+				<% end %>
+				
         <table id="members">
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Description</th>
+              <th class="col-xs-4">名前</th>
+              <th>備考</th>
             </tr>
           </thead>
       
-          <tbody class="page">
+          <tbody class="page" id="member">
             <%= render @members, m: @member %>
           </tbody>
         </table>
@@ -72,4 +99,11 @@ if ( params.match(/page/)) {
       $('#relationForm').modal('show');
   });
 }
+
+if ( params.match(/q/)) {
+  $(window).on('load',function(){
+      $('#relationForm').modal('show');
+  });
+}
+
 </script>

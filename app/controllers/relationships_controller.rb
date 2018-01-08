@@ -4,7 +4,8 @@ class RelationshipsController < ApplicationController
     @relationships = @member.relationships.find_or_initialize_by(member2_id: params[:r_id])
     @relationships.text = params[:relationship][:text] 
     @relationships.save
-    redirect_back(fallback_location: root_path)
+    redirect_to edit_member_path(@member)
+    #redirect_back(fallback_location: root_path)
   end
   
   def destroy

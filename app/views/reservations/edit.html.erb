@@ -15,11 +15,6 @@
   
   <% if @member %>
     <div class="form-group">
-      <label class="left_column">本会員</label>
-      <%= @member.id %>&nbsp;
-    </div>
-    
-    <div class="form-group">
       <label class="left_column">会員氏名</label>
       <%= @member.name %>
     </div>
@@ -27,6 +22,15 @@
       <label class="left_column">会員カナ</label>
       <%= @member.namekana %>
     </div>
+  <% else %>
+    <div class="form-group">
+      <label class="left_column">一般（氏名）</label>
+      <%= f.text_field :applicantlastname,size: 7 %>
+      <%= f.text_field :applicantfirstname,size: 7 %>
+    </div>
+    <div class="form-group">
+      <label class="left_column">氏名カナ</label>
+      <%= f.text_field :applicantkana %>
   <% end %>
 
   <div class="form-group">
@@ -106,5 +110,5 @@
     &nbsp;<%= f.text_area :other,rows:7,style: "width:80%" %>
   </div>
 
-  <%= f.submit "葬儀予約新規登録", class: "btn btn-primary col-xs-12" %>
+  <%= f.submit "葬儀予約編集", class: "btn btn-primary col-xs-12" %>
 <% end %>

@@ -11,10 +11,30 @@
     <%= f.text_field :family_name %>
   </div>
   
-  <div class="form-group">
-    <label class="left_column">本会員</label>
-    <%= f.text_field :member_id %>
-  </div>
+  <% if @member %>
+    <div class="form-group">
+      <label class="left_column">本会員</label>
+      <%= @member.id %>
+    </div>
+    
+    <div class="form-group">
+      <label class="left_column">会員氏名</label>
+      <%= @member.name %>
+    </div>
+    <div class="form-group">
+      <label class="left_column">会員カナ</label>
+      <%= @member.namekana %>
+    </div>
+  <% else %>
+    <div class="form-group">
+      <label class="left_column">一般（氏名）</label>
+      <%= f.text_field :applicantlastname,size: 7 %>
+      <%= f.text_field :applicantfirstname,size: 7 %>
+    </div>
+    <div class="form-group">
+      <label class="left_column">氏名カナ</label>
+      <%= f.text_field :applicantkana %>
+  <% end %>
   
   <div class="form-group">
     <label class="left_column">区分</label>
@@ -107,7 +127,18 @@
     <label class="left_column">式場名</label>
     <%= f.collection_select :ceremonial_id, Ceremonialplace.all, :id, :name,  {:include_blank => true}, {style: "width:190px;"} %>
   </div>
-
+  
+  <% if @enforce.ceremonial_id.present? %>
+    <% c = Ceremonialplace.find(@enforce.ceremonial_id) %>
+    <div class="form-group">
+      <label class="left_column">式場住所</label>
+      <%= c.address %>
+    </div>
+    <div class="form-group">
+      <label class="left_column">式場電話</label>
+      <%= c.tel %>
+    </div> 
+  <% end %>
   
 <div class="row">
   <div class="col-md-4">
@@ -127,10 +158,23 @@
   <div class="form-group">
     <label class="left_column spacer">寺院名</label>
     <%= f.collection_select :temple_id, Temple.all, :id, :name,  {:include_blank => true}, {style: "width:190px;"} %>
-  </div> 
+  </div>
+
+  <% if @enforce.temple_id.present? %>
+    <% t = Temple.find(@enforce.temple_id) %>
+    <div class="form-group">
+      <label class="left_column">式場住所</label>
+      <%= t.address %>
+    </div>
+    <div class="form-group">
+      <label class="left_column">式場電話</label>
+      <%= t.tel %>
+    </div> 
+  <% end %>
+  
   <div class="form-group">
     <label class="left_column">人数</label>
-    <%= f.text_field :number_of_pepole %>
+    <%= f.text_field :number_of_pepole,size: 5 %>&nbsp;名
   </div> 
  
   <div class="row">
@@ -163,6 +207,10 @@
       <label>仕入れ先</label>
       <%= f.collection_select :refreshment_supplier_id, Supplier.all, :id, :name,  {:include_blank => true}, {style: "width:190px;"} %>
     </div>
+    <div class="col-md-3">
+      <label>商品</label>
+      <%= f.collection_select :refreshment_product_id, Item.all, :id, :name,  {:include_blank => true}, {style: "width:190px;"} %>
+    </div>
   </div>
 
   <div class="row">
@@ -181,7 +229,7 @@
     </div>
     <div class="col-md-3">
       <label>商品</label>
-      <%= f.collection_select :gift_product_id, Supplier.all, :id, :name,  {:include_blank => true}, {style: "width:190px;"} %>
+      <%= f.collection_select :gift_product_id, Item.all, :id, :name,  {:include_blank => true}, {style: "width:190px;"} %>
     </div>
   </div>
 

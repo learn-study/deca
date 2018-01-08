@@ -1,9 +1,11 @@
-<tr class="member">
+<tr class="member" style="height:40px;">
+  <td class="col-xs-4"><%= member.lastname + " " + member.firstname %></td>
   <%= form_for(Relationship.new) do |f| %>
-    <td><%= member.lastname + " " + member.firstname %></td>
     <%= hidden_field_tag :member_id, m.id %>
     <%= hidden_field_tag :r_id, member.id %>
-    <td>備考<%= f.text_field :text %></td>
-    <td><%= f.submit "追加",class: "btn btn-sm btn-primary" %></td>
+    <td><%= f.text_field :text,size: 40,placeholder: "メモ" %></td>
+    <td class="col-xs-4">
+      <%= f.submit "追加",class: "btn btn-sm btn-primary" %>
   <% end %>
+    </td>
 </tr>

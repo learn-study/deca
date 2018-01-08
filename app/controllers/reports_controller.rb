@@ -5,6 +5,12 @@ class ReportsController < ApplicationController
   
   def new
     @report = Report.new
+    if params[:member_id]
+      @member = Member.find(params[:member_id])
+      @report.city = @member.city
+      @report.member_id = @member.id
+      #@report.streetadress = @member.streetaddress
+    end
   end
   
   def create

@@ -4,7 +4,7 @@ class SuppliersController < ApplicationController
   end
   def create
     begin
-      @supplier = Supplier.new(place_params)
+      @supplier = Supplier.new(supplier_params)
       @supplier.save
       redirect_to suppliers_path
     rescue => e
