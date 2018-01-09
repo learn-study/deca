@@ -179,13 +179,6 @@ ActiveRecord::Schema.define(version: 20180108144130) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "names", force: :cascade do |t|
-    t.float "sell"
-    t.float "cost"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "relationships", force: :cascade do |t|
     t.integer "member_id"
     t.integer "member2_id"
