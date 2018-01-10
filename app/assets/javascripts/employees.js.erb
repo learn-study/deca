@@ -1,0 +1,53 @@
+$(function() {
+  var member_num = $('.meals').length;
+  $('#add_item').on('click', function() {
+
+    var input =
+        '<div class="form-group meals" id="add_meals_' + member_num + '">'
+        + '<input placeholder="項目名" type="text" name="enforcement[meals_attributes][' + member_num + '][item]" style="margin-left:88px">'
+        + '&nbsp;<input placeholder="項目数" type="text" name="enforcement[meals_attributes][' + member_num + '][number]">'
+        +'</div>'
+    $('#meals_form').append(input);
+    member_num ++;
+  });
+
+
+  $('#team_members_box').on('click', '.member_delete', function() {
+    var inputId = $(this).data('id');
+    var defaultData = $(this).data('default');
+    if (defaultData == 'default') {
+      $(this).prev().prop('checked', true);
+      $('#add_member_' + inputId).hide();
+    }else{
+      $('#add_member_' + inputId).remove();
+    }
+  });
+});
+
+$(function() {
+  var member_num = $('.earning_table').length;
+  $('#add_eaning_button').on('click', function() {
+  console.log(member_num);
+     
+    var input =
+        '<tr class="earning_table" id="add_eaning_' + member_num + '">'
+        + '<td><input type="text" name="ledger[earnings_attributes][' + member_num + '][quantity]"></td>'
+        + '<input placeholder="項目名" type="text" name="enforcement[meals_attributes][' + member_num + '][item]" style="margin-left:88px">'
+        + '&nbsp;<input placeholder="項目数" type="text" name="enforcement[meals_attributes][' + member_num + '][number]">'
+        +'</tr>'
+    $('#earnings_box').append(input);
+    member_num ++;
+  });
+
+
+  $('#team_members_box').on('click', '.member_delete', function() {
+    var inputId = $(this).data('id');
+    var defaultData = $(this).data('default');
+    if (defaultData == 'default') {
+      $(this).prev().prop('checked', true);
+      $('#add_member_' + inputId).hide();
+    }else{
+      $('#add_member_' + inputId).remove();
+    }
+  });
+});
