@@ -55,6 +55,9 @@ class CreateEnforcements < ActiveRecord::Migration[5.1]
       t.integer :bus_quantity
       t.integer :bus_supplier_id
 
+      #食事業者
+      t.integer :meal_supplier_id
+      
       t.string :r_bus
       t.text :other
       

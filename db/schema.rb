@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180108144130) do
+ActiveRecord::Schema.define(version: 20180110041142) do
 
   create_table "ceremonialplaces", force: :cascade do |t|
     t.string "name"
@@ -104,6 +104,7 @@ ActiveRecord::Schema.define(version: 20180108144130) do
     t.integer "bus_price"
     t.integer "bus_quantity"
     t.integer "bus_supplier_id"
+    t.integer "meal_supplier_id"
     t.string "r_bus"
     t.text "other"
     t.datetime "created_at", null: false
@@ -145,6 +146,10 @@ ActiveRecord::Schema.define(version: 20180108144130) do
   end
 
   create_table "ledgers", force: :cascade do |t|
+    t.string "applicantlastname"
+    t.string "applicantfirstname"
+    t.string "applicantkana"
+    t.string "applicantname"
     t.string "classification"
     t.integer "kind_id"
     t.string "employee_id"
@@ -154,6 +159,15 @@ ActiveRecord::Schema.define(version: 20180108144130) do
     t.integer "member_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "meals", force: :cascade do |t|
+    t.integer "enforcement_id"
+    t.string "item"
+    t.integer "number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["enforcement_id"], name: "index_meals_on_enforcement_id"
   end
 
   create_table "members", force: :cascade do |t|
@@ -177,6 +191,21 @@ ActiveRecord::Schema.define(version: 20180108144130) do
     t.integer "row_order"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "officers", force: :cascade do |t|
+    t.integer "supplier_id"
+    t.integer "enforcement_id"
+    t.integer "receptionist"
+    t.integer "accounting"
+    t.integer "reception"
+    t.integer "moderator"
+    t.integer "parking"
+    t.integer "other"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["enforcement_id"], name: "index_officers_on_enforcement_id"
+    t.index ["supplier_id"], name: "index_officers_on_supplier_id"
   end
 
   create_table "relationships", force: :cascade do |t|

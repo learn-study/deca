@@ -66,39 +66,20 @@
             </div>
             
             <div class="form-group">
-              <label>性別</label>
-              <%= f.radio_button :gender, :男性 %>男性
-              <%= f.radio_button :gender, :女性 %>女性
-            </div>
-            
-            <div class="form-group">
               <label>住所1</label>
               <%= f.text_field :city %>
             </div>            
-            
-            <div class="form-group">
-              <label>住所2</label>
-              <%= f.text_field :streetaddress %>
-            </div>              
-            
+
             <div class="form-group">
               <label>電話番号</label>
               <%= f.text_field :tel %>
             </div>             
             
             <div class="form-group">
-              <label>宗派</label>
-                <%= f.collection_select :sect, Sect.all, :id, :sect,  :include_blank => true %>
               <label>会種</label>
+                <%#= f.collection_select :sect, Sect.all, :id, :text,  :include_blank => true %>
             </div>             
             
-            <div class="form-group">
-              <label>登録日</label>
-            </div> 
-
-            <div class="form-group">
-              <label>変更日</label>
-            </div> 
 
             <div class="form-group">
               <label>備考</label>

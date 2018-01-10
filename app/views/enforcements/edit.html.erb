@@ -265,24 +265,141 @@
     </div>
     <div class="col-md-3">
       <label>リム</label>
-        <% if @enforce.r_bus ="有" %>
-         <%= f.radio_button :r_bus, :有, {:checked => true} %>有
-        <% else %>
-         <%= f.radio_button :r_bus, :有 %>有
-        <% end %>
-        
-        <% if @enforce.r_bus ="無" %>
-         <%= f.radio_button :r_bus, :無, {:checked => true} %>無
-        <% else %>
-         <%= f.radio_button :r_bus, :無 %>無
-        <% end %>
+        <%= f.radio_button :r_bus, :有 %>有
+        <%= f.radio_button :r_bus, :無 %>無
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="left_column spacer">プロ役員</label>
+    <span class="btn btn-danger btn-sm" data-toggle="modal" data-target="#familyForm">追加</span>
+  </div>
+
+<% if @enforce.officers.present? %>
+  <% @enforce.officers.each do |officer| %>
+			<%= form_for(officer) do |f| %>
+  			  <div class="form-group">
+    				<label class="left_column">業者名</label>
+            <%= f.collection_select :supplier_id, Supplier.all, :id, :name,  {:include_blank => true}, {style: "width:190px;"} %>
+   				</div>
+
+   				<div class="row">
+  			    <div class="col-xs-3 col-xs-offset-1">
+    				  <label>受付</label>
+      				<%= f.text_field :receptionist,size:5 %>名
+    				</div>
+      				
+  			    <div class="col-xs-4">
+      				<label>会計</label>
+      				<%= f.text_field :accounting,size:5 %>名
+    				</div>
+    				
+  			    <div class="col-xs-4">
+      				<label>接待</label>
+      				<%= f.text_field :reception,size:5 %>名
+    				</div>
+  				</div>
+   				
+   				<div class="row spacer">
+  			    <div class="col-xs-3 col-xs-offset-1">
+    				  <label>司会</label>
+      				<%= f.text_field :moderator,size:5 %>名
+    				</div>
+      				
+  			    <div class="col-xs-4">
+      				<label>駐車場</label>
+      				<%= f.text_field :parking,size:5 %>名
+    				</div>
+    				
+  			    <div class="col-xs-3">
+      				<label>その他</label>
+      				<%= f.text_field :other,size:5 %>名
+    				</div>
+				<%#= f.submit "編集", class: "btn btn-primary col-xs-1" %>
+ 				</div>
+        <hr>
+			<% end %>
+		<% end %>
+<% end %>
+
+  <div class="form-group">
+    <label class="left_column spacer">お食事関係</label>
+    <%= f.collection_select :meal_supplier_id, Supplier.all, :id, :name,  {:include_blank => true}, {style: "width:190px;"} %>
+
+    <div id="meals_form">
+    <%= f.fields_for :meals do |m| %>
+      <div class="form-group meals">
+        <%= m.text_field :item,style: "margin-left:88px" %>
+        <%= m.text_field :number %>
       </div>
+    <% end %>
+    </div>
+    <span class="btn btn-default btn-sm" id="add_item" style="margin-left:88px">項目追加</span>
   </div>
   
-  <div class="form-group">
-    <label class="left_column">備考</label>
-    &nbsp;<%= f.text_area :other,rows:7,style: "width:80%" %>
+  <div class="form-group" style="margin-top:15px">
+    <label class="left_column" style="vertical-align:top;">備考</label>
+    &nbsp;<%= f.text_area :other,rows:7,style: "width:80%;" %>
   </div>
 
   <%= f.submit "施行済み葬儀・編集", class: "btn btn-primary col-xs-12" %>
 <% end %>
+
+<!--  プロ役員モーダル・ダイアログ -->
+<div class="modal fade" id="familyForm" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+				<h4 class="modal-title">プロ役員追加</h4>
+			</div>
+			<%= form_for(Officer.new) do |f| %>
+  			<div class="modal-body">
+  			  <div class="form-group">
+    				<label class="left_column">業者名</label>
+            <%= f.collection_select :supplier_id, Supplier.all, :id, :name,  {:include_blank => true}, {style: "width:190px;"} %>
+   				</div>
+   				<%= f.hidden_field :enforcement_id, value: @enforce.id %>
+   				<div class="row">
+  			    <div class="col-xs-4">
+    				  <label>受付</label>
+      				<%= f.text_field :receptionist,size:5 %>名
+    				</div>
+      				
+  			    <div class="col-xs-4">
+      				<label>会計</label>
+      				<%= f.text_field :accounting,size:5 %>名
+    				</div>
+    				
+  			    <div class="col-xs-4">
+      				<label>接待</label>
+      				<%= f.text_field :reception,size:5 %>名
+    				</div>
+  				</div>
+   				
+   				<div class="row spacer">
+  			    <div class="col-xs-4">
+    				  <label>司会</label>
+      				<%= f.text_field :moderator,size:5 %>名
+    				</div>
+      				
+  			    <div class="col-xs-4">
+      				<label>駐車場</label>
+      				<%= f.text_field :parking,size:5 %>名
+    				</div>
+    				
+  			    <div class="col-xs-4">
+      				<label>その他</label>
+      				<%= f.text_field :other,size:5 %>名
+    				</div>
+  				</div>
+
+  			</div>
+  			<div class="modal-footer">
+  				<button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
+  				<%= f.submit "登録", class: "btn btn-primary" %>
+  			</div>
+			<% end %>
+		</div>
+	</div>
+</div>

@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   resources :taxations
   resources :items
   resources :temples
+  resources :officers
+  resources :meals
   resources :collections
   resources :suppliers
   resources :altars

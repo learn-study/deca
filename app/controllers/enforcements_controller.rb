@@ -11,6 +11,7 @@ class EnforcementsController < ApplicationController
       @enforce.member_id = @member.id
       @enforce.streetaddress = @member.streetaddress
     end
+    @enforce.meals.build
   end
 
   def create
@@ -46,7 +47,9 @@ class EnforcementsController < ApplicationController
                                        :refreshment_quantity, :refreshment_supplier_id, :refreshment_product_id,
                                        :gift_price,:gift_quantity, :gift_supplier_id, :gift_product_id,
                                        :nightwear_price,:nightwear_quantity, :nightwear_supplier_id,
-                                       :bus_price,:bus_quantity, :bus_supplier_id,:r_bus, :other
+                                       :bus_price,:bus_quantity, :bus_supplier_id,:r_bus, :other, :officer_supplier_id,
+                                       :meal_supplier_id,
+                                       meals_attributes: [:item, :number, :_destroy, :id]
                                         )
   end
 end

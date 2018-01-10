@@ -7,15 +7,14 @@ class LedgersController < ApplicationController
     @ledger = Ledger.new
     if params[:member_id]
       @member = Member.find(params[:member_id])
-      @ledger.city = @member.city
       @ledger.member_id = @member.id
-      @ledger.streetadress = @member.streetaddress
     end
+    @ledger.costs.build
+    @ledger.earnings.build
   end
   
   def create
-    @ledger = Ledger.new(ledger_params)
-    @ledger.save
+    @ledger = Ledger.create(ledger_params)
     redirect_to edit_ledger_url(@ledger)
   end
   
@@ -38,6 +37,9 @@ class LedgersController < ApplicationController
   def ledger_params
     params.require(:ledger).permit(:home, :classification,
                             :employee_id, :kind_id, :member_id,
-                            :deceased, :coffin, :other)
+                            :deceased, :coffin, :other,
+                            :applicantlastname,:applicantfirstname,:applicantkana,:applicantname,
+                            costs_attributes: [:item, :quantity, :price, :total, :supplier, :id],
+                            earnings_attributes: [:item, :quantity, :price, :total, :taxclass, :id])
   end
 end

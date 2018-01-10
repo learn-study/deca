@@ -252,14 +252,49 @@
     </div>
     <div class="col-md-3">
       <label>リム</label>
-        <%= f.radio_button :r_bus, :ホクシン %>有
-        <%= f.radio_button :r_bus, :共済会 %>無
+        <%= f.radio_button :r_bus, :有 %>有
+        <%= f.radio_button :r_bus, :無 %>無
     </div>
   </div>
-  
+
   <div class="form-group">
-    <label class="left_column">備考</label>
-    &nbsp;<%= f.text_area :other,rows:7,style: "width:80%" %>
+    <label class="left_column spacer">お食事関係</label>
+    <%= f.collection_select :meal_supplier_id, Supplier.all, :id, :name,  {:include_blank => true}, {style: "width:190px;"} %>
+
+    <div id="meals_form">
+    <%= f.fields_for :meals do |m| %>
+      <div class="form-group meals" id="add_meals_0">
+        <input type="text" name="enforcement[meals_attributes][0][item]" value="夕食" style="margin-left:88px">
+        <input type="text" name="enforcement[meals_attributes][0][number]">
+      </div>
+      <div class="form-group meals" id="add_meals_1">
+        <input type="text" name="enforcement[meals_attributes][1][item]" value="オードブル" style="margin-left:88px">
+        <input type="text" name="enforcement[meals_attributes][1][number]">
+      </div>
+      <div class="form-group meals" id="add_meals_2">
+        <input type="text" name="enforcement[meals_attributes][2][item]" value="朝食" style="margin-left:88px">
+        <input type="text" name="enforcement[meals_attributes][2][number]">
+      </div>
+      <div class="form-group meals" id="add_meals_3">
+        <input type="text" name="enforcement[meals_attributes][3][item]" value="昼食" style="margin-left:88px">
+        <input type="text" name="enforcement[meals_attributes][3][number]">
+      </div>
+      <div class="form-group meals" id="add_meals_4">
+        <input type="text" name="enforcement[meals_attributes][4][item]" value="忌中" style="margin-left:88px">
+        <input type="text" name="enforcement[meals_attributes][4][number]">
+      </div>
+      <div class="form-group meals" id="add_meals_5">
+        <input type="text" name="enforcement[meals_attributes][5[item]" value="黒飯" style="margin-left:88px">
+        <input type="text" name="enforcement[meals_attributes][5][number]">
+      </div>
+    </div>
+    <span class="btn btn-default btn-sm" id="add_item" style="margin-left:88px">項目追加</span>
+    <% end %>
+  </div>
+  
+  <div class="form-group" style="margin-top:15px">
+    <label class="left_column" style="vertical-align:top;">備考</label>
+    &nbsp;<%= f.text_area :other,rows:7,style: "width:80%;" %>
   </div>
 
   <%= f.submit "施行済み葬儀・新規登録", class: "btn btn-primary col-xs-12" %>

@@ -35,7 +35,12 @@
     <tr>
       <% member = Member.find(e.member_id) if Member.find_by(id:e.member_id).present? %>
       <td><%= link_to e.id, edit_enforcement_path(e) %></td>
-      <td><%= e.family_name %></td>
+      <td>
+        <%= e.family_name %>
+        <% if e.family_name.present? %>
+          家
+        <% end %>
+      </td>
       <td><%= link_to member.name, edit_member_path(member) if member.present? %></td>
       <td><%= Employee.find(e.employee_id).name if Employee.find_by(id: e.employee_id).present? %></td>
       <td><%= Kind.find(e.kind_id).text if e.kind_id.present? %></td>

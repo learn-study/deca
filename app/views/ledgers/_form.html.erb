@@ -1,9 +1,26 @@
 <%= form_for(ledger) do |f| %>
 
-  <div class="form-group">
-    <label class="left_column">本会員</label>
-    <%= f.text_field :member_id,placeholder: "idを入力してください。" %>&nbsp;
-  </div>
+  <% if @member %>
+    <div class="form-group">
+      <label class="left_column">会員氏名</label>
+      <%= @member.name %>
+    </div>
+  
+    <div class="form-group">
+      <label class="left_column">会員カナ</label>
+      <%= @member.namekana %>
+    </div>
+  <% else %>
+    <div class="form-group">
+      <label class="left_column">氏名（一般）</label>
+      <%= f.text_field :applicantlastname,size: 7 %>
+      <%= f.text_field :applicantfirstname,size: 7 %>
+    </div>
+    <div class="form-group">
+      <label class="left_column">氏名カナ</label>
+      <%= f.text_field :applicantkana %>
+    </div>
+  <% end %>
 
   <div class="form-group">
     <label class="left_column">区分</label>
@@ -29,10 +46,67 @@
   <div class="form-group">
     <label class="left_column">出棺日</label>
     <%= f.date_select(:coffin, :use_month_numbers => true, start_year:1890, end_year:Time.now.year, default: Date.new(Time.now.year, 6, 15)) %><span id="age"></span>
-
   </div>
 
+  <div class="wrap">
+    <div class="left_box" style="display:inline-block;width:85px;vertical-align:top;">
+      <label>単価</label>
+    </div>
+    <div style="display:inline-block;width:750px">
+      <table class="table table-bordered" id="earnings_box">
+        <thead>
+          <tr>
+            <th>商品</th>
+            <th>数量</th>
+            <th>単価</th>
+            <th>金額</th>
+            <th>課税方法</th>
+          </tr>
+        </thead>
+        <tbody>
+        <%= f.fields_for :earnings do |e| %>
+          <tr class="earning_table" id="add_eaning_#{e.index}">
+          	<td><%= e.collection_select :item, Item.all, :id, :name,  {:include_blank => true}, {style: "width:190px;"} %></td>
+            <td><%= e.text_field :quantity %></td>  <%# required: true JS空白不可のバリデーション %>
+            <td><%= e.text_field :price %></td>
+            <td><%= e.text_field :total %></td>
+          	<td><%= e.collection_select :taxclass, Taxation.all, :id, :text,  {:include_blank => true}, {style: "width:190px;"} %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <span id="add_eaning_button" class="btn btn-default">単価項目追加</span>
+    </div>
+  </div>
 
+<hr>
+  <div class="wrap">
+    <div class="left_box" style="display:inline-block;width:85px;vertical-align:top;">
+      <label>原価</label>
+    </div>
+    <div id="costs_box"  style="display:inline-block;width:700px">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>仕入れ先</th>
+            <th>商品</th>
+            <th>数量</th>
+            <th>単価</th>
+            <th>金額</th>
+          </tr>
+        </thead>
+        <tbody>
+        <%= f.fields_for :costs do |c| %>
+          	<td><%= c.collection_select :supplier, Supplier.all, :id, :name,  {:include_blank => true}, {style: "width:190px;"} %></td>
+            <td><%= c.text_field :item %></td>  <%# required: true JS空白不可のバリデーション %>
+            <td><%= c.text_field :quantity %></td>
+            <td><%= c.text_field :price %></td>
+            <td><%= c.text_field :total %></td>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
   <% if (controller_name.eql? "ledgers") && (action_name.eql? "edit") %>
 
@@ -74,11 +148,6 @@
       
 
 
-
-
-
-
-
     <div class="row underspacer">
       <label class="left_column">原価</label>
       <span class="btn btn-danger btn-sm" data-toggle="modal" data-target="#costForm">追加</span>
@@ -98,15 +167,18 @@
   <tbody>
   <% costSum = 0 %>
   <% costs.each do |c| %>
+    <%= form_for(c) do |f| %>
     <tr class="item" data-model-name="costs" data-update-url="<%=  %>">
-      <td><%= c.quantity %></td>
-      <td><%= c.item %></td>
-      <td><%= c.quantity %></td>
-      <td><%= c.price %></td>
+      <td><%= f.collection_select :supplier, Supplier.all, :id, :name,  {:include_blank => true}, {style: "width:190px;"} %></td>
+      <td><%= f.text_field :item %></td>
+      <td><%= f.text_field :quantity %></td>
+      <td><%= f.text_field :price %></td>
       <td><%= s = c.quantity.to_i * c.price.to_i %></td>
+      <td style="width:40px;" class="no-wrap"><%= f.submit "編集" %></td>
       <% costSum += s %>
     </tr>
     <% end %>
+  <% end %>
     <tr>
       <td></td><td></td><td></td><td>合計金額</td>
       <td><%= costSum  %></td>
@@ -123,5 +195,5 @@
     <%= f.text_field :other, style: "width:80%" %>
   </div>
 
-  <%= f.submit %>
+  <%= f.submit "登録", class: "col-xs-12 btn btn-primary" %>
 <% end %>
