@@ -1,6 +1,7 @@
 <%= form_for(ledger) do |f| %>
 
   <% if @member %>
+  <%= f.hidden_field :member_id,value: @member.id %>
     <div class="form-group">
       <label class="left_column">会員氏名</label>
       <%= @member.name %>
@@ -50,32 +51,28 @@
 
   <div class="wrap">
     <div class="left_box" style="display:inline-block;width:85px;vertical-align:top;">
-      <label>単価</label>
+      <label>売上</label>
     </div>
     <div style="display:inline-block;width:750px">
-      <table class="table table-bordered" id="earnings_box">
+      <table class="table table-bordered">
         <thead>
           <tr>
             <th>商品</th>
             <th>数量</th>
             <th>単価</th>
-            <th>金額</th>
             <th>課税方法</th>
           </tr>
         </thead>
         <tbody>
-        <%= f.fields_for :earnings do |e| %>
-          <tr class="earning_table" id="add_eaning_#{e.index}">
+        <%= f.nested_fields_for :earnings, wrapper_tag: :tr do |e| %>
           	<td><%= e.collection_select :item, Item.all, :id, :name,  {:include_blank => true}, {style: "width:190px;"} %></td>
             <td><%= e.text_field :quantity %></td>  <%# required: true JS空白不可のバリデーション %>
             <td><%= e.text_field :price %></td>
-            <td><%= e.text_field :total %></td>
           	<td><%= e.collection_select :taxclass, Taxation.all, :id, :text,  {:include_blank => true}, {style: "width:190px;"} %></td>
-          </tr>
         <% end %>
         </tbody>
       </table>
-      <span id="add_eaning_button" class="btn btn-default">単価項目追加</span>
+      <%= f.add_nested_fields_link :earnings, '単価項目追加', class: 'btn btn-default', role: 'button' %>
     </div>
   </div>
 
@@ -92,105 +89,23 @@
             <th>商品</th>
             <th>数量</th>
             <th>単価</th>
-            <th>金額</th>
           </tr>
         </thead>
         <tbody>
-        <%= f.fields_for :costs do |c| %>
+        <%= f.nested_fields_for :costs, wrapper_tag: :tr do |c| %>
           	<td><%= c.collection_select :supplier, Supplier.all, :id, :name,  {:include_blank => true}, {style: "width:190px;"} %></td>
             <td><%= c.text_field :item %></td>  <%# required: true JS空白不可のバリデーション %>
             <td><%= c.text_field :quantity %></td>
             <td><%= c.text_field :price %></td>
-            <td><%= c.text_field :total %></td>
         <% end %>
         </tbody>
       </table>
+      <%= f.add_nested_fields_link :costs, '原価項目追加', class: 'btn btn-default', role: 'button' %>
     </div>
   </div>
 
-  <% if (controller_name.eql? "ledgers") && (action_name.eql? "edit") %>
 
-    <div class="row underspacer">
-      <label class="left_column">売上</label>
-      <span class="btn btn-danger btn-sm" data-toggle="modal" data-target="#earningForm">追加</span>
-    </div>
-
-<% if eanings.present? %>
-<table class="table table-bordered table-sortable ui-sortable">
-  <thead>
-    <tr>
-      <th>課税方法</th>
-      <th>商品</th>
-      <th>数量</th>
-      <th>単価</th>
-      <th>金額</th>
-    </tr>
-  </thead>
-  <tbody>
-  <% sum = 0 %>
-  <% eanings.each do |e| %>
-    <tr class="item" data-model-name="eaninngs" data-update-url="<%=  %>">
-      <td><%= e.taxclass %></td>
-      <td><%= e.item %></td>
-      <td><%= e.quantity %></td>
-      <td><%= e.price %></td>
-      <td><%= fa = e.quantity.to_i * e.price.to_i %></td>
-      <% sum += fa %>
-    </tr>
-    <% end %>
-    <tr>
-      <td></td><td></td><td></td><td>合計金額</td>
-      <td><%= sum  %></td>
-    </tr> 
-  </tbody>
-</table>
-<% end %>
-      
-
-
-    <div class="row underspacer">
-      <label class="left_column">原価</label>
-      <span class="btn btn-danger btn-sm" data-toggle="modal" data-target="#costForm">追加</span>
-    </div>
-
-<% if costs.present? %>
-<table class="table table-bordered table-sortable ui-sortable">
-  <thead>
-    <tr>
-      <th>仕入れ先</th>
-      <th>商品</th>
-      <th>数量</th>
-      <th>単価</th>
-      <th>金額</th>
-    </tr>
-  </thead>
-  <tbody>
-  <% costSum = 0 %>
-  <% costs.each do |c| %>
-    <%= form_for(c) do |f| %>
-    <tr class="item" data-model-name="costs" data-update-url="<%=  %>">
-      <td><%= f.collection_select :supplier, Supplier.all, :id, :name,  {:include_blank => true}, {style: "width:190px;"} %></td>
-      <td><%= f.text_field :item %></td>
-      <td><%= f.text_field :quantity %></td>
-      <td><%= f.text_field :price %></td>
-      <td><%= s = c.quantity.to_i * c.price.to_i %></td>
-      <td style="width:40px;" class="no-wrap"><%= f.submit "編集" %></td>
-      <% costSum += s %>
-    </tr>
-    <% end %>
-  <% end %>
-    <tr>
-      <td></td><td></td><td></td><td>合計金額</td>
-      <td><%= costSum  %></td>
-    </tr> 
-  </tbody>
-</table>
-<% end %>
-
-    
-  <% end %>
-
-  <div class="form-group">
+  <div class="form-group spacer">
     <label class="left_column">備考</label>
     <%= f.text_field :other, style: "width:80%" %>
   </div>

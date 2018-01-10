@@ -8,6 +8,8 @@ end
 gem 'bootstrap-sass'
 gem 'momentjs-rails'
 gem 'bootstrap3-datetimepicker-rails'
+	
+gem 'nested_form_fields'
 
 gem 'jquery-rails'
 gem 'faker'

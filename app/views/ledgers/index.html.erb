@@ -30,7 +30,7 @@
   <% @ledgers.each do |l| %>
     <tr>
       <td><%= l.id %></td>
-      <td><%= link_to l.deceased,edit_ledger_path(l) %></td>
+      <td><%= link_to l.deceased,ledger_path(l) %></td>
       <td><%= Employee.find(l.employee_id).name if l.employee_id.present? %></td>
       <td><%= l.coffin%></td>
       <td></td>

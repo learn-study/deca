@@ -15,12 +15,24 @@ class LedgersController < ApplicationController
   
   def create
     @ledger = Ledger.create(ledger_params)
-    redirect_to edit_ledger_url(@ledger)
+    redirect_to @ledger
   end
-  
+
+  def show
+    @ledger  = Ledger.find(params[:id])
+    if @ledger.member_id.present?
+      @member = Member.find(@ledger.member_id)
+    end
+    @earning = Earning.new
+    @earnings = @ledger.earnings
+    @costs   = @ledger.costs
+  end
+ 
   def edit 
     @ledger = Ledger.find(params[:id])
-    @cost = Cost.new
+    if @ledger.member_id.present?
+      @member = Member.find(@ledger.member_id)
+    end
     @earning = Earning.new
     @eanings= @ledger.earnings
     @costs   = @ledger.costs
@@ -29,7 +41,7 @@ class LedgersController < ApplicationController
   def update
     @ledger = Ledger.find(params[:id])
     @ledger.update(ledger_params)
-    redirect_to edit_ledger_url(@ledger)
+    redirect_to @ledger
   end
 
   private

@@ -6,7 +6,6 @@
 </div>
 
 <%= form_for(@enforce) do |f| %>
-  <%= f.hidden_field :member_id, value: @enforce.member_id %>
 
   <div class="form-group">
     <label class="left_column">家</label>
@@ -14,6 +13,7 @@
   </div>
 
   <% if @member %>
+  <%= f.hidden_field :member_id, value: @member.id %>
     <div class="form-group">
       <label class="left_column">会員氏名</label>
       <%= @member.name %>
