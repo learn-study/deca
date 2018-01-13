@@ -85,8 +85,8 @@ class MembersController < ApplicationController
       @member.streetaddress.present? ? streetaddress = @member.streetaddress : streetaddress = strongwords
       @member.tel.present? ? tel = @member.tel : tel = "aa-"
       @member.kind.present? ? kind = @member.kind : kind = "-cc"
-      @member.dm.present? ? dm = true : dm = "-a"
-      @member.reserve.present? ? reserve = true : reserve = "-a"
+      @member.dm.present? ? dm = true : dm = ""
+      @member.reserve.present? ? reserve = true : reserve = ""
       @member.tag.present? ? tag = @member.tag : tag = strongwords
       p tel
       #begin
