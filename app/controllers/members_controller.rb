@@ -24,7 +24,7 @@ class MembersController < ApplicationController
     @keyword = params[:keyword] #フリー検索
     @tel = params[:tel].to_s #電話番合検索
     @family = params[:family].to_s #家族検索
-    @member_id = params[:member_id].to_i #会員番号
+    @member_id = params[:member_id].to_i if params[:member_id].present?#会員番号
     
     if @keyword.present?
       @keyword.gsub!(/(\s|　)+/, '')
