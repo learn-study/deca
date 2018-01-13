@@ -1,0 +1,2 @@
+class Memorialitem < ApplicationRecord
+end

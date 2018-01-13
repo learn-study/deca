@@ -1,0 +1,2 @@
+module BuddhistsermonsHelper
+end

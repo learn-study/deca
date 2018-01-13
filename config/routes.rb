@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'buddhistsermons/index'
+
   get 'items/index'
 
   get 'collections/index'
@@ -15,7 +17,7 @@ Rails.application.routes.draw do
   resources :sects
   resources :kinds
   resources :reports
-  resources :judges
+  resources :buddhistsermons
   resources :profits
   resources :costlists
   resources :taxations

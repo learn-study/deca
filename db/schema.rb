@@ -10,7 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180113010351) do
+ActiveRecord::Schema.define(version: 20180113024815) do
+
+  create_table "altaritems", force: :cascade do |t|
+    t.integer "supplier_id"
+    t.integer "altar_id"
+    t.integer "item_id"
+    t.integer "quantity"
+    t.integer "price"
+    t.integer "amount"
+    t.integer "taxation_id"
+    t.integer "cost"
+    t.integer "total_cost"
+    t.integer "cost_taxation_id"
+    t.boolean "ordering"
+    t.datetime "derivery_date"
+    t.integer "method_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["altar_id"], name: "index_altaritems_on_altar_id"
+  end
 
   create_table "altars", force: :cascade do |t|
     t.integer "member_id"
@@ -27,10 +46,50 @@ ActiveRecord::Schema.define(version: 20180113010351) do
     t.string "pardon"
     t.string "popular"
     t.string "line"
-    t.string "tenple_id"
+    t.string "temple_id"
     t.string "sect_id"
     t.string "tel"
     t.string "mobile"
+    t.integer "collection_id"
+    t.text "other"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "buddhistsermons", force: :cascade do |t|
+    t.integer "member_id"
+    t.string "applicantlastname"
+    t.string "applicantfirstname"
+    t.string "applicantkana"
+    t.string "classification"
+    t.string "employee_id"
+    t.integer "bdmemorial_id"
+    t.datetime "orderdate"
+    t.string "deceased"
+    t.string "city"
+    t.string "streetaddress"
+    t.string "tel"
+    t.string "mobile"
+    t.datetime "ddate"
+    t.string "pardon"
+    t.string "popular"
+    t.string "temple_id"
+    t.string "sect_id"
+    t.datetime "bdmemorialdate"
+    t.string "visitingtime"
+    t.string "diningtime"
+    t.string "bdmemorialplace"
+    t.string "bdmemorial_city"
+    t.string "bdmemorial_address"
+    t.string "bdmemorial_tel"
+    t.datetime "postcard"
+    t.integer "set"
+    t.integer "setnumber"
+    t.integer "altar"
+    t.string "altardetails"
+    t.integer "drink"
+    t.string "drinkdetails"
+    t.integer "dues"
     t.integer "collection_id"
     t.text "other"
     t.datetime "created_at", null: false
@@ -238,6 +297,25 @@ ActiveRecord::Schema.define(version: 20180113010351) do
     t.integer "row_order"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "memorialitems", force: :cascade do |t|
+    t.integer "supplier_id"
+    t.integer "buddhistsermon_id"
+    t.integer "item_id"
+    t.integer "quantity"
+    t.integer "price"
+    t.integer "amount"
+    t.integer "taxation_id"
+    t.integer "cost"
+    t.integer "total_cost"
+    t.integer "cost_taxation_id"
+    t.boolean "ordering"
+    t.datetime "derivery_date"
+    t.integer "method_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["buddhistsermon_id"], name: "index_memorialitems_on_buddhistsermon_id"
   end
 
   create_table "officers", force: :cascade do |t|

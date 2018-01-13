@@ -1,0 +1,2 @@
+class Altaritem < ApplicationRecord
+end

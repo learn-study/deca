@@ -72,11 +72,6 @@
   </div>
   
   <div class="form-group">
-    <label class="left_column">行年</label>
-    <%= f.text_field :line %>
-  </div>
-
-  <div class="form-group">
     <label class="left_column">宗派</label>
     <%= f.collection_select :sect_id,Sect.all, :id, :sect,  {:include_blank => true}, {style: "width:190px;"} %>
   </div>
@@ -114,7 +109,7 @@
     <div style="display:inline-block;width:750px">
       <table class="table table-bordered">
 
-        <%= f.nested_fields_for :altaritems, wrapper_tag: :tr do |d| %>
+        <%= f.nested_fields_for :memorialitems, wrapper_tag: :tr do |d| %>
         <tr style="background:#eee">
           <th>仕入先</th>
           <th>商品</th>
@@ -166,7 +161,7 @@
         <% end %>
 
       </table>
-      <%= f.add_nested_fields_link :altaritems, '項目追加', class: 'btn btn-default', role: 'button' %>
+      <%= f.add_nested_fields_link :memorialitems, '項目追加', class: 'btn btn-default', role: 'button' %>
     </div>
   </div>
 
@@ -179,5 +174,5 @@
     &nbsp;<%= f.text_area :other,rows:7,style: "width:80%" %>
   </div>
 
-  <%= f.submit "仏壇売上登録", class: "btn btn-primary col-xs-12" %>
+  <%= f.submit "法事売上登録", class: "btn btn-primary col-xs-12" %>
 <% end %>

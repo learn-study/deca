@@ -20,7 +20,7 @@ class CreateAltars < ActiveRecord::Migration[5.1]
       #行年
       t.string :line
       #寺院
-      t.string :tenple_id
+      t.string :temple_id
       #宗派
       t.string :sect_id
      
