@@ -5,6 +5,7 @@ class MembersController < ApplicationController
     @keyword = params[:keyword] #フリー検索
     @tel = params[:tel].to_s #電話番合検索
     @family = params[:family].to_s #家族検索
+    @member_id = params[:member_id] #会員番号
     
     if @keyword.present?
       @keyword.gsub!(/(\s|　)+/, '')
@@ -25,6 +26,11 @@ class MembersController < ApplicationController
       @member = Member.new
       @members = Member.where("tel like '%"+@tel+"%'")
                 .or(Member.where("mobile like '%"+@tel+"%'"))
+                .page(params[:page])
+    elsif @member_id.present?
+      @member_id.gsub!(/(\s|　)+/, '')
+      @member = Member.new
+      @members = Member.where("id like '%"+@member_id+"%'")
                 .page(params[:page])
     elsif @family.present?
       @family.gsub!(/(\s|　)+/, '')
@@ -59,10 +65,10 @@ class MembersController < ApplicationController
       @member.city.present? ? city = @member.city : city = "123agiargnala5gqpgkqabra"
       @member.streetaddress.present? ? streetaddress = @member.streetaddress : streetaddress = strongwords
       @member.tel.present? ? tel = @member.tel : tel = "aa-"
-      @member.gender.present? ? gender = @member.gender : gender = "-cc"
-      @member.sect.present? ? sect = @member.sect : sect = "-cc"
+      @member.kind.present? ? kind = @member.kind : kind = "-cc"
       @member.dm.present? ? dm = true : dm = "-a"
       @member.reserve.present? ? reserve = true : reserve = "-a"
+      @member.tag.present? ? tag = @member.tag : tag = strongwords
       p tel
       #begin
         @members = Member.where(id: id)
@@ -72,10 +78,10 @@ class MembersController < ApplicationController
                .or(Member.where("city like '%"+city+"%'"))
                .or(Member.where("streetaddress like '%"+streetaddress+"%'"))
                .or(Member.where("tel like '%"+tel+"%'"))
-               .or(Member.where(gender: gender))
-               .or(Member.where(sect: sect))
+               .or(Member.where(kind: kind))
                .or(Member.where(dm: dm))
                .or(Member.where(reserve: reserve))
+               .or(Member.where("tag like '%"+tag+"%'"))
                .page(params[:page])
       #rescue TypeError => ex
         #@members = Member.page(params[:page])
@@ -103,6 +109,7 @@ class MembersController < ApplicationController
   
   def edit
     @member = Member.find(params[:id])
+    
     @family = @member.families.build
     @remark = Remark.new
     @families = @member.families.rank(:row_order)

@@ -29,4 +29,14 @@
     font-size:12px;
   }
   
-  
+@media print{
+  .no_print{
+      display: none;
+  }
+  a[href]:after {
+    content: "";
+  }
+  abbr[title]:after {
+    content: "";
+  }
+}

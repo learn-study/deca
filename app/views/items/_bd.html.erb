@@ -1,4 +1,4 @@
-<select name="altar[buddhistsermon_memorialitems_attributes][<%= @number %>][item_id]" id="buddhistsermon_memorialitems_altaritems_attributes_<%= @number %>_item_id">
+<select name="buddhistsermon[memorialitems_attributes][<%= @number %>][item_id]" id="buddhistsermon_memorialitems_attributes_<%= @number %>_item_id">
     <option value=""></option>
     <% @result.each do |r| %>
         <option value="<%= r.id %>"><%= r.name %></option>

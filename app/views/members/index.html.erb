@@ -1,25 +1,24 @@
-<div class="row">
+<div class="row no_print">
   <a href="/" class="col-xs-3 btn btn-danger">戻る</a>
   <div class="col-xs-4 col-xs-offset-1 text-center"><h2>会員</h2></div>
-  <div class="col-xs-3 col-xs-offset-1 btn btn-danger">印刷</div>
 </div>
 
-<div class="row" style="margin:30px 0;">
+<div class="row no_print" style="margin:30px 0;">
   <div><%= link_to "会員新規登録", new_member_path, class: "col-xs-4 col-xs-offset-4 btn btn-primary" %></div>
 </div>
 <%= @text %>
 
-<div class="row spacer">
+<div class="row spacer no_print">
   <div class="col-xs-4">
   <%= form_tag(members_path, method: :get, class: 'form-inline') do %>
-    <%= text_field_tag :keyword, @keyword, class: 'form-control input-sm', placeholder: "キーワードを入力" %>
+    <%= text_field_tag :keyword, @keyword, class: 'form-control input-sm', placeholder: "名前・住所検索" %>
     <%= submit_tag '検索', class: 'btn btn-success btn-sm' %>
   <% end %>
   </div>
   
   <div class="col-xs-4">
   <%= form_tag(members_path, method: :get, class: 'form-inline') do %>
-    <%= text_field_tag :tel, @tel, class: 'form-control input-sm', placeholder: "電話番号を入力"  %>
+    <%= text_field_tag :tel, @tel, class: 'form-control input-sm', placeholder: "電話番号検索"  %>
     <%= submit_tag '検索', class: 'btn btn-success btn-sm' %>
   <% end %>
   </div>
@@ -34,8 +33,15 @@
 </div>
 
 
-<div class="row spacer">
-  <div class="col-xs-4 col-xs-offset-4">
+<div class="row spacer no_print">
+  <div class="col-xs-4">
+  <%= form_tag(members_path, method: :get, class: 'form-inline') do %>
+    <%= text_field_tag :member_id, @member_id, class: 'form-control input-sm', placeholder: "会員番号検索"  %>
+    <%= submit_tag '検索', class: 'btn btn-success btn-sm' %>
+  <% end %>
+  </div>
+  
+  <div class="col-xs-4">
   <a class="col-xs-3 btn btn-defalut" data-toggle="modal" data-target="#serchModal">オプション検索</a>
   </div>
 </div>
@@ -51,54 +57,47 @@
 
           <%= form_for(@member, :url => {:controller => :members, :action => :index}, html: {method: 'GET'}) do |f| %>
             <%= hidden_field_tag :form, "true" %>
+
             <div class="form-group">
-              <%= f.label :id, "会員番号" %>
-              <%= f.number_field :id %>
+              <label class="left_column">氏名</label>
+              <%= f.text_field :lastname,size:7 %>
+              <%= f.text_field :firstname,size:7 %><br>
             </div>
 
             <div class="form-group">
-              <label>姓</label>
-              <%= f.text_field :lastname %>
-              <label>名</label>
-              <%= f.text_field :firstname %><br>
-              <label>カナ</label>
+              <label class="left_column">カナ</label>
               <%= f.text_field :namekana %>
             </div>
-            
+
+
             <div class="form-group">
-              <label>住所1</label>
-              <%= f.text_field :city %>
+              <label class="left_column">住所1</label>
+              <%= f.text_field :city,size: 50 %>
             </div>            
 
             <div class="form-group">
-              <label>電話番号</label>
+              <label class="left_column">電話番号</label>
               <%= f.text_field :tel %>
-            </div>             
+            </div>
             
             <div class="form-group">
-              <label>会種</label>
-                <%#= f.collection_select :sect, Sect.all, :id, :text,  :include_blank => true %>
-            </div>             
-            
+              <label class="left_column">会種</label>
+                <%= f.collection_select :kind, Kind.all, :id, :text,  {:include_blank => true}, {style: "width:190px;"} %>
+            </div>
 
             <div class="form-group">
-              <label>備考</label>
-              <label>付箋</label>
+              <label class="left_column">付箋</label>
+              <%= f.text_field :tag %>
             </div> 
             
             <div class="form-group">
-              <label>DM送付</label>
+              <label class="left_column">DM送付</label>
               <%= f.check_box :dm %> 
-              <label>予備</label>
-              <%= f.check_box :reserve %>
-            </div> 
-            
-            <div class="form-group">
-              <label>並び順</label>
             </div> 
 
             <div class="form-group">
-              <label>条件</label>
+              <label class="left_column">予備</label>
+              <%= f.check_box :reserve %>
             </div> 
 
         </div>
@@ -133,8 +132,8 @@
   <tbody>
   <% @members.each do |m| %>
     <tr>
-      <td><%= m.id %></td>
-      <td><%= link_to m.lastname + " " + m.firstname, edit_member_path(m) %></td>
+      <td><%= link_to m.id, edit_member_path(m) %></td>
+      <td><%=  m.lastname + " " + m.firstname %></td>
       <td><%= m.namekana %></td>
       <td><%= m.city %></td>
       <td><%= m.tel %></td>
