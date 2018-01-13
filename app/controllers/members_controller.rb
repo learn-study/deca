@@ -24,7 +24,7 @@ class MembersController < ApplicationController
     @keyword = params[:keyword] #フリー検索
     @tel = params[:tel].to_s #電話番合検索
     @family = params[:family].to_s #家族検索
-    @member_id = params[:member_id] #会員番号
+    @member_id = params[:member_id].to_i #会員番号
     
     if @keyword.present?
       @keyword.gsub!(/(\s|　)+/, '')
@@ -47,9 +47,8 @@ class MembersController < ApplicationController
                 .or(Member.where("mobile like '%"+@tel+"%'"))
                 .page(params[:page])
     elsif @member_id.present?
-      @member_id.gsub!(/(\s|　)+/, '').to_i
       @member = Member.new
-      @members = Member.where("id like '%"+@member_id+"%'")
+      @members = Member.where(id: @member_id)
                 .page(params[:page])
     elsif @family.present?
       @family.gsub!(/(\s|　)+/, '')
