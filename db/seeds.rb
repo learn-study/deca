@@ -572,7 +572,9 @@ Item.find_or_create_by(supplier_id:	2	,item_id:	109	,name:"	R-09 梅・茶	", se
 Item.find_or_create_by(supplier_id:	2	,item_id:	110	,name:"	R-10 梅・茶	", sell:	2500.00	,cost:	1500.00	)
 Item.find_or_create_by(supplier_id:	2	,item_id:	111	,name:"	R-11 梅・茶	", sell:	5000.00	,cost:	3000.00	)
 
-
+Deliverymethod.find_or_create_by(id:1,text: "担当者")
+Deliverymethod.find_or_create_by(id:2,text: "業者直")
+Deliverymethod.find_or_create_by(id:3,text: "事務所受代行")
 
 
 Faker::Config.locale = 'ja'

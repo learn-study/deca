@@ -13,6 +13,7 @@ class CreateMemorialitems < ActiveRecord::Migration[5.1]
       t.integer :cost_taxation_id
       t.boolean :ordering
       t.datetime :derivery_date
+      #納品方法
       t.integer :method_id
       t.timestamps
       t.timestamps

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'deliverymethods/index'
+
   get 'buddhistsermons/index'
 
   get 'items/index'
@@ -17,6 +19,7 @@ Rails.application.routes.draw do
   resources :sects
   resources :kinds
   resources :reports
+  resources :deliverymethods
   resources :buddhistsermons
   resources :profits
   resources :costlists

@@ -129,7 +129,7 @@
           <td><%= d.text_field :ordering %></td>
           <td><%= d.date_select(:derivery_date, :use_month_numbers => true, start_year:1890, end_year:Time.now.year, default: Date.new(Time.now.year, 6, 15)) %><span id="age"></span>
 </td>
-          <td>aaa</td>
+          <td><%= d.collection_select :method_id, Deliverymethod.all, :id, :text,  {:include_blank => true} %></td>
         </tr>
         
         

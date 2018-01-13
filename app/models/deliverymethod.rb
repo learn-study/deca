@@ -1,0 +1,2 @@
+class Deliverymethod < ApplicationRecord
+end
