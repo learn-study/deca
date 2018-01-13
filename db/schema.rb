@@ -244,8 +244,8 @@ ActiveRecord::Schema.define(version: 20180113032009) do
     t.integer "supplier_id"
     t.integer "item_id"
     t.string "name"
-    t.float "sell"
-    t.float "cost"
+    t.integer "sell"
+    t.integer "cost"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["supplier_id"], name: "index_items_on_supplier_id"

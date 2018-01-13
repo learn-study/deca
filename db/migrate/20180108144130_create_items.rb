@@ -4,8 +4,8 @@ class CreateItems < ActiveRecord::Migration[5.1]
       t.references :supplier
       t.integer :item_id
       t.string :name
-      t.float :sell
-      t.float :cost
+      t.integer :sell
+      t.integer :cost
 
       t.timestamps
     end

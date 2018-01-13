@@ -1,0 +1,4 @@
+$("tr td").eq(<%= @num %>).html("<%= escape_javascript(render('items/altar',result: @result,number: @number)) %>");
+
+console.log(<%= @num %>)
+

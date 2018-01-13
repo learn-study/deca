@@ -121,7 +121,7 @@
           <th>数量</th>
         </tr>
         <tr>
-          <td><%= d.collection_select :supplier_id, Supplier.all, :id, :name,  {:include_blank => true} %> </td>
+          <td ><%= d.collection_select :supplier_id, Supplier.all, :id, :name,  {:include_blank => true} %> </td>
           <td><%= d.collection_select :item_id, Item.all, :id, :name,  {:include_blank => true} %></td>
           <td><%= d.text_field :quantity %></td>
         </tr>
@@ -181,3 +181,26 @@
 
   <%= f.submit "仏壇売上登録", class: "btn btn-primary col-xs-12" %>
 <% end %>
+
+<script>
+$("tr td select").change(function() {
+
+});
+
+
+$(document).on("change", "tr td select", function(){
+  
+    var index = $('tr td select').index(this); //何番目のセレクトか
+    //仕入れ先の変更の場合はajax
+    if (index%8 ==0){
+  
+      var val = $("tr td select").eq(index).val();
+      $.get("/altarsearch",
+        {
+          number: index,//０，８，１６
+          val: val//セレクトボックスのsupplie_value
+        } 
+        );
+    }
+});
+</script>
