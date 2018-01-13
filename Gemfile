@@ -5,6 +5,11 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+#pdf
+gem 'prawn'
+gem 'prawn-table'
+
+
 gem 'bootstrap-sass'
 gem 'momentjs-rails'
 gem 'bootstrap3-datetimepicker-rails'

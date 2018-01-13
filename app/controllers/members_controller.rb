@@ -1,5 +1,24 @@
 class MembersController < ApplicationController
   before_action :require_user_logged_in
+  def show
+    @member= Member.find(params[:id])
+    respond_to do |format|
+      format.html # show.html.erb
+      format.pdf do
+        # PDF文書を作成
+        pdf = OrderPdf.new(@member)
+
+
+        # 画面にPDFを表示する
+        # disposition: "inline" によりPDFはダウンロードではなく画面に表示される
+        send_data pdf.render,
+          filename:    "member#{@member.id}.pdf",
+          type:        "application/pdf",
+          disposition: "inline"
+      end
+    end
+  end
+  
   def index
     @member = Member.new #検索用
     @keyword = params[:keyword] #フリー検索
