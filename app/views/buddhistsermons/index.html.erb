@@ -10,3 +10,47 @@
   <div class="col-sm-2 col-sm-offset-3 btn btn-default">検索</div>
   <%= link_to "新規登録", new_buddhistsermon_path,class: "col-sm-2 col-sm-offset-2 btn btn-default"%>
 </div>
+
+<%= paginate @bd %>
+
+<table class="table">
+  <thead>
+    <tr>
+        <th>コード</th>
+        <th>氏名</th>
+        <th>カナ</th>
+        <th>担当者</th>
+        <th>合計金額</th>
+        <th>原価合計</th>
+        <th>登録日</th>
+        <th>変更日</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @bd.each do |r| %>
+    <tr>
+      <td><%= link_to r.id,edit_report_path(r) %></td>
+      <td>
+        <% if r.member_id %>
+          <%= Member.find(r.member_id).name %>
+        <% else %>
+        <%= r.applicantlastname %><%= r.applicantfirstname %>
+        <% end %>
+      </td>
+      <td>
+        <% if r.member_id %>
+          <%= Member.find(r.member_id).namekana %>
+        <% else %>
+        <%= r.applicantkana %>
+        <% end %>
+7      <td><%= Employee.find(r.employee_id).name if r.employee_id.present? %></td>
+      <td></td>
+      <td></td>
+      <td><%= r.created_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %></td>
+      <td><%= r.updated_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @bd %>
