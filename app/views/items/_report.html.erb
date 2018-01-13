@@ -1,4 +1,4 @@
-<select name="altar[report_deliverables_attributes][<%= @number %>][item_id]" id="report_deliverables_attributes_<%= @number %>_item_id">
+<select name="[report[deliverables_attributes][<%= @number %>][item_id]" id="report_deliverables_attributes_<%= @number %>_item_id">
     <option value=""></option>
     <% @result.each do |r| %>
         <option value="<%= r.id %>"><%= r.name %></option>
