@@ -30,7 +30,7 @@
   <tbody>
   <% @altars.each do |r| %>
     <tr>
-      <td><%= link_to r.id,edit_report_path(r) %></td>
+      <td><%= link_to r.id,edit_altar_path(r) %></td>
       <td>
         <% if r.member_id %>
           <%= Member.find(r.member_id).name %>
