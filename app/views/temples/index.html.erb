@@ -1,2 +1,46 @@
-<h1>Temples#index</h1>
-<p>Find me in app/views/temples/index.html.erb</p>
+<div class="row">
+  <a href="/settings" class="col-xs-3 btn btn-danger">各種登録管理へ戻る</a>
+  <div class="col-xs-3 col-xs-offset-6"></div>
+</div>
+<div class="row">
+  <div class="col-xs-4 col-xs-offset-4 text-center"><h2>寺院管理</h2></div>
+</div>
+<table class="table table-boarderd">
+  <thead>
+    <th>id</th>
+    <th>寺院名</th>
+    <th>住所</th>
+    <th>電話番号</th>
+  </thead>
+  <tbody>
+<%= form_for(Temple.new) do |f| %>
+    <td><%= f.text_field :id,size: 2 %></td>
+    <td><%= f.text_field :name,size: 20 %></td>
+    <td><%= f.text_field :address,size: 20 %></td>
+    <td><%= f.text_field :tel,size: 20 %></td>
+  <td><%= f.submit "登録" %></td>
+<% end %>
+  </tbody>
+</table>
+
+<table class="table table-boarderd">
+  <thead>
+    <th>id</th>
+    <th>寺院名</th>
+    <th>住所</th>
+    <th>電話番号</th>
+  </thead>
+  <tbody>
+<% @temples.each do |t| %>
+  <%= form_for(Temple.find(t.id)) do |f| %>
+  <tr>
+    <td><%= t.id %></td>
+    <td><%= f.text_field :name,size: 20 %></td>
+    <td><%= f.text_field :address,size: 20 %></td>
+    <td><%= f.text_field :tel,size: 20 %></td>
+    <td><%= f.submit "編集" %></td>
+  </tr>
+  <% end %>
+<% end %>
+  </tbody>
+</table>

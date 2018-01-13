@@ -10,7 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180110041142) do
+ActiveRecord::Schema.define(version: 20180113010351) do
+
+  create_table "altars", force: :cascade do |t|
+    t.integer "member_id"
+    t.string "applicantlastname"
+    t.string "applicantfirstname"
+    t.string "applicantkana"
+    t.string "classification"
+    t.string "employee_id"
+    t.datetime "orderdate"
+    t.string "deceased"
+    t.string "city"
+    t.string "streetaddress"
+    t.datetime "ddate"
+    t.string "pardon"
+    t.string "popular"
+    t.string "line"
+    t.string "tenple_id"
+    t.string "sect_id"
+    t.string "tel"
+    t.string "mobile"
+    t.integer "collection_id"
+    t.text "other"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "ceremonialplaces", force: :cascade do |t|
     t.string "name"
@@ -36,6 +61,25 @@ ActiveRecord::Schema.define(version: 20180110041142) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["ledger_id"], name: "index_costs_on_ledger_id"
+  end
+
+  create_table "deliverables", force: :cascade do |t|
+    t.integer "supplier_id"
+    t.integer "report_id"
+    t.integer "item_id"
+    t.integer "quantity"
+    t.integer "price"
+    t.integer "amount"
+    t.integer "taxation_id"
+    t.integer "cost"
+    t.integer "total_cost"
+    t.integer "cost_taxation_id"
+    t.boolean "ordering"
+    t.datetime "derivery_date"
+    t.integer "method_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["report_id"], name: "index_deliverables_on_report_id"
   end
 
   create_table "earnings", force: :cascade do |t|
@@ -132,11 +176,14 @@ ActiveRecord::Schema.define(version: 20180110041142) do
   end
 
   create_table "items", force: :cascade do |t|
+    t.integer "supplier_id"
+    t.integer "item_id"
     t.string "name"
     t.float "sell"
     t.float "cost"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["supplier_id"], name: "index_items_on_supplier_id"
   end
 
   create_table "kinds", force: :cascade do |t|
@@ -230,15 +277,14 @@ ActiveRecord::Schema.define(version: 20180110041142) do
 
   create_table "reports", force: :cascade do |t|
     t.integer "member_id"
+    t.string "applicantlastname"
+    t.string "applicantfirstname"
+    t.string "applicantkana"
     t.string "classification"
     t.string "employee_id"
     t.datetime "orderdate"
     t.datetime "deliverydate"
     t.datetime "payment"
-    t.string "name"
-    t.string "namekana"
-    t.string "firstname"
-    t.string "lastname"
     t.string "deceased"
     t.string "city"
     t.string "streetaddress"

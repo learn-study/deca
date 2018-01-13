@@ -11,22 +11,27 @@ class ReportsController < ApplicationController
       @report.member_id = @member.id
       #@report.streetadress = @member.streetaddress
     end
+    @report.deliverables.build
   end
   
   def create
     @report = Report.new(report_params)
-    @report.name = @report.lastname.gsub(/(\s|　)+/, '')+@report.firstname.gsub(/(\s|　)+/, '')
     @report.save
     redirect_to edit_report_url(@report)
   end
   
   def edit 
     @report = Report.find(params[:id])
+    if @report.member_id
+      @member = Member.find(@report.member_id)
+      @report.city = @member.city
+      @report.member_id = @member.id
+      #@report.streetadress = @member.streetaddress
+    end
   end
 
   def update
     @report = Report.find(params[:id])
-    @report.name = @report.lastname.gsub(/(\s|　)+/, '')+@report.firstname.gsub(/(\s|　)+/, '')
     @report.update(report_params)
     redirect_to edit_report_url(@report)
   end
@@ -36,9 +41,11 @@ class ReportsController < ApplicationController
   def report_params
     params.require(:report).permit(:member_id, :classification, :employee_id,
                             :orderdate, :deliverydate, :payment,
-                            :name, :namekana, :firstname, :lastname,
+                            :applicantkana, :applicantfirstname, :applicantlastname,
                             :deceased, :city, :streetaddress,
-                            :tel, :mobile, :collection_id, :other
+                            :tel, :mobile, :collection_id, :other,
+                            deliverables_attributes: [:id, :supplier_id, :item_id, :quantity, :price, :amount, :taxation_id,
+                            :cost, :total_cost, :cost_taxation_id, :ordering, :derivery_date, :method_id]
                             )
   end
 end

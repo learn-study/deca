@@ -31,9 +31,20 @@
   <% @reports.each do |r| %>
     <tr>
       <td><%= link_to r.id,edit_report_path(r) %></td>
-      <td><%= r.lastname %>&nbsp;<%= r.firstname %> </td>
-      <td><%= r.namekana %></td>
-      <td><%= r.deceased %></td>
+      <td>
+        <% if r.member_id %>
+          <%= Member.find(r.member_id).name %>
+        <% else %>
+        <%= r.applicantlastname %><%= r.applicantfirstname %>
+        <% end %>
+      </td>
+      <td>
+        <% if r.member_id %>
+          <%= Member.find(r.member_id).namekana %>
+        <% else %>
+        <%= r.applicantkana %>
+        <% end %>
+      </td>      <td><%= r.deceased %></td>
       <td><%= Employee.find(r.employee_id).name if r.employee_id.present? %></td>
       <td></td>
       <td></td>

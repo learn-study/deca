@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  supplier_id: 1
+  item_id: 1
+  quantity: 1
+  price: 1
+  amount: 1
+  taxation_id: 1
+  cost: 1
+  total_cost: 1
+  cost_tacation_id: 1
+  ordering: false
+  derivery_date: 2018-01-11 08:16:33
+  method_id: 1
+
+two:
+  supplier_id: 1
+  item_id: 1
+  quantity: 1
+  price: 1
+  amount: 1
+  taxation_id: 1
+  cost: 1
+  total_cost: 1
+  cost_tacation_id: 1
+  ordering: false
+  derivery_date: 2018-01-11 08:16:33
+  method_id: 1

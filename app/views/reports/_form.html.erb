@@ -1,0 +1,155 @@
+<%= form_for(report) do |f| %>
+
+  <% if member %>
+  <%= f.hidden_field :member_id,value: member.id %>
+    <div class="form-group">
+      <label class="left_column">会員氏名</label>
+      <%= member.name %>
+    </div>
+  
+    <div class="form-group">
+      <label class="left_column">会員カナ</label>
+      <%= member.namekana %>
+    </div>
+  <% else %>
+    <div class="form-group">
+      <label class="left_column">氏名（一般）</label>
+      <%= f.text_field :applicantlastname,size: 7 %>
+      <%= f.text_field :applicantfirstname,size: 7 %>
+    </div>
+    <div class="form-group">
+      <label class="left_column">氏名カナ</label>
+      <%= f.text_field :applicantkana %>
+    </div>
+  <% end %>
+  
+  <div class="form-group">
+    <label class="left_column">区分</label>
+    <%= f.radio_button :classification, :ホクシン %>ホクシン
+    <%= f.radio_button :classification, :共済会 %>共済会
+  </div>
+
+  <div class="form-group">
+    <label class="left_column">担当</label>
+    <%= f.collection_select :employee_id, Employee.all, :id, :name,  {:include_blank => true}, {style: "width:190px;"} %>
+  </div>
+  
+  <div class="form-group">
+    <label class="left_column">受注日</label></label>
+    <%= f.date_select(:orderdate, :use_month_numbers => true, start_year:1890, end_year:Time.now.year, default: Date.new(Time.now.year-40, 6, 15)) %><span id="age"></span>
+  </div>
+  
+  <div class="form-group">
+    <label class="left_column">納品日</label>
+    <%= f.date_select(:deliverydate, :use_month_numbers => true, start_year:1890, end_year:Time.now.year, default: Date.new(Time.now.year-40, 6, 15)) %><span id="age"></span>
+  </div>
+  
+  <div class="form-group">
+    <label class="left_column">入金日</label>
+    <%= f.date_select(:payment, :use_month_numbers => true, start_year:1890, end_year:Time.now.year, include_blank: true) %><span id="age"></span>
+  </div>
+
+  <div class="form-group">
+    <label class="left_column">故人名</label>
+    <%= f.text_field :deceased %>
+  </div>
+
+  <div class="form-group">
+    <label class="left_column">市区町村 </label>
+    <%= f.text_field :city, id: "address_city", style: "width: 80%" %>
+  </div>
+    
+  <div class="form-group">
+    <label class="left_column _small">番地・ﾏﾝｼｮﾝ名</label>
+    <%= f.text_field :streetaddress, id: "address_street", style: "width: 80%" %>
+  </div>
+    
+  <div class="form-group">
+    <label class="left_column">固定電話</label>
+    <%= f.text_field :tel %>
+  </div>
+    
+  <div class="form-group">
+    <label class="left_column">携帯電話</label>
+    <%= f.text_field :mobile %>
+  </div>
+
+  <div class="form-group">
+    <label class="left_column">集金方法</label>
+    <%= f.collection_select :collection_id, Collection.all, :id, :text,  {:include_blank => true}, {style: "width:190px;"} %>
+  </div>
+
+
+  <div class="wrap">
+    <div class="left_box" style="display:inline-block;width:85px;vertical-align:top;">
+      <label>売上</label>
+    </div>
+    <div style="display:inline-block;width:750px">
+      <table class="table table-bordered">
+
+        <%= f.nested_fields_for :deliverables, wrapper_tag: :tr do |d| %>
+        <tr style="background:#eee">
+          <th>仕入先</th>
+          <th>商品</th>
+          <th>数量</th>
+        </tr>
+        <tr>
+          <td><%= d.collection_select :supplier_id, Supplier.all, :id, :name,  {:include_blank => true} %> </td>
+          <td><%= d.collection_select :item_id, Item.all, :id, :name,  {:include_blank => true} %></td>
+          <td><%= d.text_field :quantity %></td>
+        </tr>
+        <tr>
+          <th>発注</th>
+          <th>納品日時</th>
+          <th>納品方法</th>
+        </tr>
+        <tr>
+          <td><%= d.text_field :ordering %></td>
+          <td><%= d.date_select(:derivery_date, :use_month_numbers => true, start_year:1890, end_year:Time.now.year, default: Date.new(Time.now.year, 6, 15)) %><span id="age"></span>
+</td>
+          <td>aaa</td>
+        </tr>
+        
+        
+        <tr>
+          <th>単価</th>
+          <th>金額</th>
+          <th>課税方法</th>
+        </tr>
+        
+        <tr>
+          <td><%= d.text_field :price %></td>
+          <td><%= d.text_field :amount %></td>
+          <td><%= d.collection_select :taxation_id, Taxation.all, :id, :text,  {:include_blank => true} %></td>
+        </tr>
+        
+        
+        <tr>
+          <th>原価単価</th>
+          <th>原価金額</th>
+          <th>原価課税方法</th>
+        </tr>
+          
+        <tr>
+          <td><%= d.text_field :cost %></td>
+          <td><%= d.text_field :total_cost %></td>
+          <td><%= d.collection_select :cost_taxation_id, Taxation.all, :id, :text,  {:include_blank => true} %></td>
+        </tr>
+
+        <% end %>
+
+      </table>
+      <%= f.add_nested_fields_link :deliverables, '項目追加', class: 'btn btn-default', role: 'button' %>
+    </div>
+  </div>
+
+    
+
+
+  <div class="form-group spacer">
+    <label class="left_column"  style="vertical-align: top">備考</label>
+    &nbsp;<%= f.text_area :other,rows:7,style: "width:80%" %>
+  </div>
+
+  <%= f.submit "受発注報告・新規登録", class: "btn btn-primary col-xs-12" %>
+<% end %>

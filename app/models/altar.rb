@@ -1,0 +1,2 @@
+class Altar < ApplicationRecord
+end
