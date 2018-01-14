@@ -121,6 +121,7 @@ ActiveRecord::Schema.define(version: 20180113032009) do
     t.integer "total"
     t.string "supplier"
     t.integer "ledger_id"
+    t.integer "row_order"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["ledger_id"], name: "index_costs_on_ledger_id"
@@ -158,6 +159,7 @@ ActiveRecord::Schema.define(version: 20180113032009) do
     t.integer "total"
     t.string "taxclass"
     t.integer "ledger_id"
+    t.integer "row_order"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["ledger_id"], name: "index_earnings_on_ledger_id"

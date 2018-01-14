@@ -62,7 +62,7 @@
       <label>売上</label>
     </div>
     <div style="display:inline-block;width:750px">
-      <table class="table table-bordered" style="table-layout: fixed;">
+      <table class="table table-bordered table-sortable" style="table-layout: fixed;">
         <thead>
           <tr>
             <th style="width:300px">商品</th>
@@ -75,7 +75,7 @@
         <tbody>
         <% earntotal = 0 %>
         <% @earnings.each do |e| %>
-          <tr>
+          <tr class="item" data-model-name="earning" data-update-url="<%= sort_earning_path(e.id) %>">
           	<td><%= Item.find(e.item).name if e.item.present? %></td>
             <td><%= e.quantity %></td>
             <td><%= e.price %></td>
@@ -101,7 +101,7 @@
       <label>原価</label>
     </div>
     <div id="costs_box"  style="display:inline-block;width:700px">
-      <table class="table table-bordered" style="table-layout: fixed;">
+      <table class="table table-bordered table-sortable" style="table-layout: fixed;">
         <thead>
           <tr>
             <th style="width:300px">商品</th>
@@ -114,8 +114,8 @@
         <tbody>
         <% total = 0 %>
         <% @costs.each do |c| %>
-          <tr>
-            <td><%= c.item %></td>
+          <tr class="item" data-model-name="cost" data-update-url="<%= sort_cost_path(c.id) %>">
+            <td><%= Item.find(c.item).name if c.item.present? %></td>
             <td><%= c.quantity %></td>
             <td><%= c.price %></td>
             <td><%= t = c.quantity * c.price if c.quantity && c.price.present? %></td>

@@ -1,14 +1,13 @@
 class EarningsController < ApplicationController
-  def create
-    @ledger = Ledger.find(params[:ledger_id])
-    @er = @ledger.earnings.build(er_params)
-    @er.save
-    redirect_back(fallback_location: root_path)
+  def sort
+    er = Earning.find(params[:id])
+    er.update(er_params)
+    render nothing: true
   end
-  
+
   private
   
   def er_params
-    params.require(:earning).permit(:item, :quantity, :price, :taxclass)
+    params.require(:earning).permit(:item, :quantity, :price,:total, :taxclass, :ledger,:row_order_position)
   end
 end

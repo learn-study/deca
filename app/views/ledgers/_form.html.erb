@@ -93,7 +93,7 @@
         </thead>
         <tbody>
         <%= f.nested_fields_for :costs, wrapper_tag: :tr do |c| %>
-            <td><%= c.text_field :item %></td>  <%# required: true JS空白不可のバリデーション %>
+          	<td><%= c.collection_select :item, Item.all, :id, :name,  {:include_blank => true}, {style: "width:190px;"} %></td>
             <td><%= c.text_field :quantity %></td>
             <td><%= c.text_field :price %></td>
           	<td><%= c.collection_select :supplier, Supplier.all, :id, :name,  {:include_blank => true}, {style: "width:190px;"} %></td>

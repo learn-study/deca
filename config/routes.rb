@@ -42,13 +42,19 @@ Rails.application.routes.draw do
   resources :employees
   resources :ledgers
   resources :reservations
-  resources :earnings, only: [:create, :destroy]
-  resources :costs, only: [:create, :destroy]
+  resources :earnings, only: [:create, :destroy] do
+    member do
+      put :sort
+    end
+  end
+  resources :costs, only: [:create, :destroy] do
+    member do
+      put :sort
+    end
+  end
   resources :members do
     member do
       put 'sort'
-    end
-    collection do
     end
   end
   resources :families do

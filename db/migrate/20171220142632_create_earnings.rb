@@ -7,6 +7,7 @@ class CreateEarnings < ActiveRecord::Migration[5.1]
       t.integer :total
       t.string :taxclass
       t.references :ledger
+      t.integer :row_order
 
       t.timestamps
     end

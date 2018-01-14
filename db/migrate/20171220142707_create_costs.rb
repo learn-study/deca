@@ -7,6 +7,7 @@ class CreateCosts < ActiveRecord::Migration[5.1]
       t.integer :total
       t.string :supplier
       t.references :ledger
+      t.integer :row_order
 
       t.timestamps
     end

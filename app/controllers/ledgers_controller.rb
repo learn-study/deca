@@ -25,8 +25,8 @@ class LedgersController < ApplicationController
       @member = Member.find(@ledger.member_id)
     end
     @earning = Earning.new
-    @earnings = @ledger.earnings
-    @costs   = @ledger.costs
+    @earnings = @ledger.earnings.rank(:row_order)
+    @costs   = @ledger.costs.rank(:row_order)
   end
  
   def edit 
@@ -58,13 +58,13 @@ class LedgersController < ApplicationController
   end
   
   def costs
-        total_c = 0
+    total_c = 0
     total_e = 0
     @ledger.costs.each do |c|
-      total_c += c.quantity * c.price
+      total_c += c.quantity * c.price if c.quantity.present? && c.price.present?
     end
     @ledger.earnings.each do |e|
-      total_e += e.price * e.quantity
+      total_e += e.price * e.quantity if e.price.present? && e.quantity.present?
     end
     @ledger.update(total_cost: total_c,total_amount: total_e)
   end

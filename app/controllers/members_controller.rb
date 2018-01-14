@@ -112,7 +112,6 @@ class MembersController < ApplicationController
   
   def create
     @member = Member.new(member_params)
-    hokkai_check(@member.city)
     @member.name = @member.lastname.gsub(/(\s|　)+/, '')+@member.firstname.gsub(/(\s|　)+/, '')
     if @member.save
       redirect_to members_url
@@ -184,9 +183,7 @@ class MembersController < ApplicationController
     end
   end
 
-  def hokkai_check(str)
-    str.include?("北海道")
-    str.delete!("北海道")
-  end
+
+
   
 end
