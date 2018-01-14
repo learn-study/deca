@@ -12,6 +12,8 @@ class CreateLedgers < ActiveRecord::Migration[5.1]
       t.date :coffin
       t.text :other
       t.integer :member_id
+      t.integer :total_cost
+      t.integer :total_amount
       
       t.timestamps
     end

@@ -52,6 +52,8 @@ ActiveRecord::Schema.define(version: 20180113032009) do
     t.string "mobile"
     t.integer "collection_id"
     t.text "other"
+    t.integer "total_fee"
+    t.integer "total_cost"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -92,6 +94,8 @@ ActiveRecord::Schema.define(version: 20180113032009) do
     t.integer "dues"
     t.integer "collection_id"
     t.text "other"
+    t.integer "total_fee"
+    t.integer "total_cost"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -269,6 +273,8 @@ ActiveRecord::Schema.define(version: 20180113032009) do
     t.date "coffin"
     t.text "other"
     t.integer "member_id"
+    t.integer "total_cost"
+    t.integer "total_amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -375,6 +381,8 @@ ActiveRecord::Schema.define(version: 20180113032009) do
     t.string "tel"
     t.string "mobile"
     t.integer "collection_id"
+    t.integer "total_fee"
+    t.integer "total_cost"
     t.text "other"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

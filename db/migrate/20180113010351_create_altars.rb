@@ -28,7 +28,8 @@ class CreateAltars < ActiveRecord::Migration[5.1]
       t.string :mobile
       t.integer :collection_id
       t.text :other
-
+      t.integer :total_fee #合計金額
+      t.integer :total_cost #原価
       t.timestamps
     end
   end

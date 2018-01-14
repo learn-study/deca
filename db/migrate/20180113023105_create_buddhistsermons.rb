@@ -66,7 +66,8 @@ class CreateBuddhistsermons < ActiveRecord::Migration[5.1]
       t.integer :collection_id
       #備考
       t.text :other
-
+      t.integer :total_fee #合計金額
+      t.integer :total_cost #原価
 
       t.timestamps
     end

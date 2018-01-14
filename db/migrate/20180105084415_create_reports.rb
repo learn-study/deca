@@ -16,6 +16,8 @@ class CreateReports < ActiveRecord::Migration[5.1]
       t.string :tel
       t.string :mobile
       t.integer :collection_id
+      t.integer :total_fee #合計金額
+      t.integer :total_cost #原価
       t.text :other
       
       t.timestamps

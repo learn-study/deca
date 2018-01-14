@@ -141,7 +141,7 @@
         
         <tr>
           <td><%= d.text_field :price %></td>
-          <td><%= d.text_field :amount %></td>
+          <td><%= d.text_field :amount,disabled: true %></td>
           <td><%= d.collection_select :taxation_id, Taxation.all, :id, :text,  {:include_blank => true} %></td>
         </tr>
         
@@ -154,7 +154,7 @@
           
         <tr>
           <td><%= d.text_field :cost %></td>
-          <td><%= d.text_field :total_cost %></td>
+          <td><%= d.text_field :total_cost,disabled: true %></td>
           <td><%= d.collection_select :cost_taxation_id, Taxation.all, :id, :text,  {:include_blank => true} %></td>
         </tr>
 
@@ -165,9 +165,15 @@
     </div>
   </div>
 
+  <div class="form-group spacer">
+    <label class="left_column"  style="vertical-align: top">売上合計</label>
+    &nbsp;<%= altar.total_fee %>
+  </div>  
 
-    
-
+  <div class="form-group spacer">
+    <label class="left_column"  style="vertical-align: top">原価合計</label>
+    &nbsp;<%= altar.total_cost %>
+  </div>
 
   <div class="form-group spacer">
     <label class="left_column"  style="vertical-align: top">備考</label>

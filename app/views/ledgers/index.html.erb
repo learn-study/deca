@@ -33,8 +33,8 @@
       <td><%= link_to l.deceased,ledger_path(l) %></td>
       <td><%= Employee.find(l.employee_id).name if l.employee_id.present? %></td>
       <td><%= l.coffin%></td>
-      <td></td>
-      <td></td>
+      <td><%= l.total_amount %></td>
+      <td><%= l.total_cost %></td>
       <td><%= l.created_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %></td>
       <td><%= l.updated_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %></td>
     </tr>

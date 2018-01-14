@@ -46,8 +46,8 @@
         <% end %>
       </td>      <td><%= r.deceased %></td>
       <td><%= Employee.find(r.employee_id).name if r.employee_id.present? %></td>
-      <td></td>
-      <td></td>
+      <td><%= r.total_fee %></td>
+      <td><%= r.total_cost %></td>
       <td><%= r.created_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %></td>
       <td><%= r.updated_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %></td>
     </tr>

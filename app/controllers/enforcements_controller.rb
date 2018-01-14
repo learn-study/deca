@@ -35,7 +35,7 @@ class EnforcementsController < ApplicationController
   
   private
   def en_parms
-    params.require(:enforcement).permit(:family_name, :member_id,
+    params.require(:enforcement).permit(:family_name, :member_id,:applicantlastname,:applicantfirstname,:applicantkana,
                                        :classification, :kind_id, :employee_id,
                                        :deceased, :birthday, :ddate,
                                        :cliefmaster, :relationship, :constructor,

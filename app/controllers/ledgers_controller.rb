@@ -15,6 +15,7 @@ class LedgersController < ApplicationController
   
   def create
     @ledger = Ledger.create(ledger_params)
+    costs
     redirect_to @ledger
   end
 
@@ -41,6 +42,7 @@ class LedgersController < ApplicationController
   def update
     @ledger = Ledger.find(params[:id])
     @ledger.update(ledger_params)
+    costs
     redirect_to @ledger
   end
 
@@ -53,5 +55,17 @@ class LedgersController < ApplicationController
                             :applicantlastname,:applicantfirstname,:applicantkana,:applicantname,
                             costs_attributes: [:item, :quantity, :price, :total, :supplier, :id],
                             earnings_attributes: [:item, :quantity, :price, :total, :taxclass, :id])
+  end
+  
+  def costs
+        total_c = 0
+    total_e = 0
+    @ledger.costs.each do |c|
+      total_c += c.quantity * c.price
+    end
+    @ledger.earnings.each do |e|
+      total_e += e.price * e.quantity
+    end
+    @ledger.update(total_cost: total_c,total_amount: total_e)
   end
 end

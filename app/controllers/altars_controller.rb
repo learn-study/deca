@@ -23,6 +23,7 @@ class AltarsController < ApplicationController
   def create
     @altar = Altar.new(altar_params)
     @altar.save
+    costs
     redirect_to edit_altar_url(@altar)
   end
   
@@ -38,6 +39,7 @@ class AltarsController < ApplicationController
   def update
     @altar = Altar.find(params[:id])
     @altar.update(altar_params)
+    costs
     redirect_to edit_altar_url(@altar)
   end
 
@@ -51,5 +53,22 @@ class AltarsController < ApplicationController
                             :tel, :mobile, :collection_id, :other,
                             altaritems_attributes: [:id, :supplier_id, :item_id, :quantity, :price, :amount, :taxation_id,:cost, :total_cost, :cost_taxation_id, :ordering, :derivery_date, :method_id]
                             )
+  end
+  
+  def costs
+    total_fee = 0
+    total_cost = 0
+    begin
+      @altar.altaritems.each do |d|
+        kingaku = d.quantity * d.price
+        genkaga = d.quantity * d.cost
+        d.update(amount:kingaku,total_cost:genkaga)
+        total_fee += kingaku
+        total_cost += genkaga
+      end
+      @altar.update(total_fee: total_fee,total_cost: total_cost)
+    rescue => e
+      
+    end
   end
 end
