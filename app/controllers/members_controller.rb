@@ -5,16 +5,12 @@ class MembersController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.pdf do
-        # PDF文書を作成
         pdf = OrderPdf.new(@member)
 
-
-        # 画面にPDFを表示する
-        # disposition: "inline" によりPDFはダウンロードではなく画面に表示される
         send_data pdf.render,
           filename:    "member#{@member.id}.pdf",
           type:        "application/pdf",
-          disposition: "inline"
+          disposition: "inline" #dlではなくブラウザ表示
       end
     end
   end
@@ -84,8 +80,8 @@ class MembersController < ApplicationController
       @member.streetaddress.present? ? streetaddress = @member.streetaddress : streetaddress = strongwords
       @member.tel.present? ? tel = @member.tel : tel = "aa-"
       @member.kind.present? ? kind = @member.kind : kind = "-cc"
-      @member.dm.present? ? dm = true : dm = ""
-      @member.reserve.present? ? reserve = true : reserve = ""
+      #@member.dm.present? ? dm = true : dm = ""
+      #@member.reserve.present? ? reserve = true : reserve = ""
       @member.tag.present? ? tag = @member.tag : tag = strongwords
       p tel
       #begin
@@ -116,6 +112,7 @@ class MembersController < ApplicationController
   
   def create
     @member = Member.new(member_params)
+    hokkai_check(@member.city)
     @member.name = @member.lastname.gsub(/(\s|　)+/, '')+@member.firstname.gsub(/(\s|　)+/, '')
     if @member.save
       redirect_to members_url
@@ -186,4 +183,10 @@ class MembersController < ApplicationController
       object.tr!('０-９ａ-ｚＡ-Ｚ', '0-9a-zA-Z')
     end
   end
+
+  def hokkai_check(str)
+    str.include?("北海道")
+    str.delete!("北海道")
+  end
+  
 end
