@@ -1,15 +1,9 @@
 Rails.application.routes.draw do
-  get 'search/index'
 
-  get 'deliverymethods/index'
 
-  get 'buddhistsermons/index'
 
-  get 'items/index'
 
-  get 'collections/index'
 
-  get 'temples/index'
 
   get "settings" , to: "settings#index"
 
@@ -55,6 +49,9 @@ Rails.application.routes.draw do
   resources :members do
     member do
       put 'sort'
+    end
+    collection do
+      get 'posSearch'
     end
   end
   resources :families do

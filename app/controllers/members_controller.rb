@@ -15,6 +15,22 @@ class MembersController < ApplicationController
     end
   end
   
+  def posSearch
+    pos = params[:posNumber]
+    if pos.present?
+      p "exist" 
+      pos.delete!("-")
+      pos.delete!("－")
+      url = 'http://zipcloud.ibsnet.co.jp/api/search?zipcode=' + pos
+      uri = URI.parse(url)
+      json = Net::HTTP.get(uri)
+      res = JSON.parse(json)
+      
+      @city = res["results"][0]["address2"]
+      @street = res["results"][0]["address3"]
+    end
+  end
+  
   def index
     @member = Member.new #検索用
     @keyword = params[:keyword] #フリー検索

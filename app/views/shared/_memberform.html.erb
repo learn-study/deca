@@ -1,10 +1,12 @@
 <%= form_for(member, html: {class: 'form-horizontal spacer',name: 'member'}) do |f| %>
   <%= render 'layouts/error_messages', model: f.object %>
 
-  <div class="form-group">
-    <label class="left_column">コード</label>
-    <input type="text" value="<%= member.id %>" style="text-align: right;width:80px;">
-  </div>
+  <% if (controller_name.eql? "members") && (action_name.eql? "edit") %>
+    <div class="form-group">
+      <label class="left_column">コード</label>
+      <%= member.id %>
+    </div>
+  <% end %>
 
   <div class="form-group">
       <label class="left_column">氏名</label>
@@ -28,6 +30,7 @@
   <div class="form-group">
     <label class="left_column">郵便番号</label>
     <%= f.text_field :postal, maxlength: "8",onKeyUp: "AjaxZip3.zip2addr(this,'','pref','member[city]');", style: "width: 75px;" %>
+    <div id="posSearch" class="btn btn-default btn-sm">郵便検索</div>
   </div>
 
   <div class="form-group">
@@ -133,4 +136,12 @@
   });
 
   getAge();
+  $("#posSearch").click(function(){
+        var pos = $("#member_postal").val();
+        $.get("/members/posSearch",
+          {
+            posNumber: pos
+          }
+        );
+  });
 </script> 
