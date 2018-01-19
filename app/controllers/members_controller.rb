@@ -21,6 +21,7 @@ class MembersController < ApplicationController
       p "exist" 
       pos.delete!("-")
       pos.delete!("－")
+      require 'net/http'
       url = 'http://zipcloud.ibsnet.co.jp/api/search?zipcode=' + pos
       uri = URI.parse(url)
       json = Net::HTTP.get(uri)
