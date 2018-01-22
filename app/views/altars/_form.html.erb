@@ -73,7 +73,7 @@
   
   <div class="form-group">
     <label class="left_column">行年</label>
-    <%= f.text_field :line %>
+    <%= f.text_field :line %>歳
   </div>
 
   <div class="form-group">
@@ -131,7 +131,15 @@
           <th>納品方法</th>
         </tr>
         <tr>
-          <td><%= d.text_field :ordering %></td>
+          <td>
+            <% if (action_name.eql? "new") %>
+              <%= d.radio_button :ordering, :true %>済
+              <%= d.radio_button :ordering, :false,style: "margin-left:20px;", checked: "checked" %>未
+            <% else %>
+              <%= d.radio_button :ordering, :true %>済
+              <%= d.radio_button :ordering, :false,style: "margin-left:20px;", required: true %>未
+            <% end %>
+          </td>
           <td><%= d.date_select(:derivery_date, :use_month_numbers => true, start_year:1890, end_year:Time.now.year, default: Date.new(Time.now.year, 6, 15)) %><span id="age"></span>
 </td>
           <td><%= d.collection_select :method_id, Deliverymethod.all, :id, :text,  {:include_blank => true} %></td>

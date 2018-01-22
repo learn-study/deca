@@ -1,4 +1,3 @@
-$("tr td").eq(<%= @num %>).html("<%= escape_javascript(render('items/bd',result: @result,number: @number)) %>");
-
-console.log(<%= @num %>)
-
+$("#buddhistsermon_memorialitems_attributes_<%= @number %>_item_id").html("<%= escape_javascript(render('items/bd',result: @result,number: @number)) %>");
+$("#buddhistsermon_memorialitems_attributes_<%= @number %>_taxation_id").val(<%= @tax %>);
+$("#buddhistsermon_memorialitems_attributes_<%= @number %>_cost_taxation_id").val(<%= @tax %>);

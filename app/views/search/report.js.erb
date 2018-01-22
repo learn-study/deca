@@ -1,4 +1,4 @@
-$("tr td").eq(<%= @num %>).html("<%= escape_javascript(render('items/report',result: @result,number: @number)) %>");
-
-console.log(<%= @num %>)
+$("#report_deliverables_attributes_<%= @number %>_item_id").html("<%= escape_javascript(render('items/report',result: @result,number: @number)) %>");
+$("#report_deliverables_attributes_<%= @number %>_taxation_id").val(<%= @tax %>);
+$("#report_deliverables_attributes_<%= @number %>_cost_taxation_id").val(<%= @tax %>);
 
