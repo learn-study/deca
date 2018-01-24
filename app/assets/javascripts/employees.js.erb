@@ -5,7 +5,8 @@ $(function() {
     var input =
         '<div class="form-group meals" id="add_meals_' + member_num + '">'
         + '<input placeholder="項目名" type="text" name="enforcement[meals_attributes][' + member_num + '][item]" style="margin-left:88px">'
-        + '&nbsp;<input placeholder="項目数" type="text" name="enforcement[meals_attributes][' + member_num + '][number]">'
+        + '&nbsp;<input placeholder="金額" type="text" name="enforcement[meals_attributes][' + member_num + '][price]" style="width:80px;">円'
+        + '&nbsp;<input placeholder="項目数" type="text" name="enforcement[meals_attributes][' + member_num + '][number]" style="width:80px;">個'
         +'</div>'
     $('#meals_form').append(input);
     member_num ++;

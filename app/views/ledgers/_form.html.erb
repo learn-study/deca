@@ -65,7 +65,7 @@
         </thead>
         <tbody>
         <%= f.nested_fields_for :earnings, wrapper_tag: :tr do |e| %>
-          	<td><%= e.collection_select :item, Item.all, :id, :name,  {:include_blank => true}, {style: "width:190px;"} %></td>
+          	<td><%= e.collection_select :item, Item.where(supplier_id: 99999), :id, :name,  {:include_blank => true}, {style: "width:190px;"} %></td>
             <td><%= e.text_field :quantity %></td>  <%# required: true JS空白不可のバリデーション %>
             <td><%= e.text_field :price %></td>
           	<td><%= e.collection_select :taxclass, Taxation.all, :id, :text,  {:include_blank => true}, {style: "width:190px;"} %></td>
@@ -91,12 +91,12 @@
             <th>仕入れ先</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id="costs">
         <%= f.nested_fields_for :costs, wrapper_tag: :tr do |c| %>
           	<td><%= c.collection_select :item, Item.all, :id, :name,  {:include_blank => true}, {style: "width:190px;"} %></td>
             <td><%= c.text_field :quantity %></td>
             <td><%= c.text_field :price %></td>
-          	<td><%= c.collection_select :supplier, Supplier.all, :id, :name,  {:include_blank => true}, {style: "width:190px;"} %></td>
+          	<td class="itemSupplier"><%= c.collection_select :supplier, Supplier.all, :id, :name,  {:include_blank => true}, {style: "width:190px;"} %></td>
         <% end %>
         </tbody>
       </table>
@@ -112,3 +112,17 @@
 
   <%= f.submit "登録", class: "col-xs-12 btn btn-primary" %>
 <% end %>
+
+
+<script>
+$(document).on("change", ".itemSupplier", function(){
+      var n = $(".itemSupplier").index(this);
+      var val = $(".itemSupplier:eq("+n+") select").val();
+      $.get("itemsort",
+        {
+          val: val,//セレクトボックスのsupplie_value
+          num: n
+        } 
+        );
+});
+</script>

@@ -13,9 +13,15 @@ class SectsController < ApplicationController
     @place.update(sect_params)
     redirect_back(fallback_location: root_path)
   end
-  
+
+  def destroy
+    @sect = Sect.find(params[:id])
+    @sect.destroy
+    redirect_to sects_url
+  end
+
   private
   def sect_params
-    params.require(:sect).permit(:sect)
+    params.require(:sect).permit(:sect,:id)
   end
 end

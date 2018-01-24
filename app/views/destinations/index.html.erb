@@ -3,39 +3,37 @@
   <div class="col-xs-3 col-xs-offset-6"></div>
 </div>
 <div class="row">
-  <div class="col-xs-4 col-xs-offset-4 text-center"><h2>宗派管理</h2></div>
+  <div class="col-xs-4 col-xs-offset-4 text-center"><h2>納品先管理</h2></div>
 </div>
 
 <table class="table table-boarderd">
   <thead>
     <th>id</th>
-    <th>宗派</th>
+    <th>納品先</th>
   </thead>
   <tbody>
-<%= form_for(Sect.new) do |f| %>
+<%= form_for(Destination.new) do |f| %>
     <td><%= f.text_field :id,size: 2 %></td>
-    <td><%= f.text_field :sect %></td>
+    <td><%= f.text_field :name,size: 20 %></td>
   <td><%= f.submit "登録" %></td>
 <% end %>
   </tbody>
 </table>
-  
 
 <table class="table table-boarderd">
   <thead>
     <th>id</th>
-    <th>宗派</th>
+    <th>納品先</th>
   </thead>
   <tbody>
-  <% @sects.each do |p| %>
-    <%= form_for(Sect.find(p.id)) do |f| %>
-    <tr>
-      <td><%= p.id %></td>
-      <td><%= f.text_field :sect %></td>
-      <td><%= f.submit "編集" %></td>
-      <td><%= link_to "削除", sect_path(p), method: :delete %></td>
-    </tr>
-    <% end %>
+<% @destinations.each do |c| %>
+  <%= form_for(Destination.find(c.id)) do |f| %>
+  <tr>
+    <td><%= c.id %></td>
+    <td><%= f.text_field :name,size: 20 %></td>
+    <td><%= f.submit "編集" %></td>
+  </tr>
   <% end %>
+<% end %>
   </tbody>
 </table>

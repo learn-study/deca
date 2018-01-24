@@ -96,6 +96,53 @@
 <% end %>
 
   <div class="form-group">
+    <label class="left_column">日付</label>
+  </div>
+
+  <div class="form-group">
+    <label class="left_column">お参り</label>
+    <label>会食</label>
+  </div>
+
+  <div class="form-group">
+    <label class="left_column">場所</label>
+  </div>
+
+  <div class="form-group">
+    <label class="left_column">市区町村</label>
+  </div>
+
+  <div class="form-group">
+    <label class="left_column _small">番地・ﾏﾝｼｮﾝ名</label>
+  </div>
+
+  <div class="form-group">
+    <label class="left_column">電話番号</label>
+  </div>
+
+  <div class="form-group">
+    <label class="left_column _small">ハガキ自宅返信日</label>
+  </div>
+
+  <div class="form-group">
+    <label class="left_column">セット</label>
+  </div>
+
+  <div class="form-group">
+    <label class="left_column">祭壇飾り</label>
+  </div>
+
+  <div class="form-group">
+    <label class="left_column">御飲み物</label>
+  </div>
+
+  <div class="form-group">
+    <label class="left_column">会場費</label>
+  </div>
+
+
+
+  <div class="form-group">
     <label class="left_column">集金方法</label>
     <%= f.collection_select :collection_id, Collection.all, :id, :text,  {:include_blank => true}, {style: "width:190px;"} %>
   </div>
@@ -116,8 +163,8 @@
           <th>数量</th>
         </tr>
         <tr>
-          <td><%= d.collection_select :supplier_id, Supplier.all, :id, :name,  {:include_blank => true} %> </td>
-          <td><%= d.collection_select :item_id, Item.all, :id, :name,  {:include_blank => true} %></td>
+          <td class="supplier"><%= d.collection_select :supplier_id, Supplier.all, :id, :name,  {:include_blank => true} %> </td>
+          <td class="selectItems"><%= d.collection_select :item_id, Item.all, :id, :name,  {:include_blank => true} %></td>
           <td><%= d.text_field :quantity %></td>
         </tr>
         <tr>
@@ -135,7 +182,7 @@
               <%= d.radio_button :ordering, :false,style: "margin-left:20px;", required: true %>未
             <% end %>
           </td>
-          <td><%= d.date_select(:derivery_date, :use_month_numbers => true, start_year:1890, end_year:Time.now.year, default: Date.new(Time.now.year, 6, 15)) %><span id="age"></span>
+          <td><%= d.datetime_select(:derivery_date, :use_month_numbers => true,:discard_minute=>true, start_year:1950, end_year:Time.now.year+5, default: Date.new(Time.now.year, 6, 15)) %><span id="age"></span>
 </td>
           <td><%= d.collection_select :method_id, Deliverymethod.all, :id, :text,  {:include_blank => true} %></td>
         </tr>
@@ -165,7 +212,14 @@
           <td><%= d.text_field :total_cost,disabled: true %></td>
           <td><%= d.collection_select :cost_taxation_id, Taxation.all, :id, :text,  {:include_blank => true} %></td>
         </tr>
-
+        
+        <tr>
+          <th>納品方法</th>
+        </tr>
+        <tr>
+          <td><%= d.collection_select :method_id, Destination.all, :id, :name,  {:include_blank => true} %></td>
+        </tr>
+        
         <% end %>
 
       </table>
@@ -193,24 +247,28 @@
 
 
 <script>
-$("tr td select").change(function() {
 
+$(document).on("change", ".supplier", function(){
+  
+    var index = $('.supplier').index(this); 
+    var val = $(".supplier:eq("+index+") select").val();
+    console.log(index);
+    $.get("/bdsearch",
+      {
+        num: index,
+        val: val
+      } 
+      );
 });
 
-
-$(document).on("change", "tr td select", function(){
-  
-    var index = $('tr td select').index(this); //何番目のセレクトか
-    //仕入れ先の変更の場合はajax
-    if (index%8 ==0){
-  
-      var val = $("tr td select").eq(index).val();
-      $.get("/bdsearch",
+$(document).on("change", ".selectItems", function(){
+      var n = $(".selectItems").index(this);
+      var val = $(".selectItems:eq("+n+") select").val();
+      $.get("/serchitembd",
         {
-          number: index,//０，８，１６
-          val: val//セレクトボックスのsupplie_value
-        } 
-        );
-    }
+          val: val,
+          num: n
+        }
+      );
 });
 </script>

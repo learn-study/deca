@@ -3,6 +3,16 @@ class EnforcementsController < ApplicationController
     @enforces = Enforcement.page(params[:page])
   end
   
+  def itemserch
+    supplier = Supplier.find(params[:val])
+    @result = supplier.items
+  end
+  
+  def giftserch
+    supplier = Supplier.find(params[:val])
+    @result = supplier.items
+  end
+
   def new
     @enforce= Enforcement.new
     if params[:member_id]
@@ -49,7 +59,7 @@ class EnforcementsController < ApplicationController
                                        :nightwear_price,:nightwear_quantity, :nightwear_supplier_id,
                                        :bus_price,:bus_quantity, :bus_supplier_id,:r_bus, :other, :officer_supplier_id,
                                        :meal_supplier_id,
-                                       meals_attributes: [:item, :number, :_destroy, :id]
+                                       meals_attributes: [:item, :price, :number, :_destroy, :id]
                                         )
   end
 end

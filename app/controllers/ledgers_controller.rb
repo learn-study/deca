@@ -1,4 +1,11 @@
 class LedgersController < ApplicationController
+  def itemsort
+    supplier = Supplier.find(params[:val])
+    @num= params[:num]
+    p @num
+    @result = supplier.items
+  end
+  
   def index
     @ledgers = Ledger.page(params[:page])
   end

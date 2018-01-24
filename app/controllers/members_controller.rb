@@ -162,6 +162,7 @@ class MembersController < ApplicationController
   
   def update
     @member = Member.find(params[:id])
+    @member.name = params[:member][:lastname].gsub(/(\s|　)+/, '')+params[:member][:firstname].gsub(/(\s|　)+/, '')
     if @member.update(member_params)
       redirect_to edit_member_url(@member)
     else

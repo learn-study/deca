@@ -1,0 +1,6 @@
+<select name="ledger[costs_attributes][<%= number %>][item_id]" id="ledger_costs_attributes_<%= number %>_item">
+    <option value=""></option>
+    <% result.each do |r| %>
+        <option value="<%= r.id %>"><%= r.name %></option>
+    <% end %>
+</select>

@@ -133,7 +133,9 @@
   <% @members.each do |m| %>
     <tr>
       <td><%= link_to m.id, edit_member_path(m) %></td>
-      <td><%=  m.lastname + " " + m.firstname %></td>
+      <td>
+        <%=  m.name %>
+      </td>
       <td><%= m.namekana %></td>
       <td><%= m.city %></td>
       <td><%= m.tel %></td>

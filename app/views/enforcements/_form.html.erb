@@ -185,11 +185,11 @@
     </div>
     <div class="col-md-3">
       <label>仕入れ先</label>
-      <%= f.collection_select :refreshment_supplier_id, Supplier.all, :id, :name,  {:include_blank => true}, {style: "width:190px;"} %>
+      <%= f.collection_select :refreshment_supplier_id, Supplier.all, :id, :name,  {:include_blank => true}, {style: "width:190px;",class: "supplier2"} %>
     </div>
     <div class="col-md-3">
       <label>商品</label>
-      <%= f.collection_select :refreshment_product_id, Item.all, :id, :name,  {:include_blank => true}, {style: "width:190px;"} %>
+      <%= f.collection_select :refreshment_product_id, Item.all, :id, :name,  {:include_blank => true}, {style: "width:190px;",id: "gift"} %>
     </div>
   </div>
 
@@ -205,11 +205,11 @@
     </div>
     <div class="col-md-3">
       <label>仕入れ先</label>
-      <%= f.collection_select :gift_supplier_id, Supplier.all, :id, :name,  {:include_blank => true}, {style: "width:190px;"} %>
+      <%= f.collection_select :gift_supplier_id, Supplier.all, :id, :name,  {:include_blank => true}, {style: "width:190px;",class: "supplier"} %>
     </div>
     <div class="col-md-3">
       <label>商品</label>
-      <%= f.collection_select :gift_product_id, Item.all, :id, :name,  {:include_blank => true}, {style: "width:190px;"} %>
+      <%= f.collection_select :gift_product_id, Item.all, :id, :name,  {:include_blank => true}, {style: "width:190px;",id: "itemresult"} %>
     </div>
   </div>
 
@@ -258,27 +258,33 @@
     <%= f.fields_for :meals do |m| %>
       <div class="form-group meals" id="add_meals_0">
         <input type="text" name="enforcement[meals_attributes][0][item]" value="夕食" style="margin-left:88px">
-        <input type="text" name="enforcement[meals_attributes][0][number]">
+        <input type="text" name="enforcement[meals_attributes][0[price]" style="width:80px;">円
+        <input type="text" name="enforcement[meals_attributes][0][number]" style="width:80px;">個
       </div>
       <div class="form-group meals" id="add_meals_1">
         <input type="text" name="enforcement[meals_attributes][1][item]" value="オードブル" style="margin-left:88px">
-        <input type="text" name="enforcement[meals_attributes][1][number]">
+        <input type="text" name="enforcement[meals_attributes][1[price]" style="width:80px;">円
+        <input type="text" name="enforcement[meals_attributes][1][number]" style="width:80px;">個
       </div>
       <div class="form-group meals" id="add_meals_2">
         <input type="text" name="enforcement[meals_attributes][2][item]" value="朝食" style="margin-left:88px">
-        <input type="text" name="enforcement[meals_attributes][2][number]">
+        <input type="text" name="enforcement[meals_attributes][2[price]" style="width:80px;">円
+        <input type="text" name="enforcement[meals_attributes][2][number]" style="width:80px;">個
       </div>
       <div class="form-group meals" id="add_meals_3">
         <input type="text" name="enforcement[meals_attributes][3][item]" value="昼食" style="margin-left:88px">
-        <input type="text" name="enforcement[meals_attributes][3][number]">
+        <input type="text" name="enforcement[meals_attributes][3[price]" style="width:80px;">円
+        <input type="text" name="enforcement[meals_attributes][3][number]" style="width:80px;">個
       </div>
       <div class="form-group meals" id="add_meals_4">
         <input type="text" name="enforcement[meals_attributes][4][item]" value="忌中" style="margin-left:88px">
-        <input type="text" name="enforcement[meals_attributes][4][number]">
+        <input type="text" name="enforcement[meals_attributes][4[price]" style="width:80px;">円
+        <input type="text" name="enforcement[meals_attributes][4][number]" style="width:80px;">個
       </div>
       <div class="form-group meals" id="add_meals_5">
         <input type="text" name="enforcement[meals_attributes][5[item]" value="黒飯" style="margin-left:88px">
-        <input type="text" name="enforcement[meals_attributes][5][number]">
+        <input type="text" name="enforcement[meals_attributes][5[price]" style="width:80px;">円
+        <input type="text" name="enforcement[meals_attributes][5][number]" style="width:80px;">個
       </div>
     </div>
     <span class="btn btn-default btn-sm" id="add_item" style="margin-left:88px">項目追加</span>
@@ -292,3 +298,24 @@
 
   <%= f.submit "施行済み葬儀登録", class: "btn btn-primary col-xs-12" %>
 <% end %>
+
+<script>
+$(document).on("change", ".supplier", function(){
+    var val = $(".supplier").val();
+    $.get("/enforcements/itemserch",
+      {
+        val: val
+      } 
+      );
+});
+
+$(document).on("change", ".supplier2", function(){
+    var val = $(".supplier2").val();
+    $.get("/enforcements/giftserch",
+      {
+        val: val
+      } 
+      );
+});
+
+</script>

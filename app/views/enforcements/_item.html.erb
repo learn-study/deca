@@ -1,0 +1,6 @@
+<select style="width:190px;" id="itemresult" name="enforcement[gift_product_id]">
+    <option value=""></option>
+    <% @result.each do |r| %>
+        <option value="<%= r.id %>"><%= r.name %></option>
+    <% end %>
+</select>

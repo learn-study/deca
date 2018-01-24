@@ -8,6 +8,11 @@
 
 User.create(loginid:"admin", password:"pass")
 
+#納品先
+Destination.find_or_create_by(id:1,name:"自宅")
+Destination.find_or_create_by(id:2,name:"発送")
+Destination.find_or_create_by(id:3,name:"現地")
+
 # 宗派一覧
 Sect.create(sect:"浄土真宗 東")
 Sect.create(sect:"浄土真宗 西")

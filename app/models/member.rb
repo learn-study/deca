@@ -19,8 +19,10 @@ class Member < ApplicationRecord
 
 
   def word_check
-    if self.city.include?("北海道")
-      self.city.delete!("北海道")
+    if self.city.present?
+      if self.city.include?("北海道")
+        self.city.delete!("北海道")
+      end
     end
   end
 end

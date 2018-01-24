@@ -3,7 +3,7 @@ class CollectionsController < ApplicationController
     @collections = Collection.all
   end
   
-    def create
+  def create
     begin
       @collection = Collection.new(collection_params)
       @collection.save
