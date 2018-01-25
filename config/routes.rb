@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
 
 
+  get 'buddhistmemorials/index'
+
   get 'destinations/index'
 
   get "settings" , to: "settings#index"
@@ -30,6 +32,7 @@ Rails.application.routes.draw do
   resources :temples
   resources :officers
   resources :meals
+  resources :buddhistmemorials
   resources :collections
   resources :suppliers
   resources :altars

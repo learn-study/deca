@@ -50,6 +50,10 @@ class BuddhistsermonsController < ApplicationController
                             :orderdate, :deceased, :city, :streetaddress,
                             :ddate, :pardon, :popular, :line, :temple_id, :sect_id,
                             :tel, :mobile, :collection_id, :other,
+                            :bdmemorialdate,:visitingtime,:diningtime,
+                            :bdmemorialplace,:bdmemorial_city,:bdmemorial_address,:bdmemorial_tel,
+                            :postcard,:set,:setnumber,:altar,:altardetails,
+                            :drink,:drinkdetails,:dues,:bdmemorial_id,
                             memorialitems_attributes: [:id, :supplier_id, :item_id, :quantity, :price, :amount, :taxation_id,:cost, :total_cost, :cost_taxation_id, :ordering, :derivery_date, :method_id]
                             )
   end

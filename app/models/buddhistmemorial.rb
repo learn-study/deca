@@ -1,0 +1,2 @@
+class Buddhistmemorial < ApplicationRecord
+end

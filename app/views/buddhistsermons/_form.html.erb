@@ -10,7 +10,12 @@
     <label class="left_column">担当</label>
     <%= f.collection_select :employee_id, Employee.all, :id, :name,  {:include_blank => true}, {style: "width:190px;"} %>
   </div>
-  
+
+  <div class="form-group">
+    <label class="left_column">法要</label>
+    <%= f.collection_select :bdmemorial_id, Buddhistmemorial.all, :id, :name,  {:include_blank => true}, {style: "width:190px;"} %>
+  </div>
+
   <div class="form-group">
     <label class="left_column">受注日</label></label>
     <%= f.date_select(:orderdate, :use_month_numbers => true, start_year:1890, end_year:Time.now.year, default: Date.new(Time.now.year-40, 6, 15)) %><span id="age"></span>
@@ -97,47 +102,65 @@
 
   <div class="form-group">
     <label class="left_column">日付</label>
+    <%= f.date_select(:bdmemorialdate, :use_month_numbers => true, start_year:1890, end_year:Time.now.year+2, default: Date.new(Time.now.year, 6, 15)) %><span id="age"></span>
   </div>
 
   <div class="form-group">
     <label class="left_column">お参り</label>
+    <%= f.datetime_select(:visitingtime, :discard_month => true, :discard_year => true, default: Date.new(Time.now.year, 6, 15)) %><span id="age"></span>
     <label>会食</label>
+    <%= f.datetime_select(:diningtime, :discard_month => true, :discard_year => true, default: Date.new(Time.now.year, 6, 15)) %><span id="age"></span>
   </div>
 
   <div class="form-group">
     <label class="left_column">場所</label>
+    <%= f.text_field :bdmemorialplace %>
   </div>
 
   <div class="form-group">
     <label class="left_column">市区町村</label>
+    <%= f.text_field :bdmemorial_city, id: "address_city", style: "width: 80%" %>
   </div>
 
   <div class="form-group">
     <label class="left_column _small">番地・ﾏﾝｼｮﾝ名</label>
+    <%= f.text_field :bdmemorial_address, id: "address_street", style: "width: 80%" %>
   </div>
 
   <div class="form-group">
     <label class="left_column">電話番号</label>
+    <%= f.text_field :bdmemorial_tel %>
   </div>
 
   <div class="form-group">
-    <label class="left_column _small">ハガキ自宅返信日</label>
+    <label class="left_column _small">ﾊｶﾞｷ自宅返信日</label>
+    <%= f.date_select(:postcard, :use_month_numbers => true, start_year:1890, end_year:Time.now.year+2, default: Date.new(Time.now.year, 6, 15)) %><span id="age"></span>
   </div>
 
   <div class="form-group">
     <label class="left_column">セット</label>
+    <%= f.radio_button :set, :"1" %>往復はがき
+    <%= f.radio_button :set, :"2", style: "margin-left:20px;" %>3点セット
+    <%= f.text_field :setnumber,size: 5 %>&nbsp;枚
   </div>
 
   <div class="form-group">
     <label class="left_column">祭壇飾り</label>
+    <%= f.radio_button :altar, :"1" %>有
+    <%= f.radio_button :altar, :"2", style: "margin-left:20px;" %>無
+    <%= f.text_field :altardetails %>&nbsp;
   </div>
 
   <div class="form-group">
     <label class="left_column">御飲み物</label>
+    <%= f.radio_button :drink, :"1" %>有
+    <%= f.radio_button :drink, :"2", style: "margin-left:20px;" %>無
+    <%= f.text_field :drinkdetails %>&nbsp;
   </div>
 
   <div class="form-group">
     <label class="left_column">会場費</label>
+    <%= f.text_field :dues %>
   </div>
 
 

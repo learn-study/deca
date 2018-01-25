@@ -35,9 +35,9 @@ class CreateBuddhistsermons < ActiveRecord::Migration[5.1]
       #法要日
       t.datetime :bdmemorialdate
       #お参り時間
-      t.string :visitingtime
+      t.datetime :visitingtime
       #会食時間
-      t.string :diningtime
+      t.datetime :diningtime
       #法要場所
       t.string :bdmemorialplace
       #法要市区町村

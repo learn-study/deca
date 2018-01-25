@@ -8,6 +8,15 @@
 
 User.create(loginid:"admin", password:"pass")
 
+#法要
+Buddhistmemorial.find_or_create_by(id:1,name:"49日")
+Buddhistmemorial.find_or_create_by(id:2,name:"100日")
+Buddhistmemorial.find_or_create_by(id:3,name:"１周忌")
+Buddhistmemorial.find_or_create_by(id:4,name:"３回忌")
+Buddhistmemorial.find_or_create_by(id:5,name:"７回忌")
+Buddhistmemorial.find_or_create_by(id:6,name:"13回忌")
+Buddhistmemorial.find_or_create_by(id:7,name:"１年祭")
+
 #納品先
 Destination.find_or_create_by(id:1,name:"自宅")
 Destination.find_or_create_by(id:2,name:"発送")
@@ -1337,7 +1346,7 @@ Item.find_or_create_by(supplier_id:7,item_id:111,name:"祭/集合 焼増", sell:
 Item.find_or_create_by(supplier_id:7,item_id:112,name:"", sell:0,cost:0)
 Item.find_or_create_by(supplier_id:7,item_id:113,name:"スライドショー（旧）", sell:0,cost:0)
 Item.find_or_create_by(supplier_id:7,item_id:114,name:"", sell:0,cost:0)
-Item.find_or_create_by(supplier_id:7,item_id:115,name:"キャビネ(中判）焼増し", sell:0,cost:3360.00)
+Item.find_or_create_by(supplier_id:7,item_id:115,name:"キャビネ(中���）焼増し", sell:0,cost:3360.00)
 Item.find_or_create_by(supplier_id:7,item_id:116,name:"キャビネ(中判）新規", sell:0,cost:4560.00)
 Item.find_or_create_by(supplier_id:7,item_id:117,name:"", sell:0,cost:0)
 Item.find_or_create_by(supplier_id:7,item_id:118,name:"遺影写真焼増し", sell:0,cost:0)

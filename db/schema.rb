@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180124045637) do
+ActiveRecord::Schema.define(version: 20180125155918) do
 
   create_table "altaritems", force: :cascade do |t|
     t.integer "supplier_id"
@@ -58,6 +58,12 @@ ActiveRecord::Schema.define(version: 20180124045637) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "buddhistmemorials", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "buddhistsermons", force: :cascade do |t|
     t.integer "member_id"
     t.string "applicantlastname"
@@ -78,8 +84,8 @@ ActiveRecord::Schema.define(version: 20180124045637) do
     t.string "temple_id"
     t.string "sect_id"
     t.datetime "bdmemorialdate"
-    t.string "visitingtime"
-    t.string "diningtime"
+    t.datetime "visitingtime"
+    t.datetime "diningtime"
     t.string "bdmemorialplace"
     t.string "bdmemorial_city"
     t.string "bdmemorial_address"
