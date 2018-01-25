@@ -58,12 +58,13 @@
 
   <div class="form-group">
     <label class="left_column">生年月日</label>
-    <%= f.date_select(:birthday, :use_month_numbers => true, start_year:1890, end_year:Time.now.year, default: Date.new(Time.now.year-40, 6, 15)) %><span id="age"></span>
+    <%= f.date_select(:birthday, :use_month_numbers => true, start_year:1890, end_year:Time.now.year, default: Date.new(Time.now.year-40, 6, 15)) %>
   </div>
   
   <div class="form-group">
     <label class="left_column">御逝去日</label>
-    <%= f.date_select(:ddate, :use_month_numbers => true, start_year:1890, end_year:Time.now.year, default: Date.new(Time.now.year-40, 6, 15)) %><span id="age"></span>
+    <%= f.date_select(:ddate, :use_month_numbers => true, start_year:1890, end_year:Time.now.year, default: Date.new(Time.now.year-40, 6, 15)) %>
+    行年：<span id="age"></span>才<span style="padding:0 20px;"></span>満：<span id="afterAge"></span>才
   </div>
 
   <div class="form-group">
@@ -122,13 +123,13 @@
     <label class="col-md-2" style="width:85px;">日時</label>
     <div class="col-md-10">
       <div style="width:60px;display:inline-block;">通夜</div>
-      <%= f.datetime_select(:wake, :use_month_numbers => true, start_year:1890, end_year:Time.now.year, default: Date.new(Time.now.year, 6, 15)) %><span id="age"></span>
+      <%= f.datetime_select(:wake, :use_month_numbers => true, start_year:1890, end_year:Time.now.year, default: Date.new(Time.now.year, 6, 15)) %>
 <br>
       <div style="width:60px;display:inline-block;" class="spacer">告別式</div>
-      <%= f.datetime_select(:funeral, :use_month_numbers => true, start_year:1890, end_year:Time.now.year, default: Date.new(Time.now.year, 6, 15)) %><span id="age"></span>
+      <%= f.datetime_select(:funeral, :use_month_numbers => true, start_year:1890, end_year:Time.now.year, default: Date.new(Time.now.year, 6, 15)) %>
 <br>
       <div style="width:60px;display:inline-block;" class="spacer">出棺</div>
-      <%= f.datetime_select(:coffin, :use_month_numbers => true, start_year:1890, end_year:Time.now.year, default: Date.new(Time.now.year, 6, 15)) %><span id="age"></span>
+      <%= f.datetime_select(:coffin, :use_month_numbers => true, start_year:1890, end_year:Time.now.year, default: Date.new(Time.now.year, 6, 15)) %>
 
     </div> 
 
@@ -192,11 +193,11 @@
     </div>
     <div class="col-md-3">
       <label>仕入れ先</label>
-      <%= f.collection_select :refreshment_supplier_id, Supplier.all, :id, :name,  {:include_blank => true}, {style: "width:190px;"} %>
+      <%= f.collection_select :refreshment_supplier_id, Supplier.all, :id, :name,  {:include_blank => true}, {style: "width:190px;",class: "supplier2"} %>
     </div>
     <div class="col-md-3">
       <label>商品</label>
-      <%= f.collection_select :refreshment_product_id, Item.all, :id, :name,  {:include_blank => true}, {style: "width:190px;"} %>
+      <%= f.collection_select :refreshment_product_id, Item.all, :id, :name,  {:include_blank => true}, {style: "width:190px;",id: "gift"} %>
     </div>
   </div>
 
@@ -212,11 +213,11 @@
     </div>
     <div class="col-md-3">
       <label>仕入れ先</label>
-      <%= f.collection_select :gift_supplier_id, Supplier.all, :id, :name,  {:include_blank => true}, {style: "width:190px;"} %>
+      <%= f.collection_select :gift_supplier_id, Supplier.all, :id, :name,  {:include_blank => true}, {style: "width:190px;",class: "supplier"} %>
     </div>
     <div class="col-md-3">
       <label>商品</label>
-      <%= f.collection_select :gift_product_id, Item.all, :id, :name,  {:include_blank => true}, {style: "width:190px;"} %>
+      <%= f.collection_select :gift_product_id, Item.all, :id, :name,  {:include_blank => true}, {style: "width:190px;",id: "itemresult"} %>
     </div>
   </div>
 
@@ -281,3 +282,53 @@
 
   <%= f.submit "施行済み葬儀登録", class: "btn btn-primary col-xs-12" %>
 <% end %>
+
+<script>
+$(document).on("change", ".supplier", function(){
+    var val = $(".supplier").val();
+    $.get("/enforcements/itemserch",
+      {
+        val: val
+      } 
+      );
+});
+
+$(document).on("change", ".supplier2", function(){
+    var val = $(".supplier2").val();
+    $.get("/enforcements/giftserch",
+      {
+        val: val
+      } 
+      );
+});
+
+            function calcAge(birthdate, targetdate) {
+            var age = targetdate.getFullYear() - birthdate.getFullYear();
+            var birthday = new Date(targetdate.getFullYear(), birthdate.getMonth(), birthdate.getDate());
+            if (targetdate < birthday) {
+            age--;
+            $("#afterAge").html(age)
+            }
+            $("#afterAge").html(age)
+           }
+
+                var year = $("#enforcement_birthday_1i").val();
+                var year2 = $("#enforcement_ddate_1i").val();
+                var age = year2 - year;
+                $("#age").html(age)
+
+
+                var month = $("#enforcement_birthday_2i").val();
+                var day = $("#enforcement_birthday_3i").val();
+                var date = year + "/" + month + "/" + day;
+                var birthday = new Date(date)
+
+
+                var month2 = $("#enforcement_ddate_2i").val();
+                var day2 = $("#enforcement_ddate_3i").val();
+                var date2 = year2 + "/" + month2 + "/" + day2;
+                var ddeath = new Date(date2)
+
+                var n = calcAge(birthday,ddeath);  
+
+</script>
