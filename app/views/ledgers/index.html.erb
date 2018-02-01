@@ -20,8 +20,6 @@
         <th>故人名</th>
         <th>担当者</th>
         <th>出棺日</th>
-        <th>合計金額</th>
-        <th>原価合計</th>
         <th>登録日</th>
         <th>変更日</th>
     </tr>
@@ -33,10 +31,8 @@
       <td><%= l.deceased %></td>
       <td><%= Employee.find(l.employee_id).name if l.employee_id.present? %></td>
       <td><%= l.coffin%></td>
-      <td><%= l.total_amount %></td>
-      <td><%= l.total_cost %></td>
-      <td><%= l.created_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %></td>
-      <td><%= l.updated_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %></td>
+      <td><%= l.created_at.in_time_zone('Tokyo').strftime("%Y-%m-%d") %></td>
+      <td><%= l.updated_at.in_time_zone('Tokyo').strftime("%Y-%m-%d") %></td>
     </tr>
     <% end %>
   </tbody>

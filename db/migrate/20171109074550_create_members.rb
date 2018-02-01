@@ -16,6 +16,8 @@ class CreateMembers < ActiveRecord::Migration[5.1]
       t.string :kind
       t.boolean :local, default: false, null: false
       t.boolean :reserve, default: false, null: false
+      t.boolean :reserve2, default: false, null: false
+      t.boolean :reserve3, default: false, null: false
       t.boolean :dm, default: false, null: false
       t.text :tag
       t.integer :row_order

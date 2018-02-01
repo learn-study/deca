@@ -60,6 +60,12 @@
   </div>
   
   <div class="form-group">
+    <label class="left_column">故人名</label>
+    <%= f.text_field :deceased %>
+  </div>
+
+
+  <div class="form-group">
     <label class="left_column">御逝去日</label>
     <%= f.date_select(:orderdate, :use_month_numbers => true, start_year:1890, end_year:Time.now.year, default: Date.new(Time.now.year-40, 6, 15)) %><span id="age"></span>
   </div>

@@ -11,20 +11,18 @@
 </div>
 
 <%= paginate @enforces %>
-
 <table class="table">
   <thead>
     <tr>
         <th>コード</th>
+        <th>出棺日</th>
         <th>家</th>
-        <th>本会員</th>
-        <th>担当</th>
+        <th>担当者</th>
         <th>会種</th>
         <th>故人</th>
         <th>喪主</th>
-        <th>続柄</th>
         <th>施主</th>
-        <th>死亡日</th>
+        <th>本会員</th>
         <th>登録日</th>
         <th>変更日</th>
     </tr>
@@ -34,22 +32,21 @@
     <tr>
       <% member = Member.find(e.member_id) if Member.find_by(id:e.member_id).present? %>
       <td><%= link_to e.id, edit_enforcement_path(e) %></td>
+      <td><%= e.coffin.strftime("%Y-%m-%d %H:%M") %></td>
       <td>
         <%= e.family_name %>
         <% if e.family_name.present? %>
           家
         <% end %>
       </td>
-      <td><%= link_to member.name, edit_member_path(member) if member.present? %></td>
       <td><%= Employee.find(e.employee_id).name if Employee.find_by(id: e.employee_id).present? %></td>
       <td><%= Kind.find(e.kind_id).text if e.kind_id.present? %></td>
       <td><%= e.deceased %></td>
       <td><%= e.cliefmaster %></td>
-      <td><%= e.relationship %></td>
       <td><%= e.constructor %></td>
-      <td><%= e.ddate.in_time_zone('Tokyo').strftime("%Y-%m-%d") %></td>
-      <td><%= e.created_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %></td>
-      <td><%= e.updated_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %></td>
+      <td><%= link_to member.name, edit_member_path(member) if member.present? %></td>
+      <td><%= e.created_at.in_time_zone('Tokyo').strftime("%Y-%m-%d") %></td>
+      <td><%= e.updated_at.in_time_zone('Tokyo').strftime("%Y-%m-%d") %></td>
     </tr>
     <% end %>
   </tbody>

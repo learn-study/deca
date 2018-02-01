@@ -8,12 +8,16 @@
 <%= form_for(@enforce) do |f| %>
 
   <div class="form-group">
+    <label class="left_column">会員ID</label>
+    <%= f.text_field :member_id %>
+  </div>
+
+  <div class="form-group">
     <label class="left_column">家</label>
     <%= f.text_field :family_name %>&nbsp;家
   </div>
-
+<%= @enforce.inspect %>
   <% if @member %>
-  <%= f.hidden_field :member_id, value: @member.id %>
     <div class="form-group">
       <label class="left_column">会員氏名</label>
       <%= @member.name %>
@@ -123,13 +127,13 @@
     <label class="col-md-2" style="width:85px;">日時</label>
     <div class="col-md-10">
       <div style="width:60px;display:inline-block;">通夜</div>
-      <%= f.datetime_select(:wake, :use_month_numbers => true, start_year:1890, end_year:Time.now.year, default: Date.new(Time.now.year, 6, 15)) %>
+      <%= f.datetime_select(:wake, :use_month_numbers => true, start_year:1890, end_year:Time.now.year+1, default: Date.new(Time.now.year, 6, 15)) %>
 <br>
       <div style="width:60px;display:inline-block;" class="spacer">告別式</div>
-      <%= f.datetime_select(:funeral, :use_month_numbers => true, start_year:1890, end_year:Time.now.year, default: Date.new(Time.now.year, 6, 15)) %>
+      <%= f.datetime_select(:funeral, :use_month_numbers => true, start_year:1890, end_year:Time.now.year+1, default: Date.new(Time.now.year, 6, 15)) %>
 <br>
       <div style="width:60px;display:inline-block;" class="spacer">出棺</div>
-      <%= f.datetime_select(:coffin, :use_month_numbers => true, start_year:1890, end_year:Time.now.year, default: Date.new(Time.now.year, 6, 15)) %>
+      <%= f.datetime_select(:coffin, :use_month_numbers => true, start_year:1890, end_year:Time.now.year+1, default: Date.new(Time.now.year, 6, 15)) %>
 
     </div> 
 
@@ -139,7 +143,18 @@
     <label class="left_column">式場名</label>
     <%= f.collection_select :ceremonial_id, Ceremonialplace.all, :id, :name,  {:include_blank => true}, {style: "width:190px;"} %>
   </div>
-
+  
+  <% if f.object.ceremonial_id.present? %>
+  <% ce = Ceremonialplace.find(f.object.ceremonial_id) %>
+    <div class="form-group">
+      <label class="left_column">式場住所</label>
+      <%= ce.address %>
+    </div>
+    <div class="form-group">
+      <label class="left_column">式場電話</label>
+      <%= ce.tel %>
+    </div>
+  <% end %>
   
 <div class="row">
   <div class="col-md-4">
@@ -159,7 +174,22 @@
   <div class="form-group">
     <label class="left_column spacer">寺院名</label>
     <%= f.collection_select :temple_id, Temple.all, :id, :name,  {:include_blank => true}, {style: "width:190px;"} %>
-  </div> 
+  </div>
+  <% if f.object.temple_id.present? %>
+  <% temple = Temple.find(f.object.temple_id) %>
+  
+    <div class="form-group">
+      <label class="left_column">住所</label>
+      <%= temple.address %>
+    </div>
+  
+    <div class="form-group">
+      <label class="left_column">電話番号</label>
+      <%= temple.tel %>
+    </div>
+  <% end %>
+
+
   <div class="form-group">
     <label class="left_column">人数</label>
     <%= f.text_field :number_of_pepole %>

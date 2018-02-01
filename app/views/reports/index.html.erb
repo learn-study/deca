@@ -17,12 +17,13 @@
   <thead>
     <tr>
         <th>コード</th>
+        <th>受注日</th>
+        <th>納品日</th>
+        <th>入金日</th>
         <th>氏名</th>
         <th>カナ</th>
         <th>故人名</th>
         <th>担当者</th>
-        <th>合計金額</th>
-        <th>原価合計</th>
         <th>登録日</th>
         <th>変更日</th>
     </tr>
@@ -31,6 +32,9 @@
   <% @reports.each do |r| %>
     <tr>
       <td><%= link_to r.id,edit_report_path(r) %></td>
+      <td><%= r.orderdate.strftime('%Y-%m-%d') %></td>
+      <td><%= r.deliverydate.strftime('%Y-%m-%d') %></td>
+      <td><%= r.payment.strftime('%Y-%m-%d') if r.payment.present? %></td>
       <td>
         <% if r.member_id %>
           <%= Member.find(r.member_id).name %>
@@ -47,10 +51,8 @@
       </td> 
       <td><%= r.deceased %></td>
       <td><%= Employee.find(r.employee_id).name if r.employee_id.present? %></td>
-      <td><%= r.total_fee %></td>
-      <td><%= r.total_cost %></td>
-      <td><%= r.created_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %></td>
-      <td><%= r.updated_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %></td>
+      <td><%= r.created_at.in_time_zone('Tokyo').strftime("%Y-%m-%d") %></td>
+      <td><%= r.updated_at.in_time_zone('Tokyo').strftime("%Y-%m-%d") %></td>
     </tr>
     <% end %>
   </tbody>

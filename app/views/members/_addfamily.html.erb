@@ -28,13 +28,14 @@
       <td><%= fa.lastname + " " + fa.firstname %></td>
       <td><%= fa.namekana %></td>
       <td><%= fa.birthday %></td>
-      <td><%= age(fa.birthday) %></td>
+      <td><%= age(fa.birthday) if fa.birthday.present? %></td>
       <td><%= fa.postal %></td>
       <td><%= fa.city %></td>
       <td><%= fa.streetaddress %></td>
       <td><%= fa.note %></td>
       <td><%= boolean(fa.dm) %></td>
       <td class="no-wrap"><%= link_to "修正", edit_family_path(fa),class: "btn btn-primary btn-xs" %></td>
+      <td class="no-wrap"><%= link_to "削除", fa,method: :delete,class: "btn btn-danger btn-xs" %></td>
     </tr>
     <% end %>
   </tbody>

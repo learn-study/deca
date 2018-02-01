@@ -189,7 +189,8 @@ class MembersController < ApplicationController
 
   def member_params
     params.require(:member).permit(:id,:lastname, :firstname, :namekana, :gender,
-    :birthday, :postal, :city, :streetaddress, :tel, :mobile, :sect, :kind, :local, :reserve, :dm, :tag, :row_order_position)
+    :birthday, :postal, :city, :streetaddress, :tel, :mobile, :sect, :kind, :local,
+    :reserve,:reserve2,:reserve3, :dm, :tag, :row_order_position)
   end
   
   def trim(object) #数字を半角に変換し、ハイフンを削除するロジック 

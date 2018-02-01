@@ -3,7 +3,6 @@ class FamiliesController < ApplicationController
     @member = Member.find(params[:member_id])
     @family = @member.families.build(family_params)
     @family.name = @family.lastname.gsub(/(\s|　)+/, '')+@family.firstname.gsub(/(\s|　)+/, '')
-    p @family.inspect
     @members = Member.where.not(:id => @member.id).page(params[:page])
     if @family.save
       redirect_to edit_member_url(@member)
@@ -29,7 +28,13 @@ class FamiliesController < ApplicationController
     family = Family.find(params[:id])
     family.update!(family_params)
   end
-  
+
+  def destroy
+    @family = Family.find(params[:id])
+    @family.destroy
+    redirect_back(fallback_location: root_path)
+  end
+
   private
   
   def family_params

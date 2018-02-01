@@ -23,8 +23,8 @@
         </div>
         
         <div class="form-group">
-          <label class="left_column">誕生日</label>
-          <%= f.date_select(:birthday, :use_month_numbers => true, start_year:1890, end_year:Time.now.year, default: Date.new(Time.now.year-40, 6, 15)) %><span id="age"></span>
+          <label class="left_column">生年月日</label>
+          <%= f.date_select(:birthday, include_blank: true, :use_month_numbers => true, start_year:1890, end_year:Time.now.year) %><span id="age"></span>
         </div>        
   
         <div class="form-group">

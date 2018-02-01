@@ -115,13 +115,13 @@
     <label class="col-md-2" style="width:85px;">日時</label>
     <div class="col-md-10">
       <div style="width:60px;display:inline-block;">通夜</div>
-      <%= f.datetime_select(:wake, :use_month_numbers => true, start_year:1890, end_year:Time.now.year, default: Date.new(Time.now.year, 6, 15)) %><span id="age"></span>
+      <%= f.datetime_select(:wake, :use_month_numbers => true, start_year:1890, end_year:Time.now.year+1, default: Date.new(Time.now.year, 6, 15)) %><span id="age"></span>
 <br>
       <div style="width:60px;display:inline-block;" class="spacer">告別式</div>
-      <%= f.datetime_select(:funeral, :use_month_numbers => true, start_year:1890, end_year:Time.now.year, default: Date.new(Time.now.year, 6, 15)) %><span id="age"></span>
+      <%= f.datetime_select(:funeral, :use_month_numbers => true, start_year:1890, end_year:Time.now.year+1, default: Date.new(Time.now.year, 6, 15)) %><span id="age"></span>
 <br>
       <div style="width:60px;display:inline-block;" class="spacer">出棺</div>
-      <%= f.datetime_select(:coffin, :use_month_numbers => true, start_year:1890, end_year:Time.now.year, default: Date.new(Time.now.year, 6, 15)) %><span id="age"></span>
+      <%= f.datetime_select(:coffin, :use_month_numbers => true, start_year:1890, end_year:Time.now.year+1, default: Date.new(Time.now.year, 6, 15)) %><span id="age"></span>
 
     </div> 
 
@@ -132,7 +132,6 @@
     <%= f.collection_select :ceremonial_id, Ceremonialplace.all, :id, :name,  {:include_blank => true}, {style: "width:190px;"} %>
   </div>
 
-  
 <div class="row">
   <div class="col-md-4">
     <label class="left_column">式場使用料</label>
