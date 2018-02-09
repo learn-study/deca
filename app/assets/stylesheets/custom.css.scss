@@ -1,6 +1,10 @@
 @import 'bootstrap-sprockets';
 @import 'bootstrap';
 @import 'bootstrap-datetimepicker';
+body{
+  background:#eafff4;
+}
+
 .yellow{
   background:#ffd;
 }
@@ -30,8 +34,12 @@
   ._small{
     font-size:12px;
   }
-  
+
+
 @media print{
+  body{
+    background: #fff;
+  }
   .no_print{
       display: none;
   }
